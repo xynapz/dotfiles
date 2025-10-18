@@ -35,3 +35,4 @@ opt.updatetime = 200 -- Faster completion
 opt.clipboard = "unnamedplus" -- Use system clipboard
 opt.mouse = "a"               -- Enable mouse in all modes
 opt.timeoutlen = 300          -- Time to wait for a mapped sequence (ms)
+opt.fileformats = { "unix", "dos" }

@@ -29,3 +29,23 @@ for _, mode in ipairs({ "n", "i", "v" }) do
   disable_key(mode, "<Right>")
   -- disable_key(mode, "<Esc>") -- disable esc too
 end
+
+local keymap = vim.keymap.set
+
+-- Window navigation
+keymap('n', '<C-h>', '<C-w>h')
+keymap('n', '<C-j>', '<C-w>j')
+keymap('n', '<C-k>', '<C-w>k')
+keymap('n', '<C-l>', '<C-w>l')
+
+-- Window resizing
+keymap('n', '<C-Up>', '<cmd>resize +2<CR>')
+keymap('n', '<C-Down>', '<cmd>resize -2<CR>')
+keymap('n', '<C-Left>', '<cmd>vertical resize -2<CR>')
+keymap('n', '<C-Right>', '<cmd>vertical resize +2<CR>')
+
+-- Split management
+keymap('n', '<leader>sv', '<cmd>vsplit<CR>')
+keymap('n', '<leader>sh', '<cmd>split<CR>')
+keymap('n', '<leader>se', '<C-w>=')
+keymap('n', '<leader>sx', '<cmd>close<CR>')

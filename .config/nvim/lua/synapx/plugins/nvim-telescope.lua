@@ -1,6 +1,7 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
+    enable = false,
     dependencies = {
       { "nvim-lua/plenary.nvim" },
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -59,11 +60,9 @@ return {
           },
           project = {
             base_dirs = {
-              { path = "/home/angeldx/angel-dx/", max_depth = 3, hidden_files = true },
-              -- for zoro macbook
-              -- { path = "~/Documents/andy4747", max_depth = 3 },
-              { path = "~/.config",               max_depth = 2 },
-              { path = "~/angel-dx/byte-arena" }
+              { path = "/home/angel/angel-dx/", max_depth = 3, hidden_files = true },
+              { path = "/home/angel/sinopx/",   max_depth = 3, hidden_files = true },
+              { path = "/home/angel/.config",   max_depth = 2 },
             },
             hidden_files = true,
           },

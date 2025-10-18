@@ -1,7 +1,7 @@
 # Common config
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$ZSH/custom"
-ZSH_THEME="robbyrussell"
+ZSH_THEME="arrow"
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
