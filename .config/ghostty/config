@@ -1,7 +1,2 @@
-background=#000
-font-size=14
-font-family="Iosevka-Heavy"
-font-feature="-calt, -liga, -dlig"
-gtk-titlebar=false
-window-decoration=false
-
+theme = GitHub Dark Default
+maximize = true

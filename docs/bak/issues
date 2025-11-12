@@ -1,0 +1,7 @@
+---ISSUE{2025-OCT-22}{dotfiles}{ags}---
+ags astal error from example status bar
+---FIX---
+ISSUE: https://github.com/Jas-SinghFSU/HyprPanel/issues/759
+Please make sure you have astal-hyprland installed.
+You can install it through the AUR (or your respective package manager( or build it from the source https://github.com/Aylur/astal/tree/main/lib/hyprland with help from https://aylur.github.io/astal/guide/getting-started/installation#building-from-source
+---ENDBLOCK---

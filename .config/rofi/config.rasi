@@ -1,0 +1,156 @@
+/**
+ * Rofi Configuration
+ * Based on github-dark-default theme
+ * File: ~/.config/rofi/config.rasi
+ */
+
+configuration {
+    modi: "drun,run,window,ssh";
+    show-icons: true;
+    icon-theme: "Papirus-Dark";
+    display-drun: "Applications";
+    display-run: "Run";
+    display-window: "Windows";
+    display-ssh: "SSH";
+    drun-display-format: "{name}";
+    font: "JetBrains Mono 12";
+    terminal: "ghostty";
+}
+
+* {
+    /* GitHub Dark Colors */
+    bg: #0d1117;
+    bg-alt: #161b22;
+    bg-selected: #21262d;
+    
+    fg: #c9d1d9;
+    fg-alt: #8b949e;
+    
+    border: #30363d;
+    border-selected: #58a6ff;
+    
+    accent: #58a6ff;
+    urgent: #f85149;
+    
+    background-color: transparent;
+    text-color: @fg;
+    
+    padding: 0;
+    margin: 0;
+    spacing: 0;
+}
+
+window {
+    background-color: @bg;
+    border: 2px;
+    border-color: @border;
+    border-radius: 8px;
+    width: 600px;
+    padding: 16px;
+}
+
+mainbox {
+    children: [inputbar, listview];
+    spacing: 16px;
+}
+
+inputbar {
+    children: [prompt, entry];
+    background-color: @fg;
+    border-radius: 6px;
+    padding: 12px;
+    spacing: 8px;
+}
+
+prompt {
+    text-color: @urgent;
+    font: "JetBrains Mono Bold 12";
+}
+
+entry {
+    placeholder: "Search...";
+    placeholder-color: @fg-alt;
+}
+
+listview {
+    lines: 8;
+    columns: 1;
+    scrollbar: true;
+    spacing: 4px;
+}
+
+scrollbar {
+    handle-width: 6px;
+    handle-color: @border;
+    background-color: @bg-alt;
+    border-radius: 4px;
+    margin: 0 0 0 8px;
+}
+
+element {
+    padding: 10px;
+    border-radius: 6px;
+    spacing: 12px;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element selected.normal {
+    background-color: @bg-selected;
+    text-color: @accent;
+    border: 1px;
+    border-color: @border-selected;
+}
+
+element normal.urgent {
+    background-color: @urgent;
+    text-color: @bg;
+}
+
+element selected.urgent {
+    background-color: @urgent;
+    text-color: @bg;
+    border-color: @urgent;
+}
+
+element-icon {
+    size: 24px;
+}
+
+element-text {
+    vertical-align: 0.5;
+}
+
+/* Message styling */
+message {
+    background-color: @bg-alt;
+    border: 1px;
+    border-color: @border;
+    border-radius: 6px;
+    padding: 12px;
+}
+
+textbox {
+    text-color: @fg;
+}
+
+/* Error messages */
+error-message {
+    background-color: @bg;
+    border: 2px;
+    border-color: @urgent;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+error-message textbox {
+    text-color: @urgent;
+}
