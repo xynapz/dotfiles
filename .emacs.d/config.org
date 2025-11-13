@@ -481,3 +481,93 @@ Adds helpful annotations to minibuffer completions. Enhances completion candidat
     :after dired)
 #+end_src
 
+** Evil Mode
+#+begin_src emacs-lisp
+;; Install and configure Evil mode
+(use-package evil
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-undo-system 'undo-redo)
+  :config
+  (evil-mode 1))
+
+;; Evil Collection for better defaults across modes
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+#+end_src
+
+** Optional: Escape Key Binding
+#+begin_src emacs-lisp
+  ;; Use 'jk' or 'kj' as alternative escape (optional)
+  ;; Uncomment if desired:
+  (use-package evil-escape
+    :config
+    (evil-escape-mode 1)
+    (setq-default evil-escape-key-sequence "jk")
+    (setq-default evil-escape-delay 0.2))
+#+end_src
+
+* Magit Configuration
+** Magit Setup
+#+begin_src emacs-lisp
+;; Install and configure Magit
+(use-package magit
+  :bind (("C-x g" . magit-status)
+         ("C-x M-g" . magit-dispatch))
+  :config
+  ;; Show word-granularity differences within diff hunks
+  (setq magit-diff-refine-hunk t)
+  ;; Auto-refresh magit buffers
+  (setq magit-auto-revert-mode t))
+#+end_src
+
+* Terminal Configuration
+** VTerm Setup (VSCode-like Terminal)
+#+begin_src emacs-lisp
+(use-package vterm
+  :config
+  (setq vterm-max-scrollback 10000)
+  (setq vterm-kill-buffer-on-exit t))
+
+;; Multi-vterm for managing multiple terminals
+(use-package multi-vterm
+  :after vterm
+  :bind (("C-c t" . multi-vterm)
+         ("C-c n" . multi-vterm-next)
+         ("C-c p" . multi-vterm-prev)))
+#+end_src
+
+** Split Terminal Function
+#+begin_src emacs-lisp
+(defun my/split-terminal ()
+  "Open terminal in bottom split."
+  (interactive)
+  (let ((term-buffer (multi-vterm)))
+    ;; Split window below and resize to ~30% height
+    (when (> (length (window-list)) 1)
+      (delete-other-windows))
+    (split-window-below -12)
+    (other-window 1)
+    (switch-to-buffer term-buffer)))
+
+;; Bind to convenient key
+(global-set-key (kbd "C-`") 'my/split-terminal)
+#+end_src
+
+** Terminal Window Management
+#+begin_src emacs-lisp
+(defun my/toggle-vterm ()
+  "Toggle terminal window at bottom."
+  (interactive)
+  (let ((term-window (get-buffer-window "*vterm*" t)))
+    (if term-window
+        (delete-window term-window)
+      (my/vscode-terminal))))
+
+;; Bind toggle to Ctrl+`
+(global-set-key (kbd "C-`") 'my/toggle-vterm)
+#+end_src
+
