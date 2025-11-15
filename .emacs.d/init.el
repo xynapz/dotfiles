@@ -1,16 +1,45 @@
-;; ~/.emacs.d/init.el
-;; This is the only file Emacs reads upon startup.
-;; Its only job is to load our "real" config in init.org.
+;;; init.el --- entry point -*- lexical-binding: t; -*-
 
-(require 'org)
-(require 'ob-tangle)
+;;; Commentary:
+;; Entry point for my Emacs config
 
-;; Load the Org-mode configuration file
-(org-babel-load-file
- (expand-file-name "config.org"
-                   user-emacs-directory))
+;;; Code:
 
-;; Set custom-set-variables to be saved in a separate file
-;; This keeps your init.org clean from auto-generated code
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(load custom-file 'noerror)
+;; Add Lisp directories
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "lisp/lang" user-emacs-directory))
+
+;; Load modules in order
+(load "core")
+(load "packages")
+(load "evil-config")
+(load "leader")
+(load "ui")
+(load "editing")
+(load "completion")
+(load "org-config")
+(load "git")
+
+;; Languages
+(load "cc")
+
+;; After package loads
+(add-hook 'projectile-after-switch-project-hook
+          (lambda () (treemacs-add-and-display-current-project-exclusively)))
+
+;;; init.el ends here
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-show-quick-access t nil nil "Customized with use-package company")
+ '(package-selected-packages nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
