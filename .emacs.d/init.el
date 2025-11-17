@@ -10,22 +10,16 @@
 (add-to-list 'load-path (expand-file-name "lisp/lang" user-emacs-directory))
 
 ;; Load modules in order
-(load "core")
-(load "packages")
-(load "evil-config")
-(load "leader")
-(load "ui")
-(load "editing")
-(load "completion")
-(load "org-config")
-(load "git")
+(load "xz-core")
+(load "xz-package")
+(load "xz-editor")
+(load "xz-completion")
+(load "xz-keybindings")
+;; (load "xz-server")
 
 ;; Languages
 (load "cc")
-
-;; After package loads
-(add-hook 'projectile-after-switch-project-hook
-          (lambda () (treemacs-add-and-display-current-project-exclusively)))
+(load "astro")
 
 ;;; init.el ends here
 
@@ -42,4 +36,3 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-

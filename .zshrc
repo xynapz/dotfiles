@@ -24,7 +24,7 @@ bindkey '^ ' autosuggest-accept
 
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
-export PATH="$HOME/zig/zig-linux-x86_64-0.14.0:$PATH"
+export PATH="$HOME/zig/zig-linux-x86_64*:$PATH"
 export PATH="$PATH:$HOME/dotfiles/scripts/path"
 
 
