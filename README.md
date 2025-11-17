@@ -1,8 +1,6 @@
-# andy4747's Dotfiles 🛠️
+# xynapz dotfiles 🛠️
 
 Welcome to my personal dotfiles repo! This is where I keep configuration files for my development environment, including editors, Tmux, terminal emulators, and zsh. These dotfiles are setup for my needs but feel free to use it for yourself.
-
-
 
 ## 🚀 Quick Setup
 
