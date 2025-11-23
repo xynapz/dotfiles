@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: bash script
-# key: bash
-# --
-#!/bin/bash
-
-set -euo pipefail
-
-$0

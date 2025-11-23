@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: form
-# key: form
-# --
-<form action="${1:/submit}" method="${2:post}">
-    $0
-    <button type="submit">${3:Submit}</button>
-</form>

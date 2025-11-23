@@ -184,3 +184,4 @@ autocmd VimEnter * if argc() == 0 | NERDTree | endif
 
 " Focus current file in tree
 nnoremap <leader>f :NERDTreeFind<CR>
+

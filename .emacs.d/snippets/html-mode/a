@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: anchor tag
-# key: a
-# --
-<a href="${1:#}">${2:Link Text}</a>$0

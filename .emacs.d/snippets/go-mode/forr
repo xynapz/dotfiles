@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: for range
-# key: forr
-# --
-for ${1:_, }${2:item} := range ${3:items} {
-    $0
-}

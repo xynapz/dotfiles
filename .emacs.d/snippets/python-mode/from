@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: from import
-# key: from
-# --
-from ${1:module} import ${2:name}$0
