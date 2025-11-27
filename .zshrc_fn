@@ -67,3 +67,61 @@ Show    => nmcli connection show
 "
 echo "$doc"
 }
+
+sync_dotfiles() {
+    DOTFILES_DIR="$HOME/dotfiles"
+    CONFIG_DIR="$HOME/.config"
+
+    echo "Syncing dotfiles..."
+
+    # 1. Handle .config directory specifically
+    if [ -d "$DOTFILES_DIR/.config" ]; then
+        echo "Processing dotfiles .config..."
+        mkdir -p "$CONFIG_DIR"
+        
+        for item in "$DOTFILES_DIR/.config"/*; do
+            basename=$(basename "$item")
+            target="$CONFIG_DIR/$basename"
+            
+            if [ -L "$target" ]; then
+                echo "Removing existing link: $target"
+                rm "$target"
+            elif [ -e "$target" ]; then
+                 echo "Backing up existing file/dir: $target to $target.bak"
+                 mv "$target" "$target.bak"
+            fi
+            
+            echo "Linking $item -> $target"
+            ln -s "$item" "$target"
+        done
+    fi
+
+    # 2. Handle other files in dotfiles root
+    echo "Processing root dotfiles..."
+    
+    # Hidden files
+    for item in "$DOTFILES_DIR"/.*; do
+        basename=$(basename "$item")
+        if [[ "$basename" == "." || "$basename" == ".." || "$basename" == ".git" || "$basename" == ".config" ]]; then
+            continue
+        fi
+        target="$HOME/$basename"
+        if [ -L "$target" ]; then rm "$target"; elif [ -e "$target" ]; then mv "$target" "$target.bak"; fi
+        echo "Linking $item -> $target"
+        ln -s "$item" "$target"
+    done
+    
+    # Non-hidden files
+    for item in "$DOTFILES_DIR"/*; do
+        basename=$(basename "$item")
+        if [[ "$basename" == "docs" || "$basename" == "scripts" || "$basename" == "README.md" ]]; then
+            continue
+        fi
+        target="$HOME/$basename"
+        if [ -L "$target" ]; then rm "$target"; elif [ -e "$target" ]; then mv "$target" "$target.bak"; fi
+        echo "Linking $item -> $target"
+        ln -s "$item" "$target"
+    done
+
+    echo "Dotfiles sync complete!"
+}
