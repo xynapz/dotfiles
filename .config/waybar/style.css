@@ -1,32 +1,108 @@
+/* Waybar Styles - KDE Plasma Theme */
+
 * {
     border: none;
     border-radius: 0;
-    font-family: "Sans Serif", monospace;
-    font-size: 13px;
+    font-family: "Noto Sans", "Iosevka Nerd Font", sans-serif;
+    /* Consistent stack */
+    font-size: 16px;
+    font-weight: bold;
+    /* Global bold */
     min-height: 0;
 }
 
 window#waybar {
-    background: rgba(43, 48, 59, 0.9);
-    border-bottom: 2px solid rgba(100, 114, 125, 0.5);
-    color: #ffffff;
+    background: #2b2b2b;
+    /* KDE Dark Gray */
+    color: #eff0f1;
+    border-bottom: 1px solid #3daee9;
+    /* KDE Blue Accent Line */
+}
+
+/* Tooltip */
+tooltip {
+    background: #31363b;
+    border: 1px solid #3daee9;
+}
+
+tooltip label {
+    color: #eff0f1;
+}
+
+/* Workspaces */
+#workspaces {
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
 }
 
 #workspaces button {
-    padding: 0 5px;
+    padding: 0 10px;
     background-color: transparent;
-    color: #ffffff;
+    color: #eff0f1;
+    border-radius: 0;
+    transition: background 0.2s;
+    font-weight: bold;
 }
 
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: #3daee9;
+    /* KDE Blue Hover */
+    color: #ffffff;
 }
 
-#workspaces button.focused {
-    background-color: #64727D;
+#workspaces button.active {
+    background-color: #3daee9;
+    /* KDE Blue Active */
+    color: #ffffff;
     border-bottom: 2px solid #ffffff;
 }
 
+#workspaces button.urgent {
+    background-color: #f67400;
+    /* KDE Orange */
+}
+
+/* Window Group (Icon + Title) */
+#title {
+    background-color: transparent;
+    margin-left: 40px;
+    /* User preferred spacing */
+    padding: 0;
+    border: none;
+}
+
+/* Window Title & Icon inside group */
+#window {
+    background-color: transparent;
+    padding: 0 5px;
+    color: #eff0f1;
+    font-weight: bold;
+    margin: 0;
+}
+
+#custom-window-icon {
+    background-color: transparent;
+    padding: 0 5px;
+    color: #3daee9;
+    /* KDE Blue Accent for the icon */
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Modules */
+#clock,
+#battery,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#tray,
+#custom-notification,
+#custom-power,
+#custom-window-icon,
+#custom-gap,
+#backlight,
 #clock,
 #battery,
 #cpu,
@@ -35,55 +111,103 @@ window#waybar {
 #pulseaudio,
 #tray {
     padding: 0 10px;
-    color: #ffffff;
+    background-color: transparent;
+    color: #eff0f1;
+    margin: 2px 0;
+    /* Vertical margin to prevent hover overflow */
+    border-radius: 4px;
+    /* Rounded hover effect */
+    transition: background 0.2s;
+    font-weight: bold;
+}
+
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover,
+#custom-notification:hover,
+#custom-power:hover,
+#backlight:hover {
+    background-color: #31363b;
+    /* Slightly lighter gray on hover */
+}
+
+/* Specific Module Colors */
+#custom-notification {
+    color: #f67400;
+    /* Orange for notification bell */
+    padding-right: 15px;
+}
+
+#custom-power {
+    color: #3daee9;
+    padding-right: 15px;
 }
 
 #clock {
-    background-color: #64727D;
-}
-
-#battery {
-    background-color: #ffffff;
-    color: #000000;
-}
-
-#battery.charging {
-    background-color: #26A65B;
-    color: #ffffff;
-}
-
-#battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
-}
-
-#cpu {
-    background-color: #2ecc71;
-    color: #000000;
-}
-
-#memory {
-    background-color: #9b59b6;
-}
-
-#network {
-    background-color: #2980b9;
-}
-
-#network.disconnected {
-    background-color: #f53c3c;
-}
-
-#pulseaudio {
-    background-color: #f1c40f;
-    color: #000000;
-}
-
-#pulseaudio.muted {
-    background-color: #90b1b1;
-    color: #2a5c45;
+    font-weight: bold;
+    color: #cba6f7;
+    /* Neon purple for entire clock */
 }
 
 #tray {
-    background-color: #2980b9;
+    background-color: transparent;
+    /* Minimal: No background */
+    border: 1px solid #4d5057;
+    /* Minimal: Subtle gray border */
+    border-radius: 4px;
+    padding: 0 10px;
+    margin: 2px 5px;
+    /* 2px vertical margin to prevent overflow */
+}
+
+#hardware {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Hardware group icons - unified color */
+#network,
+#cpu,
+#memory {
+    color: #3daee9;
+    /* KDE Blue for all hardware icons */
+}
+
+#tray>.passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #f67400;
+}
+
+#battery.charging {
+    color: #2ecc71;
+}
+
+#battery.warning:not(.charging) {
+    color: #f67400;
+}
+
+#battery.critical:not(.charging) {
+    color: #da4453;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #da4453;
+        color: #ffffff;
+    }
 }

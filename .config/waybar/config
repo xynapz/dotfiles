@@ -1,50 +1,164 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 30,
-    "modules-left": ["hyprland/workspaces", "hyprland/window"],
-    "modules-center": ["clock"],
-    "modules-right": ["network", "cpu", "memory", "battery", "pulseaudio", "tray"],
+    "height": 32,
+    "spacing": 0,
+    "margin-top": 0,
+    "margin-bottom": 0,
+    "modules-left": [
+        "hyprland/workspaces",
+        "group/title"
+    ],
+    "modules-center": [
+        "clock",
+        "custom/notification"
+    ],
+    "modules-right": [
+        "tray",
+        "custom/gap",
+        "group/hardware",
+        "custom/gap",
+        "pulseaudio",
+        "backlight",
+        "battery",
+        "custom/power"
+    ],
+    "group/hardware": {
+        "orientation": "horizontal",
+        "modules": [
+            "network",
+            "cpu",
+            "memory"
+        ]
+    },
+    "group/title": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/window-icon",
+            "hyprland/window"
+        ]
+    },
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
-        "format": "{name}"
+        "format": "<span size='110%'><b>{id}</b></span>",
+        "on-click": "activate"
     },
-    "clock": {
-        "format": "{:%H:%M} ",
-        "format-alt": "{:%Y-%m-%d}"
-    },
-    "cpu": {
-        "format": "{usage}% CPU",
+    "custom/window-icon": {
+        "format": "<span size='150%' rise='-4096'><b></b></span>   ",
         "tooltip": false
     },
+    "hyprland/window": {
+        "format": "<b>{title}</b>",
+        "max-length": 50,
+        "rewrite": {
+            "(.*) - Mozilla Firefox": "Firefox",
+            "(.*) - Visual Studio Code": "VS Code",
+            "(.*) - Terminal": "Terminal"
+        }
+    },
+    "clock": {
+        "format": "<span size='150%' rise='-4096'><b></b></span>    {:%A, %B %d   %H:%M}",
+        "format-alt": "<span size='150%' rise='-4096'><b></b></span>    {:%Y-%m-%d}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "on-click-right": "mode",
+            "format": {
+                "months": "<span color='#eff0f1'><b>{}</b></span>",
+                "days": "<span color='#eff0f1'>{}</span>",
+                "weeks": "<tt><span color='#3daee9'><b>W{}</b></span></tt>",
+                "weekdays": "<span color='#3daee9'><b>{}</b></span>",
+                "today": "<span bgcolor='#3daee9' color='#ffffff'><b>{}</b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+    "custom/notification": {
+        "format": "<span size='150%' rise='-4096'><b></b></span> ",
+        "on-click": "swaync-client -t -sw",
+        "tooltip": true,
+        "tooltip-format": "Notifications"
+    },
+    "tray": {
+        "icon-size": 22,
+        "spacing": 10
+    },
+    "pulseaudio": {
+        "format": "<span size='150%' rise='-4096'><b>{icon}</b></span>    {volume}%",
+        "format-muted": "<span size='150%' rise='-4096'><b></b></span>    Muted",
+        "format-icons": {
+            "default": [
+                "",
+                "",
+                ""
+            ]
+        },
+        "on-click": "pavucontrol",
+        "tooltip-format": "Volume: {volume}%"
+    },
+    "backlight": {
+        "format": "<span size='150%' rise='-4096'><b>{icon}</b></span>    {percent}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "tooltip-format": "Brightness: {percent}%"
+    },
+    "network": {
+        "format-wifi": "<span size='150%' rise='-4096'><b>󰀂</b></span>",
+        "format-ethernet": "<span size='150%' rise='-4096'><b>󰅬</b></span>",
+        "format-disconnected": "<span size='150%' rise='-4096'><b>󰅬</b></span>",
+        "tooltip-format": "{ifname} via {gwaddr}"
+    },
+    "cpu": {
+        "format": "<span size='150%' rise='-4096'><b>󰅬</b></span>",
+        "tooltip": true,
+        "tooltip-format": "CPU Usage: {usage}%"
+    },
     "memory": {
-        "format": "{}% MEM"
+        "format": "<span size='150%' rise='-4096'><b></b></span>",
+        "tooltip": true,
+        "tooltip-format": "Memory Used: {used}GiB"
     },
     "battery": {
         "states": {
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% BAT",
-        "format-charging": "{capacity}% CHG",
-        "format-plugged": "{capacity}% PLG",
-        "format-alt": "{time}"
+        "format": "<span size='150%' rise='-4096'><b>{icon}</b></span>    {capacity}%",
+        "format-charging": "<span size='150%' rise='-4096'><b></b></span>    {capacity}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "tooltip-format": "Battery: {capacity}%"
     },
-    "network": {
-        "format-wifi": "{essid} ({signalStrength}%)",
-        "format-ethernet": "{ipaddr}/{cidr}",
-        "tooltip-format": "{ifname} via {gwaddr}",
-        "format-linked": "{ifname} (No IP)",
-        "format-disconnected": "Disconnected",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    "custom/power": {
+        "format": "<span size='150%' rise='-4096'><b></b></span>",
+        "on-click": "wlogout",
+        "tooltip": true,
+        "tooltip-format": "Power Menu"
     },
-    "pulseaudio": {
-        "format": "{volume}% VOL",
-        "format-muted": "MUTED",
-        "format-icons": {
-            "default": ["VOL"]
-        },
-        "on-click": "pavucontrol"
+    "custom/gap": {
+        "format": " ",
+        "tooltip": false
     }
 }
