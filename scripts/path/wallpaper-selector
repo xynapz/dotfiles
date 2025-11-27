@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# Configuration
+WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+CACHE_DIR="$HOME/.cache/wallpaper-thumbnails"
+ROFI_THEME="$HOME/dotfiles/.config/rofi/wallpaper.rasi"
+
+# Create cache directory if it doesn't exist
+mkdir -p "$CACHE_DIR"
+
+# Ensure swww is running
+if ! pgrep -x "swww-daemon" > /dev/null; then
+    swww init &
+    sleep 1
+fi
+
+# Function to generate thumbnails
+generate_thumbnail() {
+    local file="$1"
+    local filename=$(basename "$file")
+    local thumbnail="$CACHE_DIR/$filename"
+
+    if [ ! -f "$thumbnail" ]; then
+        # Generate thumbnail (resize to 500x500 for good quality in grid)
+        convert "$file" -thumbnail 500x500^ -gravity center -extent 500x500 "$thumbnail"
+    fi
+    echo "$thumbnail"
+}
+
+# Main logic
+if [ -z "$1" ]; then
+    # Generate list for rofi
+    selected=$(for file in "$WALLPAPER_DIR"/*; do
+        if [ -f "$file" ]; then
+            # Check if it's an image file
+            if [[ "$file" =~ \.(jpg|jpeg|png|gif|webp)$ ]]; then
+                thumb=$(generate_thumbnail "$file")
+                filename=$(basename "$file")
+                # Output format: filename\0icon\x1fpath/to/thumbnail
+                echo -en "$filename\0icon\x1f$thumb\n"
+            fi
+        fi
+    done | rofi -dmenu -theme "$ROFI_THEME" -p "Select Wallpaper" -show-icons)
+
+    if [ -n "$selected" ]; then
+        # Set selected wallpaper
+        SELECTED_FILE="$WALLPAPER_DIR/$selected"
+        if [ -f "$SELECTED_FILE" ]; then
+            swww img "$SELECTED_FILE" --transition-type grow --transition-pos 0.5,0.5 --transition-step 90
+            
+            # Optional: Save current wallpaper to a file for persistence on reboot
+            # echo "$SELECTED_FILE" > "$HOME/.current_wallpaper"
+        fi
+    fi
+else
+    # Set selected wallpaper (CLI mode)
+    SELECTED_FILE="$WALLPAPER_DIR/$1"
+    if [ -f "$SELECTED_FILE" ]; then
+        swww img "$SELECTED_FILE" --transition-type grow --transition-pos 0.5,0.5 --transition-step 90
+    fi
+fi
