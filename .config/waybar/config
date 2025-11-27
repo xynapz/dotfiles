@@ -82,10 +82,24 @@
         }
     },
     "custom/notification": {
-        "format": "<span size='150%' rise='-4096'><b></b></span> ",
-        "on-click": "swaync-client -t -sw",
         "tooltip": true,
-        "tooltip-format": "Notifications"
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "<span size='150%' rise='-4096'><b>󰂚</b></span>",
+            "none": "<span size='150%' rise='-4096'><b>󰂜</b></span>",
+            "dnd-notification": "<span size='150%' rise='-4096'><b>󰂛</b></span>",
+            "dnd-none": "<span size='150%' rise='-4096'><b>󰪑</b></span>",
+            "inhibited-notification": "<span size='150%' rise='-4096'><b>󰂚</b></span>",
+            "inhibited-none": "<span size='150%' rise='-4096'><b>󰂜</b></span>",
+            "dnd-inhibited-notification": "<span size='150%' rise='-4096'><b>󰂛</b></span>",
+            "dnd-inhibited-none": "<span size='150%' rise='-4096'><b>󰪑</b></span>"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
     },
     "tray": {
         "icon-size": 22,
