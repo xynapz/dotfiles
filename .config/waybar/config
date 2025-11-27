@@ -6,6 +6,7 @@
     "margin-top": 0,
     "margin-bottom": 0,
     "modules-left": [
+        "custom/brand",
         "hyprland/workspaces",
         "group/title"
     ],
@@ -174,5 +175,11 @@
     "custom/gap": {
         "format": " ",
         "tooltip": false
+    },
+    "custom/brand": {
+        "format": " ",
+        "tooltip": true,
+        "tooltip-format": "angeld.me",
+        "on-click": "xdg-open https://angeld.me"
     }
 }

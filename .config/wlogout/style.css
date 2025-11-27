@@ -1,0 +1,119 @@
+/* Wlogout Styles - Matching Waybar/SwayNC KDE Plasma Theme */
+
+* {
+    font-family: "Noto Sans", "Iosevka Nerd Font", sans-serif;
+    font-size: 16px;
+}
+
+window {
+    background-color: rgba(43, 43, 43, 0.95);
+    /* KDE Dark Gray with slight transparency */
+}
+
+button {
+    background-color: #2b2b2b;
+    /* KDE Dark Gray */
+    border: 2px solid #3daee9;
+    /* KDE Blue border */
+    border-radius: 8px;
+    background-repeat: no-repeat;
+    background-position: center 30%;
+    /* Position icon at top-center area */
+    background-size: 35%;
+    color: #eff0f1;
+    /* KDE Light text */
+    font-size: 15px;
+    font-weight: bold;
+    margin: 15px;
+    padding: 20px;
+    min-width: 150px;
+    min-height: 150px;
+    transition: all 0.15s ease-in-out;
+}
+
+/* Button labels - position at bottom */
+button label {
+    color: #eff0f1;
+    margin-top: 80px;
+    /* Push label to bottom */
+}
+
+
+button:focus,
+button:active {
+    background-color: #31363b;
+    /* Slightly lighter gray */
+    outline-style: none;
+}
+
+button:hover {
+    background-color: #3daee9;
+    /* KDE Blue on hover */
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+/* Button labels */
+button label {
+    color: #eff0f1;
+}
+
+/* Lock Button */
+#lock {
+    background-image: url("/usr/share/wlogout/icons/lock.png");
+}
+
+#lock:hover {
+    background-color: #3daee9;
+    /* KDE Blue */
+}
+
+/* Logout Button */
+#logout {
+    background-image: url("/usr/share/wlogout/icons/logout.png");
+}
+
+#logout:hover {
+    background-color: #f67400;
+    /* KDE Orange */
+}
+
+/* Suspend Button */
+#suspend {
+    background-image: url("/usr/share/wlogout/icons/suspend.png");
+}
+
+#suspend:hover {
+    background-color: #2ecc71;
+    /* Green */
+}
+
+/* Hibernate Button */
+#hibernate {
+    background-image: url("/usr/share/wlogout/icons/hibernate.png");
+}
+
+#hibernate:hover {
+    background-color: #9b59b6;
+    /* Purple */
+}
+
+/* Shutdown Button */
+#shutdown {
+    background-image: url("/usr/share/wlogout/icons/shutdown.png");
+}
+
+#shutdown:hover {
+    background-color: #da4453;
+    /* KDE Red */
+}
+
+/* Reboot Button */
+#reboot {
+    background-image: url("/usr/share/wlogout/icons/reboot.png");
+}
+
+#reboot:hover {
+    background-color: #f67400;
+    /* KDE Orange */
+}
