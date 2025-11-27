@@ -164,6 +164,12 @@ tooltip label {
     padding-right: 15px;
 }
 
+#pulseaudio,
+#backlight {
+    color: #eff0f1;
+    /* Standard text color - not highlighted */
+}
+
 #clock {
     font-weight: bold;
     color: #cba6f7;
