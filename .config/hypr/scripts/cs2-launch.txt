@@ -1,0 +1,1 @@
+env SDL_VIDEO_DRIVER=wayland SDL_VIDEO_WAYLAND_MODE_SCALING=1 gamescope -W 2560 -H 1440 -w 1280 -h 720 -U -f -- gamemoderun %command% -nojoy -vulkan -high +engine_low_latency_sleep_after_client_tick 1 -softparticlesdefaultoff +r_dynamic 0

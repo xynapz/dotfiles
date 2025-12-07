@@ -136,12 +136,12 @@
     },
     "network": {
         "format-wifi": "<span size='150%' rise='-4096'><b>󰀂</b></span>",
-        "format-ethernet": "<span size='150%' rise='-4096'><b>󰅬</b></span>",
-        "format-disconnected": "<span size='150%' rise='-4096'><b>󰅬</b></span>",
+        "format-ethernet": "<span size='150%' rise='-4096'><b>󰈀</b></span>",
+        "format-disconnected": "<span size='150%' rise='-4096'><b>󰤭</b></span>",
         "tooltip-format": "{ifname} via {gwaddr}"
     },
     "cpu": {
-        "format": "<span size='150%' rise='-4096'><b>󰅬</b></span>",
+        "format": "<span size='150%' rise='-4096'><b>󰻠</b></span>",
         "tooltip": true,
         "tooltip-format": "CPU Usage: {usage}%"
     },

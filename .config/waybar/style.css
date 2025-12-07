@@ -3,10 +3,10 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "Noto Sans", "Iosevka Nerd Font", sans-serif;
+    font-family:  "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
     /* Consistent stack */
     font-size: 16px;
-    font-weight: bold;
+    font-weight: bolder;
     /* Global bold */
     min-height: 0;
 }
@@ -64,7 +64,7 @@ tooltip label {
 /* Window Group (Icon + Title) */
 #title {
     background-color: transparent;
-    margin-left: 40px;
+    margin-left: 50px;
     /* User preferred spacing */
     padding: 0;
     border: none;
@@ -73,7 +73,7 @@ tooltip label {
 /* Window Title & Icon inside group */
 #window {
     background-color: transparent;
-    padding: 0 5px;
+    padding: 0 0px;
     color: #eff0f1;
     font-weight: bold;
     margin: 0;
@@ -81,7 +81,7 @@ tooltip label {
 
 #custom-window-icon {
     background-color: transparent;
-    padding: 0 5px;
+    padding: 0 0px;
     color: #3daee9;
     /* KDE Blue Accent for the icon */
     font-weight: bold;
@@ -101,17 +101,17 @@ tooltip label {
 #custom-window-icon,
 #custom-gap,
 #backlight,
+#pulseaudio,
 #clock,
 #battery,
 #cpu,
 #memory,
 #network,
-#pulseaudio,
 #tray {
     padding: 0 10px;
     background-color: transparent;
     color: #eff0f1;
-    margin: 2px 0;
+    margin: 2px 0px;
     /* Vertical margin to prevent hover overflow */
     border-radius: 4px;
     /* Rounded hover effect */
@@ -139,8 +139,8 @@ tooltip label {
     background-size: 24px 24px;
     background-repeat: no-repeat;
     background-position: center;
-    min-width: 32px;
-    padding: 0 8px;
+    min-width: 26px;
+    padding: 0 12px;
     margin: 2px 10px 2px 5px;
     /* Added right margin for gap */
     border-radius: 4px;

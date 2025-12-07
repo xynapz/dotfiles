@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+# export-angeld-content.sh
+# Triggers Emacs to export site content to HTML.
+# Intended for Hyprland binding.
+
+LOG_FILE="$HOME/xynapz/angeld.me/logs/site-export.log"
+SCRIPT_EL="$HOME/dotfiles/scripts/workers/angeld-content-exporter.el"
+
+mkdir -p "$(dirname "$LOG_FILE")"
+
+# Reset log file for this run
+echo "[$(date)] Export started" > "$LOG_FILE"
+
+# Notify start
+notify-send -t 3000 "Site Export" "Export started..."
+
+# Ensure the elisp function is loaded
+# We use --eval to load the file. Redirect output to avoid noise.
+emacsclient -e "(load \"$SCRIPT_EL\")" >> "$LOG_FILE" 2>&1
+
+if [ $? -ne 0 ]; then
+    notify-send -u critical "Site Export" "Failed to load elisp script. Is Emacs running?"
+    echo "[$(date)] FATAL: Failed to load $SCRIPT_EL" >> "$LOG_FILE"
+    exit 1
+fi
+
+# Run the export function
+RESULT=$(emacsclient -e '(my/export-site-content)' 2>> "$LOG_FILE")
+EXIT_CODE=$?
+
+# Extract the string content from the result (remove quotes)
+RESULT_CLEAN=$(echo "$RESULT" | sed 's/^"//;s/"$//')
+
+if [ $EXIT_CODE -eq 0 ]; then
+    notify-send -t 5000 "Site Export" "$RESULT_CLEAN"
+    echo "[$(date)] Finished: $RESULT_CLEAN" >> "$LOG_FILE"
+else
+    notify-send -u critical "Site Export" "Export FAILED. Check log at $LOG_FILE"
+    echo "[$(date)] FATAL: emacsclient execution failed." >> "$LOG_FILE"
+fi
