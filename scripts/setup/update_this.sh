@@ -103,12 +103,6 @@ noto-fonts-cjk                   # Chinese, Japanese, Korean Fonts
 noto-fonts-extra                 # Extras, Historical Fonts
 noto-fonts-emoji
 
-# AMD Graphics Drivers (Vivobook Ryzen/Radeon)
-mesa
-vulkan-radeon
-libva-mesa-driver
-mesa-vdpau
-
 # Audio
 pipewire
 pipewire-pulse
@@ -330,21 +324,30 @@ setup_steam() {
         log "Multilib repository is already enabled."
     fi
 
-    # Install Packages
-    # ttf-liberation: REQUIRED. Fixes invisible text in Steam UI.
-    # lib32-pipewire: Fixes audio in 32-bit games.
     packages=(
+        # AMD GRAPHICS STACK (Stable)
+        "mesa"
+        "lib32-mesa"              # Required for Steam to see GPU
+        "vulkan-radeon"           # Best Vulkan driver for Gaming
+        "lib32-vulkan-radeon"     # 32-bit Vulkan for Steam
+        "libva-mesa-driver"       # Video Acceleration
+        "mesa-vdpau"
+
+        # GAMING TOOLS
         "steam"
-        "ttf-liberation"
-        "gamemode"
+        "gamescope"               # Your upscaler tool
+        "gamemode"                # CPU optimizer
         "lib32-gamemode"
-        "lib32-pipewire"
-        "gamescope"
-        "vulkan-tools"
+        "vulkan-tools"            # Debugging tools (vkcube)
+
+        # AUDIO & FONTS
+        "lib32-pipewire"          # Fixes audio in 32-bit games
+        "ttf-liberation"          # Fixes invisible text in Steam
     )
 
     log "Installing Steam and dependencies..."
-    yay -S --needed --noconfirm "${packages[@]}"
+    # I use pacman (not yay) to strictly force official, stable drivers
+    sudo pacman -S --needed --noconfirm "${packages[@]}"
 
     # Ensure user can trigger gamemode
     sudo usermod -aG gamemode "$USER"
