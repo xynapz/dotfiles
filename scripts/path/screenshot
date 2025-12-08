@@ -16,7 +16,9 @@ notify_user() {
 
 case "$1" in
     "fullscreen")
-        grim - | swappy -f -
+        # Capture active monitor only
+        ACTIVE_MONITOR=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')
+        grim -o "$ACTIVE_MONITOR" - | swappy -f -
         ;;
     "area")
         grim -g "$(slurp)" - | swappy -f -

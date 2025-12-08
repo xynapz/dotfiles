@@ -83,6 +83,7 @@ swaync
 wlogout
 slurp
 grim
+swappy
 wl-clipboard
 ghostty
 swww
