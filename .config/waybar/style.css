@@ -1,94 +1,35 @@
-/* Waybar Styles - KDE Plasma Theme */
+/* Waybar Styles - Polished Pill Design v2 */
 
 * {
     border: none;
     border-radius: 0;
-    font-family:  "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
-    /* Consistent stack */
-    font-size: 16px;
-    font-weight: bolder;
-    /* Global bold */
+    font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
+    font-size: 14px;
+    font-weight: bold;
     min-height: 0;
 }
 
 window#waybar {
-    background: #2b2b2b;
-    /* KDE Dark Gray */
-    color: #eff0f1;
+    background: rgba(30, 30, 46, 0.85);
+    /* Slightly more opaque for better contrast */
+    color: #cdd6f4;
 }
 
-/* Tooltip */
 tooltip {
-    background: #31363b;
-    border: 1px solid #3daee9;
+    background: #1e1e2e;
+    border: 1px solid #cba6f7;
+    border-radius: 10px;
 }
 
 tooltip label {
-    color: #eff0f1;
+    color: #cdd6f4;
 }
 
-/* Workspaces */
-#workspaces {
-    background-color: transparent;
-    margin: 0;
-    padding: 0;
-}
+/* -----------------------------------------------------------------------------
+ * Module Styles
+ * -------------------------------------------------------------------------- */
 
-#workspaces button {
-    padding: 0 10px;
-    background-color: transparent;
-    color: #eff0f1;
-    border-radius: 0;
-    transition: background 0.2s;
-    font-weight: bold;
-}
-
-#workspaces button:hover {
-    background: #3daee9;
-    /* KDE Blue Hover */
-    color: #ffffff;
-}
-
-#workspaces button.active {
-    background-color: #3daee9;
-    /* KDE Blue Active */
-    color: #ffffff;
-    border-bottom: 2px solid #ffffff;
-}
-
-#workspaces button.urgent {
-    background-color: #f67400;
-    /* KDE Orange */
-}
-
-/* Window Group (Icon + Title) */
-#title {
-    background-color: transparent;
-    margin-left: 50px;
-    /* User preferred spacing */
-    padding: 0;
-    border: none;
-}
-
-/* Window Title & Icon inside group */
-#window {
-    background-color: transparent;
-    padding: 0 0px;
-    color: #eff0f1;
-    font-weight: bold;
-    margin: 0;
-}
-
-#custom-window-icon {
-    background-color: transparent;
-    padding: 0 0px;
-    color: #3daee9;
-    /* KDE Blue Accent for the icon */
-    font-weight: bold;
-    margin: 0;
-}
-
-/* Modules */
+/* Standard Pill Style */
 #clock,
 #battery,
 #cpu,
@@ -96,29 +37,20 @@ tooltip label {
 #network,
 #pulseaudio,
 #tray,
+#backlight,
 #custom-notification,
 #custom-power,
-#custom-window-icon,
-#custom-gap,
-#backlight,
-#pulseaudio,
-#clock,
-#battery,
-#cpu,
-#memory,
-#network,
-#tray {
-    padding: 0 10px;
-    background-color: transparent;
-    color: #eff0f1;
-    margin: 2px 0px;
-    /* Vertical margin to prevent hover overflow */
-    border-radius: 4px;
-    /* Rounded hover effect */
-    transition: background 0.2s;
-    font-weight: bold;
+#language,
+#disk {
+    padding: 0 15px;
+    margin: 4px 3px;
+    background-color: #313244;
+    color: #cdd6f4;
+    border-radius: 15px;
+    transition: all 0.3s ease;
 }
 
+/* Hover Effects */
 #clock:hover,
 #battery:hover,
 #cpu:hover,
@@ -126,99 +58,145 @@ tooltip label {
 #network:hover,
 #pulseaudio:hover,
 #tray:hover,
+#backlight:hover,
 #custom-notification:hover,
-#custom-power:hover,
-#backlight:hover {
-    background-color: #31363b;
-    /* Slightly lighter gray on hover */
+#custom-power:hover {
+    background-color: #45475a;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Specific Module Colors */
+/* -----------------------------------------------------------------------------
+ * Brand Icon
+ * -------------------------------------------------------------------------- */
+
 #custom-brand {
-    background-image: url("/home/angel/.config/waybar/icons/brand.png");
-    background-size: 24px 24px;
+    background-image: url("icons/brand.png");
     background-repeat: no-repeat;
     background-position: center;
-    min-width: 26px;
-    padding: 0 12px;
-    margin: 2px 10px 2px 5px;
-    /* Added right margin for gap */
-    border-radius: 4px;
-    transition: background 0.2s;
+    background-size: contain;
+    background-color: #313244;
+    /* Consistent pill background */
+    padding: 0px 7px;
+    /* Width for the icon */
+    margin: 2px 3px 2px 6px;
+    /* Slightly more left margin */
+    border-radius: 10px;
+    opacity: 1;
+    transition: all 0.3s ease;
 }
 
 #custom-brand:hover {
-    background-color: #31363b;
+    background-color: #45475a;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-#custom-notification {
-    color: #f67400;
-    /* Orange for notification bell */
-    padding-right: 15px;
+/* -----------------------------------------------------------------------------
+ * Workspace Styles
+ * -------------------------------------------------------------------------- */
+
+#workspaces {
+    background-color: #313244;
+    margin: 4px 3px;
+    padding: 0 5px;
+    border-radius: 15px;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    /* Slightly tighter internal padding */
+    margin: 4px 2px;
+    background-color: transparent;
+    color: #a6adc8;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+#workspaces button:hover {
+    background-color: #45475a;
+    color: #cdd6f4;
+}
+
+#workspaces button.active {
+    background-color: #cba6f7;
+    color: #1e1e2e;
+    min-width: 35px;
+    /* Wider active pill for emphasis */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.urgent {
+    background-color: #fab387;
+    color: #1e1e2e;
+}
+
+/* -----------------------------------------------------------------------------
+ * Specific Module Tweaks
+ * -------------------------------------------------------------------------- */
+
+#window {
+    background-color: transparent;
+    color: #cdd6f4;
+    margin: 0 10px;
+    padding: 0 10px;
+    /* font-style: italic;  Optional polish */
+}
+
+#group-hardware {
+    background-color: #313244;
+    padding: 0 6px;
+    margin: 4px 3px;
+    border-radius: 15px;
+}
+
+#group-hardware #network,
+#group-hardware #cpu,
+#group-hardware #memory,
+#group-hardware #disk {
+    background-color: transparent;
+    margin: 0;
+    padding: 0 10px;
+    /* More breathing room inside group */
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* Separator lines or subtle spacing inside group? Just spacing for now */
+
+/* Colors */
+#network {
+    color: #89b4fa;
+}
+
+#cpu {
+    color: #f38ba8;
+}
+
+#memory {
+    color: #a6e3a1;
 }
 
 #custom-power {
-    color: #3daee9;
-    padding-right: 15px;
+    background-color: #f38ba8;
+    color: #1e1e2e;
+    padding-right: 14px;
+    margin-right: 8px;
+    font-weight: 900;
 }
 
-#pulseaudio,
-#backlight {
-    color: #eff0f1;
-    /* Standard text color - not highlighted */
-}
-
-#clock {
-    font-weight: bold;
-    color: #cba6f7;
-    /* Neon purple for entire clock */
-}
-
-#tray {
-    background-color: transparent;
-    /* Minimal: No background */
-    border: 1px solid #4d5057;
-    /* Minimal: Subtle gray border */
-    border-radius: 4px;
-    padding: 0 10px;
-    margin: 2px 5px;
-    /* 2px vertical margin to prevent overflow */
-}
-
-#hardware {
-    background-color: transparent;
-    border: none;
-    margin: 0;
-    padding: 0;
-}
-
-/* Hardware group icons - unified color */
-#network,
-#cpu,
-#memory {
-    color: #3daee9;
-    /* KDE Blue for all hardware icons */
-}
-
-#tray>.passive {
-    -gtk-icon-effect: dim;
-}
-
-#tray>.needs-attention {
-    -gtk-icon-effect: highlight;
-    background-color: #f67400;
+#custom-power:hover {
+    background-color: #eba0ac;
 }
 
 #battery.charging {
-    color: #2ecc71;
+    color: #a6e3a1;
 }
 
 #battery.warning:not(.charging) {
-    color: #f67400;
+    color: #fab387;
 }
 
 #battery.critical:not(.charging) {
-    color: #da4453;
+    color: #f38ba8;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -228,7 +206,7 @@ tooltip label {
 
 @keyframes blink {
     to {
-        background-color: #da4453;
-        color: #ffffff;
+        background-color: #f38ba8;
+        color: #1e1e2e;
     }
 }

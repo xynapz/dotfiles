@@ -1,7 +1,7 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 32,
+    "height": 28,
     "spacing": 0,
     "margin-top": 0,
     "margin-bottom": 0,
@@ -16,9 +16,7 @@
     ],
     "modules-right": [
         "tray",
-        "custom/gap",
         "group/hardware",
-        "custom/gap",
         "pulseaudio",
         "backlight",
         "battery",
@@ -171,10 +169,6 @@
         "on-click": "wlogout",
         "tooltip": true,
         "tooltip-format": "Power Menu"
-    },
-    "custom/gap": {
-        "format": " ",
-        "tooltip": false
     },
     "custom/brand": {
         "format": " ",
