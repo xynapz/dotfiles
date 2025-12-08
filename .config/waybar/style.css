@@ -96,7 +96,7 @@ tooltip label {
 
 #workspaces {
     background-color: #313244;
-    margin: 4px 3px;
+    margin: 4px 15px 4px 3px;
     padding: 0 5px;
     border-radius: 15px;
 }
@@ -133,18 +133,23 @@ tooltip label {
  * Specific Module Tweaks
  * -------------------------------------------------------------------------- */
 
+#custom-window-icon {
+    color: #cdd6f4;
+    padding-right: 5px;
+    margin-left: 5px;
+}
+
 #window {
     background-color: transparent;
     color: #cdd6f4;
-    margin: 0 10px;
-    padding: 0 10px;
-    /* font-style: italic;  Optional polish */
+    margin: 0 5px;
+    padding: 0 5px;
 }
 
 #group-hardware {
     background-color: #313244;
     padding: 0 6px;
-    margin: 4px 3px;
+    margin: 4px 6px 4px 3px;
     border-radius: 15px;
 }
 
@@ -178,8 +183,9 @@ tooltip label {
 #custom-power {
     background-color: #f38ba8;
     color: #1e1e2e;
-    padding-right: 14px;
-    margin-right: 8px;
+    margin-right: 6px;
+    border-radius: 15px;
+    padding: 0 10px 0 6px;
     font-weight: 900;
 }
 

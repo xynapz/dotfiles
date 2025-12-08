@@ -44,7 +44,7 @@
         "on-click": "activate"
     },
     "custom/window-icon": {
-        "format": "<span size='150%' rise='-4096'><b></b></span>   ",
+        "format": "<span size='150%' rise='-4096'><b></b></span> ",
         "tooltip": false
     },
     "hyprland/window": {
@@ -57,8 +57,8 @@
         }
     },
     "clock": {
-        "format": "<span size='150%' rise='-4096'><b></b></span>    {:%A, %B %d   %H:%M}",
-        "format-alt": "<span size='150%' rise='-4096'><b></b></span>    {:%Y-%m-%d}",
+        "format": "{:%A, %B %d   %H:%M}",
+        "format-alt": "{:%Y-%m-%d}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
             "mode": "month",
@@ -105,8 +105,8 @@
         "spacing": 10
     },
     "pulseaudio": {
-        "format": "<span size='150%' rise='-4096'><b>{icon}</b></span>    {volume}%",
-        "format-muted": "<span size='150%' rise='-4096'><b></b></span>    Muted",
+        "format": "<span size='150%' rise='-4096'><b>{icon}</b></span>  {volume}%",
+        "format-muted": "<span size='150%' rise='-4096'><b></b></span>  Muted",
         "format-icons": {
             "default": [
                 "",
@@ -118,7 +118,7 @@
         "tooltip-format": "Volume: {volume}%"
     },
     "backlight": {
-        "format": "<span size='150%' rise='-4096'><b>{icon}</b></span>    {percent}%",
+        "format": "<span size='150%' rise='-4096'><b>{icon}</b></span>  {percent}%",
         "format-icons": [
             "",
             "",
@@ -153,8 +153,8 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "<span size='150%' rise='-4096'><b>{icon}</b></span>    {capacity}%",
-        "format-charging": "<span size='150%' rise='-4096'><b></b></span>    {capacity}%",
+        "format": "<span size='150%' rise='-4096'><b>{icon}</b></span>  {capacity}%",
+        "format-charging": "<span size='150%' rise='-4096'><b></b></span>  {capacity}%",
         "format-icons": [
             "",
             "",
