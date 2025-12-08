@@ -144,7 +144,7 @@
         "tooltip-format": "CPU Usage: {usage}%"
     },
     "memory": {
-        "format": "<span size='150%' rise='-4096'><b></b></span>",
+        "format": "<span size='150%' rise='-4096'><b></b></span>",
         "tooltip": true,
         "tooltip-format": "Memory Used: {used}GiB"
     },
@@ -171,9 +171,9 @@
         "tooltip-format": "Power Menu"
     },
     "custom/brand": {
-        "format": " ",
+        "format": "A",
         "tooltip": true,
-        "tooltip-format": "angeld.me",
+        "tooltip-format": "xynapz - angeld.me",
         "on-click": "xdg-open https://angeld.me"
     }
 }

@@ -70,18 +70,18 @@ tooltip label {
  * -------------------------------------------------------------------------- */
 
 #custom-brand {
-    background-image: url("icons/brand.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    background-color: #313244;
-    /* Consistent pill background */
-    padding: 0px 7px;
-    /* Width for the icon */
-    margin: 2px 3px 2px 6px;
-    /* Slightly more left margin */
+    background-color: #89b4fa;
+    /* Blue to match the previous icon */
+    color: #ffffff;
+    /* White text to match the reference image */
+    font-family: "Iosevka", "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    padding: 0px 8px;
+    /* Balanced padding */
+    margin: 7px 3px 7px 6px;
+    /* 4px vertical margin to match others */
     border-radius: 10px;
-    opacity: 1;
     transition: all 0.3s ease;
 }
 
@@ -153,14 +153,37 @@ tooltip label {
     border-radius: 15px;
 }
 
-#group-hardware #network,
-#group-hardware #cpu,
-#group-hardware #memory,
+#group-hardware #network {
+    background-color: transparent;
+    margin: 0;
+    padding: 0 5px 0 2px;
+    /* Reduce left padding to fix visual gap */
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#group-hardware #cpu {
+    background-color: transparent;
+    margin: 0;
+    padding: 0 5px;
+    /* Looks fine */
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#group-hardware #memory {
+    background-color: transparent;
+    margin: 0;
+    padding: 0 5px 0 2px;
+    /* Reduce left padding to fix visual gap */
+    border-radius: 0;
+    box-shadow: none;
+}
+
 #group-hardware #disk {
     background-color: transparent;
     margin: 0;
     padding: 0 5px;
-    /* More breathing room inside group */
     border-radius: 0;
     box-shadow: none;
 }
