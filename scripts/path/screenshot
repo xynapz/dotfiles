@@ -1,0 +1,28 @@
+#!/bin/bash
+# Screenshot utility wrapper for Hyprland
+# Usage:screenshot [active|screen|area|output|window]
+
+set -e
+
+DIR="$HOME/Pictures/Screenshots"
+mkdir -p "$DIR"
+
+NAME="$(date +%Y%m%d_%H%M%S).png"
+FILE="$DIR/$NAME"
+
+notify_user() {
+    notify-send "Screenshot" "$1"
+}
+
+case "$1" in
+    "fullscreen")
+        grim - | swappy -f -
+        ;;
+    "area")
+        grim -g "$(slurp)" - | swappy -f -
+        ;;
+    *)
+        echo "Usage: $0 {fullscreen|area}"
+        exit 1
+        ;;
+esac

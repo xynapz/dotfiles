@@ -50,8 +50,11 @@ generate_pkg_list() {
     cat <<EOF > "$HOME/packages.ini"
 # Core Utils
 zsh
+gcc
+clang
+base-devel
+gdb
 emacs
-tmux
 git
 openssh
 fzf
@@ -60,14 +63,17 @@ fd
 htop
 unzip
 zip
-python-pip
-npm
-pnpm
-vim
 thunar
 brightnessctl
 dmidecode
+nodejs
+typescript
+python-pip
+npm
+pnpm
 tree
+tmux
+vim
 
 # Hyprland Desktop
 hyprland
@@ -127,6 +133,9 @@ fastfetch
 discord
 google-chrome
 nwg-displays
+pyright
+typescript-language-server
+astrojs-language-server
 EOF
 }
 
