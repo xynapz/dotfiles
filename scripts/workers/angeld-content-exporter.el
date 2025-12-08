@@ -1,3 +1,8 @@
+;;; angeld-content-exporter.el --- site content exporter worker program -*-lexical-binding: t; -*-
+;;; Commentary:
+;; content exporter worker program
+
+;;; Code:
 (defun my/site-export-log (msg)
   "Append MSG to the site export log file with a timestamp."
   (let ((log-file "/home/angel/xynapz/angeld.me/logs/site-export.log"))
@@ -7,7 +12,7 @@
 (defun my/export-site-content ()
   "Export all .org files in site-content to HTML, preserving existing buffers."
   (interactive)
-  (let ((files (directory-files-recursively "/home/angel/xynapz/angeld.me/site-content" "\\.org$"))
+  (let ((files (directory-files-recursively "/home/angel/xynapz/site-content" "\\.org$"))
         (count 0)
         (errors 0))
     (my/site-export-log "--------------------------------------------------")
@@ -29,7 +34,9 @@
         (error
          (setq errors (1+ errors))
          (my/site-export-log (format "ERROR exporting %s: %s" file err)))))
-    
+
     (let ((summary (format "Export complete. Processed: %d, Errors: %d" count errors)))
       (my/site-export-log summary)
       summary)))
+
+;;; angeld-content-exporter.el ends here
