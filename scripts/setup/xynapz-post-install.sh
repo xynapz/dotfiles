@@ -74,6 +74,7 @@ pnpm
 tree
 tmux
 vim
+jq
 
 # Hyprland Desktop
 hyprland
@@ -84,6 +85,8 @@ wlogout
 slurp
 grim
 swappy
+wayfreeze-git
+slurp
 wl-clipboard
 ghostty
 swww
