@@ -31,6 +31,7 @@ export PATH="$PATH:$HOME/dotfiles/scripts/path"
 # Aliases and functions (common)
 alias xc="xclip -selection clipboard"
 alias ta="tmux attach -t"
+alias tree="tree -I '.git|.hg|.svn|.DS_Store|auto|node_modules|vendor|build|dist|out|obj|target|.cache|__pycache__|venv|.venv|env|cmake-build-debug|cmake-build-release|elpa|.idea|.vscode|.next|.nuxt|coverage|tmp|temp|eln-cache'"
 
 source $HOME/.zshrc_fn
 

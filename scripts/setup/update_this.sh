@@ -67,6 +67,7 @@ vim
 thunar
 brightnessctl
 dmidecode
+tree
 
 # Hyprland Desktop
 hyprland
@@ -115,6 +116,7 @@ texlive-latex
 texlive-latexextra
 texlive-plaingeneric
 texlive-xetex
+texlive-fontsrecommended
 poppler                          # M-x pdf-tools-install to manual build.
 poppler-glib
 
