@@ -2,11 +2,20 @@
 
 # Configuration
 WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
-CACHE_DIR="$HOME/.cache/wallpaper-thumbnails"
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/wallpaper-thumbnails"
 ROFI_THEME="$HOME/dotfiles/.config/rofi/wallpaper.rasi"
 
-# Create cache directory if it doesn't exist
+# Ensure cache directory exists
 mkdir -p "$CACHE_DIR"
+
+# Dependency Check
+if command -v convert >/dev/null 2>&1; then
+    HAS_CONVERT=true
+else
+    HAS_CONVERT=false
+    # Only notify once per session/run to avoid spam, or just warn silently
+    notify-send -u low "Wallpaper Selector" "ImageMagick 'convert' not found. Thumbnails disabled."
+fi
 
 # Ensure swww is running
 if ! pgrep -x "swww-daemon" > /dev/null; then
@@ -20,26 +29,26 @@ generate_thumbnail() {
     local filename=$(basename "$file")
     local thumbnail="$CACHE_DIR/$filename"
 
-    if [ ! -f "$thumbnail" ]; then
-        # Generate thumbnail (resize to 500x500 for good quality in grid)
-        convert "$file" -thumbnail 500x500^ -gravity center -extent 500x500 "$thumbnail"
+    if [ "$HAS_CONVERT" = true ]; then
+        if [ ! -f "$thumbnail" ]; then
+            # Generate thumbnail (resize to 500x500 for good quality in grid)
+            convert "$file" -thumbnail 500x500^ -gravity center -extent 500x500 "$thumbnail"
+        fi
+        echo "$thumbnail"
+    else
+        # Fallback to original image if convert is missing
+        echo "$file"
     fi
-    echo "$thumbnail"
 }
 
 # Main logic
 if [ -z "$1" ]; then
-    # Generate list for rofi
-    selected=$(for file in "$WALLPAPER_DIR"/*; do
-        if [ -f "$file" ]; then
-            # Check if it's an image file
-            if [[ "$file" =~ \.(jpg|jpeg|png|gif|webp)$ ]]; then
-                thumb=$(generate_thumbnail "$file")
-                filename=$(basename "$file")
-                # Output format: filename\0icon\x1fpath/to/thumbnail
-                echo -en "$filename\0icon\x1f$thumb\n"
-            fi
-        fi
+    # DIRECTLY pipe into rofi to allow null bytes (\0) which Bash variables can't handle
+    selected=$(find "$WALLPAPER_DIR" -maxdepth 1 -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.gif" -o -name "*.webp" \) -print0 | sort -z | while IFS= read -r -d '' file; do
+        thumb=$(generate_thumbnail "$file")
+        filename=$(basename "$file")
+        # Output format: filename\0icon\x1fpath/to/thumbnail
+        echo -en "$filename\0icon\x1f$thumb\n"
     done | rofi -dmenu -theme "$ROFI_THEME" -p "Select Wallpaper" -show-icons)
 
     if [ -n "$selected" ]; then
@@ -50,6 +59,8 @@ if [ -z "$1" ]; then
             
             # Optional: Save current wallpaper to a file for persistence on reboot
             # echo "$SELECTED_FILE" > "$HOME/.current_wallpaper"
+            
+            notify-send "Wallpaper Changed" "$selected" -i "$SELECTED_FILE"
         fi
     fi
 else

@@ -88,6 +88,7 @@ wl-clipboard
 ghostty
 swww
 swayosd
+imagemagick                     # which has bin "convert"rofi wallpaper selector thumbnail
 
 # Login & Locking
 sddm
