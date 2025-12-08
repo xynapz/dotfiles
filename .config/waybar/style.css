@@ -148,7 +148,7 @@ tooltip label {
 
 #group-hardware {
     background-color: #313244;
-    padding: 0 6px;
+    padding: 0 5px;
     margin: 4px 6px 4px 3px;
     border-radius: 15px;
 }
@@ -159,7 +159,7 @@ tooltip label {
 #group-hardware #disk {
     background-color: transparent;
     margin: 0;
-    padding: 0 10px;
+    padding: 0 5px;
     /* More breathing room inside group */
     border-radius: 0;
     box-shadow: none;
