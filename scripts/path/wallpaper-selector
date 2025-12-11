@@ -57,6 +57,9 @@ if [ -z "$1" ]; then
         if [ -f "$SELECTED_FILE" ]; then
             swww img "$SELECTED_FILE" --transition-type grow --transition-pos 0.5,0.5 --transition-step 90
             
+            # Create a symlink to the current wallpaper
+            ln -sf "$SELECTED_FILE" "$HOME/.cache/current_wallpaper.jpg"
+
             # Optional: Save current wallpaper to a file for persistence on reboot
             # echo "$SELECTED_FILE" > "$HOME/.current_wallpaper"
             
@@ -68,5 +71,7 @@ else
     SELECTED_FILE="$WALLPAPER_DIR/$1"
     if [ -f "$SELECTED_FILE" ]; then
         swww img "$SELECTED_FILE" --transition-type grow --transition-pos 0.5,0.5 --transition-step 90
+        # Create a symlink to the current wallpaper
+        ln -sf "$SELECTED_FILE" "$HOME/.cache/current_wallpaper.jpg"
     fi
 fi

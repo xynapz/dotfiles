@@ -133,6 +133,7 @@ poppler-glib
 
 # Other tools
 cmake
+docker
 libtool
 fastfetch
 discord
@@ -141,6 +142,8 @@ nwg-displays
 pyright
 typescript-language-server
 astrojs-language-server
+pwvucontrol
+figma-linux
 EOF
 }
 
@@ -347,7 +350,6 @@ setup_steam() {
         "vulkan-radeon"           # Best Vulkan driver for Gaming
         "lib32-vulkan-radeon"     # 32-bit Vulkan for Steam
         "libva-mesa-driver"       # Video Acceleration
-        "mesa-vdpau"
 
         # GAMING TOOLS
         "steam"
@@ -369,6 +371,27 @@ setup_steam() {
     sudo usermod -aG gamemode "$USER"
 
     success "Steam Setup Complete."
+}
+
+setup_docker() {
+    log "Setting up Docker..."
+
+    if ! command -v docker &> /dev/null; then
+        error "Docker not found. Ensure it is in packages.ini"
+    fi
+
+    log "Enabling Docker Systemd Service..."
+    sudo systemctl enable --now docker.service
+
+    log "Adding $USER to docker group..."
+    # Create group if it doesn't exist (pacman install presumably does this, but safe to check)
+    if ! getent group docker > /dev/null; then
+        sudo groupadd docker
+    fi
+
+    sudo usermod -aG docker "$USER"
+
+    success "Docker configured. (Relogin required for group changes)"
 }
 
 finalize() {
@@ -414,4 +437,5 @@ setup_dotfiles
 setup_emacs
 setup_login
 setup_steam
+setup_docker
 finalize

@@ -105,8 +105,8 @@
         "spacing": 10
     },
     "pulseaudio": {
-        "format": "<span size='150%' rise='-4096'><b>{icon}</b></span>  {volume}%",
-        "format-muted": "<span size='150%' rise='-4096'><b></b></span>  Muted",
+        "format": "<span size='120%' rise='-4096'><b>{icon}</b></span>",
+        "format-muted": "<span size='120%' rise='-4096'><b></b></span>  Muted",
         "format-icons": {
             "default": [
                 "",
@@ -114,11 +114,11 @@
                 ""
             ]
         },
-        "on-click": "pavucontrol",
+        "on-click": "pwvucontrol",
         "tooltip-format": "Volume: {volume}%"
     },
     "backlight": {
-        "format": "<span size='150%' rise='-4096'><b>{icon}</b></span>  {percent}%",
+        "format": "<span size='120%' rise='-4096'><b>{icon}</b></span>",
         "format-icons": [
             "",
             "",
@@ -133,9 +133,9 @@
         "tooltip-format": "Brightness: {percent}%"
     },
     "network": {
-        "format-wifi": "<span size='150%' rise='-4096'><b>󰀂</b></span>",
-        "format-ethernet": "<span size='150%' rise='-4096'><b>󰈀</b></span>",
-        "format-disconnected": "<span size='150%' rise='-4096'><b>󰤭</b></span>",
+        "format-wifi": "<span size='120%' rise='-4096'><b>󰀂</b></span>",
+        "format-ethernet": "<span size='120%' rise='-4096'><b>󰈀</b></span>",
+        "format-disconnected": "<span size='120%' rise='-4096'><b>󰤭</b></span>",
         "tooltip-format": "{ifname} via {gwaddr}"
     },
     "cpu": {
@@ -144,7 +144,7 @@
         "tooltip-format": "CPU Usage: {usage}%"
     },
     "memory": {
-        "format": "<span size='150%' rise='-4096'><b></b></span>",
+        "format": "<span size='120%' rise='-4096'><b></b></span>",
         "tooltip": true,
         "tooltip-format": "Memory Used: {used}GiB"
     },
@@ -153,8 +153,8 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "<span size='150%' rise='-4096'><b>{icon}</b></span>  {capacity}%",
-        "format-charging": "<span size='150%' rise='-4096'><b></b></span>  {capacity}%",
+        "format": "<span size='120%' rise='-4096'><b>{icon}</b></span>",
+        "format-charging": "<span size='120%' rise='-4096'><b></b></span>",
         "format-icons": [
             "",
             "",
@@ -165,7 +165,7 @@
         "tooltip-format": "Battery: {capacity}%"
     },
     "custom/power": {
-        "format": "<span size='150%' rise='-4096'><b></b></span>",
+        "format": "<span size='120%' rise='-4096'><b></b></span>",
         "on-click": "wlogout",
         "tooltip": true,
         "tooltip-format": "Power Menu"

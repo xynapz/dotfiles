@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Penpot
+Comment=Open-source design and prototyping platform
+Exec=xdg-open http://localhost:9001
+Icon=applications-graphics
+Terminal=false
+Categories=Graphics;Design;
+Keywords=design;prototype;figma;
