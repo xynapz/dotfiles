@@ -84,11 +84,11 @@ tooltip label {
     color: #2b2b2b;
     /* White text to match the reference image */
     font-family: "Iosevka", "JetBrainsMono Nerd Font", sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 900;
-    padding: 0px 8px;
+    padding: 0px 12px 0px 8px;
     /* Balanced padding */
-    margin: 7px 3px 7px 6px;
+    margin: 7px 7px;
     /* 4px vertical margin to match others */
     border-radius: 10px;
     transition: all 0.3s ease;
