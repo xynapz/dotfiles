@@ -66,6 +66,14 @@ tooltip label {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
+#pulseaudio {
+    color: #f67400;
+}
+
+#backlight {
+    color: #fdcc31;
+}
+
 /* -----------------------------------------------------------------------------
  * Brand Icon
  * -------------------------------------------------------------------------- */
@@ -201,7 +209,7 @@ tooltip label {
 }
 
 #memory {
-    color: #3daee9;
+    color: #1cdc9a;
 }
 
 #custom-power {
@@ -226,11 +234,11 @@ tooltip label {
 }
 
 #battery.charging {
-    color: #3daee9;
+    color: #1cdc9a;
 }
 
 #battery.warning:not(.charging) {
-    color: #da4453;
+    color: #f67400;
 }
 
 #battery.critical:not(.charging) {
