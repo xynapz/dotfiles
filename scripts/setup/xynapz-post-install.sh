@@ -32,17 +32,23 @@ prepare_system() {
 }
 
 install_yay() {
-    if command -v yay &> /dev/null; then
-        success "Yay is already installed."
+    if command -v yay &> /dev/null && yay --version &> /dev/null; then
+        success "Yay is already installed and functional."
     else
-        log "Installing Yay..."
+        if command -v yay &> /dev/null; then
+            log "Yay is installed but broken (might be pending update). Rebuilding..."
+        else
+            log "Installing Yay..."
+        fi
+        
+        # Build yay from source
         cd /tmp
         rm -rf yay
         git clone https://aur.archlinux.org/yay.git
         cd yay
         makepkg -si --noconfirm
         cd "$HOME"
-        success "Yay installed."
+        success "Yay installed/updated."
     fi
 }
 
@@ -56,6 +62,7 @@ base-devel
 gdb
 emacs
 git
+xclip
 openssh
 fzf
 ripgrep
@@ -73,7 +80,7 @@ npm
 pnpm
 tree
 tmux
-vim
+gvim
 jq
 
 # Hyprland Desktop
@@ -121,7 +128,7 @@ pipewire-pulse
 pipewire-alsa
 wireplumber
 
-# latex, org, pdf-tools dependencies (tex namespaces changed in 2025 update)
+# latex, org, pdf-tools dependencies (aur: tex namespaces changed in 2025 update)
 texlive-basic
 texlive-latex
 texlive-latexextra
@@ -144,6 +151,7 @@ typescript-language-server
 astrojs-language-server
 pwvucontrol
 figma-linux
+ladybird
 EOF
 }
 
@@ -278,6 +286,7 @@ setup_dotfiles() {
     link_file ".config/swaync"
     link_file ".config/waybar"
     link_file ".config/wlogout"
+    link_file ".config/foot"
 }
 
 setup_emacs() {
@@ -373,6 +382,21 @@ setup_steam() {
     success "Steam Setup Complete."
 }
 
+setup_vim() {
+    log "Setting up Vim..."
+    local PLUG_URL="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    local AUTOLOAD_DIR="$HOME/.vim/autoload"
+
+    if [ ! -f "$AUTOLOAD_DIR/plug.vim" ]; then
+         log "Installing vim-plug..."
+         curl -fLo "$AUTOLOAD_DIR/plug.vim" --create-dirs "$PLUG_URL"
+    fi
+
+    log "Installing Vim plugins..."
+    vim -E -s +PlugInstall +qall > /dev/null 2>&1 || true
+    success "Vim setup complete."
+}
+
 setup_docker() {
     log "Setting up Docker..."
 
@@ -435,6 +459,7 @@ setup_omz
 setup_github_ssh
 setup_dotfiles
 setup_emacs
+setup_vim
 setup_login
 setup_steam
 setup_docker

@@ -31,6 +31,20 @@ set undolevels=1000
 " Always use system/global clipboard
 set clipboard=unnamed,unnamedplus
 
+" Wayland Clipboard Support (wl-clipboard)
+let g:clipboard = {
+            \   'name': 'wl-clipboard',
+            \   'copy': {
+            \      '+': ['wl-copy', '--trim-newline', '--type', 'text/plain'],
+            \      '*': ['wl-copy', '--trim-newline', '--type', 'text/plain'],
+            \    },
+            \   'paste': {
+            \      '+': ['wl-paste', '--no-newline'],
+            \      '*': ['wl-paste', '--no-newline'],
+            \   },
+            \   'cache_enabled': 1,
+            \ }
+
 " ==========================
 " UI and display
 " ==========================
@@ -93,7 +107,12 @@ set termguicolors
 set background=dark
 
 " Install Modus Vivendi (via vim-plug)
-colorscheme modus
+" Install Modus Vivendi (via vim-plug)
+try
+    colorscheme modus
+catch
+    colorscheme default
+endtry
 
 " Cursor / highlight adjustments
 highlight CursorLine cterm=NONE ctermbg=236 guibg=#2d2d2d
@@ -179,9 +198,5 @@ set statusline=%#PmenuSel#\ %f\ %#LineNr#\ %m%r%h%w\ %=%#CursorColumn#\ %y\ %#Pm
 " Toggle file tree
 nnoremap <leader>e :NERDTreeToggle<CR>
 
-" Automatically open NERDTree if Vim is started without a file
-autocmd VimEnter * if argc() == 0 | NERDTree | endif
-
 " Focus current file in tree
 nnoremap <leader>f :NERDTreeFind<CR>
-
