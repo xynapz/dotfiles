@@ -4,7 +4,7 @@
 # Toggles Hyprland animations and decorations for performance
 
 LOCK_FILE="$HOME/.cache/gamemode.active"
-
+HYPRFILE="$HOME/dotfiles/.config/hypr/hyprland.conf"
 if [ -z "$@" ]; then
     ICON="$HOME/dotfiles/.config/rofi/icons/game.png"
     if [ -f "$LOCK_FILE" ]; then
@@ -16,7 +16,8 @@ else
     if [ "$@" = "Enable Game Mode" ]; then
         # Create lock file
         touch "$LOCK_FILE"
-        
+        sed -i "s/monitors.conf/game\/monitor.conf/" "$HYPRFILE"
+        sed -i "s/general.conf/game\/general.conf/" "$HYPRFILE"
         # Disable animations and decorations
         hyprctl --batch "\
             keyword animations:enabled 0;\
@@ -25,16 +26,18 @@ else
             keyword general:gaps_in 0;\
             keyword general:gaps_out 0;\
             keyword decoration:rounding 0" > /dev/null
-            
+
         notify-send -u low -t 2000 "Game Mode" "Enabled: Animations & Effects Disabled"
-        
+
     elif [ "$@" = "Disable Game Mode" ]; then
         # Remove lock file
         rm -f "$LOCK_FILE"
-        
+
+        sed -i "s/game\/monitor.conf/monitors.conf/" "$HYPRFILE"
+        sed -i "s/game\/general.conf/general.conf/" "$HYPRFILE"
         # Reload Hyprland config to restore defaults
         hyprctl reload > /dev/null
-        
+
         notify-send -u low -t 2000 "Game Mode" "Disabled: Normal Mode Restored"
     fi
 fi

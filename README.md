@@ -1,25 +1,12 @@
-# xynapz dotfiles 🛠️
+# Hyprland Configuration - Modularized
 
-Welcome to my personal dotfiles repo! This is where I keep configuration files for my development environment, including editors, Tmux, terminal emulators, and zsh. These dotfiles are setup for my needs but feel free to use it for yourself.
-
-## 🚀 Quick Setup
-
-Clone the repository:
-
-```bash
-git clone https://github.com/xynapz/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-```
-
-Then manually copy the files or create a symlink for them.
-
-> Back up any existing configs before copying.
-
-
-## 📝 License
-
-MIT — feel free to fork and adapt.
-
----
-
-Made with ❤️ by [xynapz](https://angeld.me)
+# Source modules
+source = ~/.config/hypr/modules/game/monitor.conf
+# source = ~/.config/hypr/modules/game/monitor.conf
+source = ~/.config/hypr/modules/env.conf
+source = ~/.config/hypr/modules/input.conf
+source = ~/.config/hypr/modules/general.conf
+#source = ~/.config/hypr/modules/game/general.conf
+source = ~/.config/hypr/modules/keybindings.conf
+source = ~/.config/hypr/modules/autostart.conf
+source = ~/.config/hypr/modules/windowrules.conf

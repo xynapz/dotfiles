@@ -12,7 +12,7 @@ set -e
 DOTFILES_REPO="https://github.com/xynapz/dotfiles.git"
 EMACS_REPO="https://github.com/xynapz/.emacs.d.git"
 DOTFILES_DIR="$HOME/dotfiles"
-LOG_FILE="$HOME/install_log.txt"
+LOG_FILE="$HOME/.cache/xynapz-post-install.log"
 
 # --- Colors ---
 RED='\033[0;31m'
@@ -40,7 +40,7 @@ install_yay() {
         else
             log "Installing Yay..."
         fi
-        
+
         # Build yay from source
         cd /tmp
         rm -rf yay
@@ -98,7 +98,7 @@ wl-clipboard
 ghostty
 swww
 swayosd
-imagemagick                     # which has bin "convert"rofi wallpaper selector thumbnail
+imagemagick                     # which has bin "convert" rofi wallpaper selector thumbnail
 
 # Login & Locking
 sddm
@@ -139,6 +139,7 @@ poppler                          # M-x pdf-tools-install to manual build.
 poppler-glib
 
 # Other tools
+ccache                            # for faster package updates
 cmake
 docker
 libtool
@@ -151,7 +152,7 @@ typescript-language-server
 astrojs-language-server
 pwvucontrol
 figma-linux
-ladybird
+zen-browser-bin
 EOF
 }
 
@@ -160,9 +161,10 @@ install_packages() {
     generate_pkg_list
 
     # Clean comments and empty lines
-    PACKAGES=$(grep -vE "^\s*#" "$HOME/packages.ini" | sed 's/#.*//' | tr '\n' ' ')
+    PACKAGES=$(grep -vE "^\s*#" "$HOME/dotfiles/packages.ini" | sed 's/#.*//' | tr '\n' ' ')
 
     log "Installing packages using Yay..."
+    yay -Y --sudoloop --save
     yay -S --needed --noconfirm $PACKAGES
     success "Packages installed."
 }
@@ -192,7 +194,7 @@ setup_omz() {
     fi
 }
 
-# --- 2.5 Setup GitHub SSH ---
+# 2.5 Setup GitHub SSH ---
 setup_github_ssh() {
     log "Setting up GitHub SSH Authentication..."
     SSH_KEY="$HOME/.ssh/id_ed25519"
