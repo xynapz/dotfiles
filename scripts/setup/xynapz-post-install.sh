@@ -2,8 +2,8 @@
 
 # XYNAPZ ARCH LINUX BOOTSTRAP
 # Author: Generated for Xynapz
-# Hardware: Asus Vivobook 15 (Ryzen 5000 / Radeon)
-# Features: Hyprland, SDDM, SSH, Hyprlock, Emacs, Graphics Driver, Steam, OH-MY-ZSH
+# Hardware: Asus Vivobook 15 (Ryzen 5000 / Radeon(iGPU))
+# Features: Hyprland, SDDM, Hyprlock, Emacs, Graphics Driver, Steam, OH-MY-ZSH
 
 # Stop script on error
 set -e
@@ -53,7 +53,7 @@ install_yay() {
 }
 
 generate_pkg_list() {
-    cat <<EOF > "$HOME/packages.ini"
+    cat <<EOF > "$DOTFILES_DIR/packages.ini"
 # Core Utils
 zsh
 gcc
@@ -62,6 +62,8 @@ base-devel
 gdb
 emacs
 git
+man-db
+man-pages
 xclip
 openssh
 fzf
@@ -161,7 +163,7 @@ install_packages() {
     generate_pkg_list
 
     # Clean comments and empty lines
-    PACKAGES=$(grep -vE "^\s*#" "$HOME/dotfiles/packages.ini" | sed 's/#.*//' | tr '\n' ' ')
+    PACKAGES=$(grep -vE "^\s*#" "$DOTFILES_DIR/packages.ini" | sed 's/#.*//' | tr '\n' ' ')
 
     log "Installing packages using Yay..."
     yay -Y --sudoloop --save
@@ -191,50 +193,6 @@ setup_omz() {
         log "Installing zsh-syntax-highlighting..."
         git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$OMZ_CUSTOM/plugins/zsh-syntax-highlighting"
         success "Plugin: zsh-syntax-highlighting installed."
-    fi
-}
-
-# 2.5 Setup GitHub SSH ---
-setup_github_ssh() {
-    log "Setting up GitHub SSH Authentication..."
-    SSH_KEY="$HOME/.ssh/id_ed25519"
-
-    if [ ! -f "$SSH_KEY" ]; then
-        log "Generating new Ed25519 SSH key..."
-        ssh-keygen -t ed25519 -C "angeldhakal97@gmail.com" -f "$SSH_KEY"
-    else
-        log "SSH Key found. Skipping generation."
-    fi
-
-    # Add to Agent (Current Session)
-    eval "$(ssh-agent -s)" > /dev/null
-    ssh-add "$SSH_KEY" 2>/dev/null
-
-    # 3. Copy to Clipboard
-    if command -v wl-copy &> /dev/null; then
-        cat "${SSH_KEY}.pub" | wl-copy
-        success "Public key copied to clipboard!"
-    fi
-
-    # Display & Pause
-    echo -e "${YELLOW}====================================================${NC}"
-    echo -e "${YELLOW}  ACTION REQUIRED: ADD KEY TO GITHUB  ${NC}"
-    echo -e "${YELLOW}====================================================${NC}"
-    echo -e "Key:"
-    cat "${SSH_KEY}.pub"
-    echo -e "\n1. Open: https://github.com/settings/keys"
-    echo -e "2. Click 'New SSH Key'"
-    echo -e "3. Paste the key (it is already in your clipboard)"
-    echo -e "${YELLOW}====================================================${NC}"
-
-    read -p "Press [Enter] once you have added the key to GitHub..."
-
-    log "Testing GitHub connection..."
-    if ssh -T git@github.com 2>&1 | grep -q "successfully authenticated"; then
-        success "GitHub Authentication Verified!"
-    else
-        echo -e "${RED}[WARN] GitHub authentication failed. Please check your key.${NC}"
-        sleep 3
     fi
 }
 
@@ -428,6 +386,15 @@ finalize() {
         chsh -s "$(which zsh)"
     fi
 
+    log "Setting up man command"
+    if ! command -v man &> /dev/null; then
+        error "man executable not found, install or manage path"
+    else
+        log "Generating man pages"
+        mandb
+        success "man setup successfull"
+    fi
+
     # add user to input group
     sudo usermod -aG input $USER
 
@@ -447,22 +414,23 @@ finalize() {
     # Reloading Fonts
     fc-cache -fv
 
-    echo -e "${GREEN}=========================================${NC}"
     echo -e "${GREEN}  INSTALLATION COMPLETE  ${NC}"
-    echo -e "${GREEN}=========================================${NC}"
     echo "1. Reboot now to start SDDM > Hyprland."
-    echo "2. Your packages are tracked in $HOME/packages.ini"
+    echo "2. Your packages are tracked in $DOTFILES_DIR/packages.ini"
 }
 
-prepare_system
-install_yay
-install_packages
-setup_omz
-setup_github_ssh
-setup_dotfiles
-setup_emacs
-setup_vim
-setup_login
-setup_steam
-setup_docker
-finalize
+main(){
+    prepare_system
+    install_yay
+    install_packages
+    setup_omz
+    setup_dotfiles
+    setup_emacs
+    setup_vim
+    setup_login
+    setup_steam
+    setup_docker
+    finalize
+}
+
+main

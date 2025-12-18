@@ -1,12 +1,1 @@
-# Hyprland Configuration - Modularized
-
-# Source modules
-source = ~/.config/hypr/modules/game/monitor.conf
-# source = ~/.config/hypr/modules/game/monitor.conf
-source = ~/.config/hypr/modules/env.conf
-source = ~/.config/hypr/modules/input.conf
-source = ~/.config/hypr/modules/general.conf
-#source = ~/.config/hypr/modules/game/general.conf
-source = ~/.config/hypr/modules/keybindings.conf
-source = ~/.config/hypr/modules/autostart.conf
-source = ~/.config/hypr/modules/windowrules.conf
+# my dotfiles

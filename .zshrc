@@ -3,7 +3,7 @@ export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$ZSH/custom"
 ZSH_THEME="arrow"
 # oh-my-zsh plugins
-# NOTE: REMOVED zsh-autosuggestions temporarily
+# NOTE: REMOVED (zsh-autosuggestions zsh-syntax-highlighting) temporarily
 plugins=(git zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
@@ -37,3 +37,6 @@ alias tree="tree -I '.git|.hg|.svn|.DS_Store|auto|node_modules|vendor|build|dist
 alias em="emacs -nw"
 
 source $HOME/.zshrc_fn
+
+# Display system info on startup
+fastfetch --config $HOME/dotfiles/.config/fastfetch/config.jsonc
