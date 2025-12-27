@@ -2,76 +2,93 @@
 
 # Configuration
 WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
-CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/wallpaper-thumbnails"
-ROFI_THEME="$HOME/dotfiles/.config/rofi/wallpaper.rasi"
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/wallpaper-selector"
 
-# Ensure cache directory exists
+# Ensure directories exist
 mkdir -p "$CACHE_DIR"
 
-# Dependency Check
-if command -v convert >/dev/null 2>&1; then
-    HAS_CONVERT=true
-else
-    HAS_CONVERT=false
-    # Only notify once per session/run to avoid spam, or just warn silently
-    notify-send -u low "Wallpaper Selector" "ImageMagick 'convert' not found. Thumbnails disabled."
+# Detect Session
+SESSION_TYPE=""
+if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+    SESSION_TYPE="wayland"
+elif [ -n "$DISPLAY" ]; then
+    SESSION_TYPE="x11"
 fi
 
-# Ensure swww is running
-if ! pgrep -x "swww-daemon" > /dev/null; then
-    swww init &
-    sleep 1
-fi
+# Helper: Run launcher (Wayland: bemenu, X11: dmenu)
+run_launcher() {
+    if [ "$SESSION_TYPE" == "wayland" ]; then
+        # Catppuccin Colors (Mocha)
+        local BG="#1e1e2e"
+        local FG="#cdd6f4"
+        local SELBG="#89b4fa"
+        local SELFG="#1e1e2e"
+        local BORDER="#89dceb"
 
-# Function to generate thumbnails
-generate_thumbnail() {
-    local file="$1"
-    local filename=$(basename "$file")
-    local thumbnail="$CACHE_DIR/$filename"
-
-    if [ "$HAS_CONVERT" = true ]; then
-        if [ ! -f "$thumbnail" ]; then
-            # Generate thumbnail (resize to 500x500 for good quality in grid)
-            convert "$file" -thumbnail 500x500^ -gravity center -extent 500x500 "$thumbnail"
-        fi
-        echo "$thumbnail"
+        bemenu -i -l 12 -p "Set Wallpaper:" \
+            --fn "monospace 13" \
+            --tb "$BG" --tf "$FG" \
+            --fb "$BG" --ff "$FG" \
+            --nb "$BG" --nf "$FG" \
+            --hb "$SELBG" --hf "$SELFG" \
+            --sb "$SELBG" --sf "$SELFG" \
+            --ab "$BG" --af "$FG" \
+            --bdr "$BORDER" -B 2 \
+            --hp 10 \
+            --ch 25 \
+            -c -W 0.4 -M 600
     else
-        # Fallback to original image if convert is missing
-        echo "$file"
+        # X11 dmenu (simple fallback)
+        dmenu -i -l 15 -p "Set Wallpaper:"
     fi
 }
 
-# Main logic
+set_wallpaper() {
+    local file="$1"
+    
+    if [ "$SESSION_TYPE" == "wayland" ]; then
+        # Ensure swww is running
+        if ! pgrep -x "swww-daemon" > /dev/null; then
+            swww init &
+            sleep 1
+        fi
+        swww img "$file" --transition-type grow --transition-pos 0.5,0.5 --transition-step 90
+    else
+        # X11 Fallback requires feh, nitrogen, or xwallpaper
+        if command -v feh >/dev/null 2>&1; then
+            feh --bg-fill "$file"
+        elif command -v xwallpaper >/dev/null 2>&1; then
+            xwallpaper --zoom "$file"
+        elif command -v nitrogen >/dev/null 2>&1; then
+            nitrogen --set-zoom-fill "$file" --save
+        else
+            notify-send "Wallpaper Selector" "No X11 wallpaper setter found (install feh, xwallpaper, or nitrogen)."
+            return
+        fi
+    fi
+
+    # Create a symlink to the current wallpaper
+    ln -sf "$file" "$HOME/.cache/current_wallpaper.jpg"
+    notify-send "Wallpaper Changed" "$(basename "$file")" -i "$file"
+}
+
+# Main Logic
 if [ -z "$1" ]; then
-    # DIRECTLY pipe into rofi to allow null bytes (\0) which Bash variables can't handle
-    selected=$(find "$WALLPAPER_DIR" -maxdepth 1 -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.gif" -o -name "*.webp" \) -print0 | sort -z | while IFS= read -r -d '' file; do
-        thumb=$(generate_thumbnail "$file")
-        filename=$(basename "$file")
-        # Output format: filename\0icon\x1fpath/to/thumbnail
-        echo -en "$filename\0icon\x1f$thumb\n"
-    done | rofi -dmenu -theme "$ROFI_THEME" -p "Select Wallpaper" -show-icons)
+    cd "$WALLPAPER_DIR" || exit 1
+    
+    selected=$(find . -maxdepth 1 -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.gif" -o -name "*.webp" \) -printf "%f\n" | sort | run_launcher)
 
     if [ -n "$selected" ]; then
-        # Set selected wallpaper
-        SELECTED_FILE="$WALLPAPER_DIR/$selected"
-        if [ -f "$SELECTED_FILE" ]; then
-            swww img "$SELECTED_FILE" --transition-type grow --transition-pos 0.5,0.5 --transition-step 90
-            
-            # Create a symlink to the current wallpaper
-            ln -sf "$SELECTED_FILE" "$HOME/.cache/current_wallpaper.jpg"
-
-            # Optional: Save current wallpaper to a file for persistence on reboot
-            # echo "$SELECTED_FILE" > "$HOME/.current_wallpaper"
-            
-            notify-send "Wallpaper Changed" "$selected" -i "$SELECTED_FILE"
+        FULL_PATH="$WALLPAPER_DIR/$selected"
+        if [ -f "$FULL_PATH" ]; then
+            set_wallpaper "$FULL_PATH"
         fi
     fi
 else
-    # Set selected wallpaper (CLI mode)
-    SELECTED_FILE="$WALLPAPER_DIR/$1"
+    SELECTED_FILE="$1"
     if [ -f "$SELECTED_FILE" ]; then
-        swww img "$SELECTED_FILE" --transition-type grow --transition-pos 0.5,0.5 --transition-step 90
-        # Create a symlink to the current wallpaper
-        ln -sf "$SELECTED_FILE" "$HOME/.cache/current_wallpaper.jpg"
+        set_wallpaper "$SELECTED_FILE"
+    elif [ -f "$WALLPAPER_DIR/$1" ]; then
+        set_wallpaper "$WALLPAPER_DIR/$1"
     fi
 fi
