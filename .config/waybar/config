@@ -1,77 +1,53 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 28,
-    "spacing": 0,
-    "margin-top": 0,
-    "margin-bottom": 0,
+    "height": 24,
     "modules-left": [
-        "custom/brand",
-        "hyprland/workspaces",
-        "group/title"
+        "sway/workspaces",
+        "sway/mode",
+        "sway/window"
     ],
     "modules-center": [
-        "clock",
-        "custom/notification"
     ],
     "modules-right": [
-        "tray",
-        "group/hardware",
+        "network",
+        "cpu",
+        "memory",
         "pulseaudio",
         "backlight",
         "battery",
-        "custom/power"
+        "custom/weather",
+        "tray",
+        "custom/power",
+        "clock"
     ],
-    "group/hardware": {
-        "orientation": "horizontal",
-        "modules": [
-            "network",
-            "cpu",
-            "memory"
-        ]
-    },
-    "group/title": {
-        "orientation": "horizontal",
-        "modules": [
-            "custom/window-icon",
-            "hyprland/window"
-        ]
-    },
-    "hyprland/workspaces": {
-        "disable-scroll": true,
+    "sway/workspaces": {
+        "disable-scroll": false,
         "all-outputs": true,
-        "format": "<span size='110%'><b>{id}</b></span>",
-        "on-click": "activate"
+        "format": "{name}"
     },
-    "custom/window-icon": {
-        "format": "<span size='150%' rise='-4096'><b></b></span> ",
-        "tooltip": false
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
     },
-    "hyprland/window": {
-        "format": "<b>{title}</b>",
-        "max-length": 50,
-        "rewrite": {
-            "(.*) - Mozilla Firefox": "Firefox",
-            "(.*) - Visual Studio Code": "VS Code",
-            "(.*) - Terminal": "Terminal"
-        }
+    "sway/window": {
+        "format": "{}",
+        "max-length": 40
     },
     "clock": {
-        "format": " {:%A, %B %d   %H:%M}",
-        "format-alt": "{:%Y-%m-%d}",
-        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "format": "{:%a %d %b %H:%M:%S}",
+        "interval": 1,
+        "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
         "calendar": {
             "mode": "month",
             "mode-mon-col": 3,
-            "weeks-pos": "right",
+            "weeks-pos": "left",
             "on-scroll": 1,
-            "on-click-right": "mode",
             "format": {
-                "months": "<span color='#eff0f1'><b>{}</b></span>",
-                "days": "<span color='#eff0f1'>{}</span>",
-                "weeks": "<tt><span color='#3daee9'><b>W{}</b></span></tt>",
-                "weekdays": "<span color='#3daee9'><b>{}</b></span>",
-                "today": "<span bgcolor='#3daee9' color='#ffffff'><b>{}</b></span>"
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "days": "<span color='#ecc6d9'>{}</span>",
+                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                "today": "<span color='#ff6699' background='#222222'><b><u>{}</u></b></span>"
             }
         },
         "actions": {
@@ -80,94 +56,61 @@
             "on-scroll-down": "shift_down"
         }
     },
-    "custom/notification": {
-        "tooltip": true,
-        "format": "{icon}",
-        "format-icons": {
-            "notification": "<span size='150%' rise='-4096'><b>󰂚</b></span>",
-            "none": "<span size='150%' rise='-4096'><b>󰂜</b></span>",
-            "dnd-notification": "<span size='150%' rise='-4096'><b>󰂛</b></span>",
-            "dnd-none": "<span size='150%' rise='-4096'><b>󰪑</b></span>",
-            "inhibited-notification": "<span size='150%' rise='-4096'><b>󰂚</b></span>",
-            "inhibited-none": "<span size='150%' rise='-4096'><b>󰂜</b></span>",
-            "dnd-inhibited-notification": "<span size='150%' rise='-4096'><b>󰂛</b></span>",
-            "dnd-inhibited-none": "<span size='150%' rise='-4096'><b>󰪑</b></span>"
-        },
-        "return-type": "json",
-        "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb",
-        "on-click": "swaync-client -t -sw",
-        "on-click-right": "swaync-client -d -sw",
-        "escape": true
-    },
-    "tray": {
-        "icon-size": 22,
-        "spacing": 10
-    },
-    "pulseaudio": {
-        "format": "<span size='120%' rise='-4096'><b>{icon}</b></span>",
-        "format-muted": "<span size='120%' rise='-4096'><b></b></span>  Muted",
-        "format-icons": {
-            "default": [
-                "",
-                "",
-                ""
-            ]
-        },
-        "on-click": "pwvucontrol",
-        "tooltip-format": "Volume: {volume}%"
-    },
-    "backlight": {
-        "format": "<span size='120%' rise='-4096'><b>{icon}</b></span>",
-        "format-icons": [
-            "󰃞",
-            "󰃟",
-            "󰃠"
-        ],
-        "tooltip-format": "Brightness: {percent}%"
-    },
-    "network": {
-        "format-wifi": "<span size='120%' rise='-4096'><b></b></span>",
-        "format-ethernet": "<span size='120%' rise='-4096'><b>󰈀</b></span>",
-        "format-disconnected": "<span size='120%' rise='-4096'><b>󰤭</b></span>",
-        "tooltip-format": "{ifname} via {gwaddr}"
-    },
     "cpu": {
-        "format": "<span size='150%' rise='-4096'><b>󰻠</b></span>",
-        "tooltip": true,
-        "tooltip-format": "CPU Usage: {usage}%"
+        "format": "CPU {usage}%",
+        "interval": 2,
+        "tooltip-format": "CPU Usage: {usage}%\nLoad Average: {load}",
+        "on-click": "foot -e htop"
     },
     "memory": {
-        "format": "<span size='120%' rise='-4096'><b></b></span>",
-        "tooltip": true,
-        "tooltip-format": "Memory Used: {used}GiB"
+        "format": "RAM {percentage}%",
+        "interval": 5,
+        "tooltip-format": "RAM: {used:0.1f}GiB / {total:0.1f}GiB ({percentage}%)\nSwap: {swapUsed:0.1f}GiB / {swapTotal:0.1f}GiB ({swapPercentage}%)\nAvailable: {avail:0.1f}GiB",
+        "on-click": "foot -e htop"
     },
     "battery": {
         "states": {
             "warning": 30,
             "critical": 15
         },
-        "format": "<span size='120%' rise='-4096'><b>{icon}</b></span>",
-        "format-charging": "<span size='120%' rise='-4096'><b></b></span>",
-        "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            ""
-        ],
-        "tooltip-format": "Battery: {capacity}%"
+        "format": "BAT {capacity}%",
+        "format-charging": "CHG {capacity}%",
+        "format-plugged": "AC {capacity}%"
+    },
+    "network": {
+        "format-wifi": "WiFi {signalStrength}%",
+        "format-ethernet": "ETH",
+        "format-disconnected": "Disconnected",
+        "tooltip-format": "{ifname}\nIP: {ipaddr}/{cidr}\nGateway: {gwaddr}\nNetmask: {netmask}\nFrequency: {frequency}MHz\nSignal: {signaldBm}dBm ({signalStrength}%)\nUp: {bandwidthUpBytes} Down: {bandwidthDownBytes}",
+        "tooltip-format-ethernet": "{ifname}\nIP: {ipaddr}/{cidr}\nGateway: {gwaddr}\nNetmask: {netmask}\nUp: {bandwidthUpBytes} Down: {bandwidthDownBytes}",
+        "tooltip-format-disconnected": "Disconnected"
+    },
+    "pulseaudio": {
+        "format": "VOL {volume}%",
+        "format-muted": "VOL Muted",
+        "tooltip-format": "{desc}\nVolume: {volume}%",
+        "on-click": "pavucontrol",
+        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    },
+    "backlight": {
+        "format": "BRI {percent}%",
+        "tooltip-format": "Brightness: {percent}%",
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%-"
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "custom/weather": {
+        "format": "{}",
+        "tooltip": true,
+        "interval": 1800,
+        "exec": "~/.config/waybar/scripts/weather.sh",
+        "return-type": "json"
     },
     "custom/power": {
-        "format": "<span size='120%' rise='-4096'><b></b></span>",
+        "format": "P",
         "on-click": "wlogout",
-        "tooltip": true,
-        "tooltip-format": "Power Menu"
-    },
-    "custom/brand": {
-        "format": "<span><b></b></span>",
-        "tooltip": true,
-        "tooltip-format": "xynapz - angeld.me",
-        "on-click": "xdg-open https://angeld.me"
+        "tooltip": false
     }
 }

@@ -36,6 +36,3 @@ alias em="emacs -nw"
 alias penv="source ./.venv/bin/activate"
 
 source $HOME/dotfiles/.zshrc_fn
-
-# Display system info on startup
-fastfetch --config $HOME/dotfiles/.config/fastfetch/config.jsonc
