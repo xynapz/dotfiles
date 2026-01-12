@@ -3,3 +3,4 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 if [[ "$INSIDE_EMACS" ]]; then
     export TERM=foot
 fi
+export PATH="$HOME/dotfiles/scripts/path:$PATH"

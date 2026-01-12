@@ -8,6 +8,7 @@
         "sway/window"
     ],
     "modules-center": [
+         "custom/notification"
     ],
     "modules-right": [
         "network",
@@ -112,5 +113,25 @@
         "format": "P",
         "on-click": "wlogout",
         "tooltip": false
-    }
+    },
+    "custom/notification": {
+        "tooltip": true,
+        "format": "LOG {icon}",
+        "format-icons": {
+            "notification": "<span color='#285577'>!</span>",
+            "none": "-",
+            "dnd-notification": "<span color='#285577'>DND!</span>",
+            "dnd-none": "DND",
+            "inhibited-notification": "INH!",
+            "inhibited-none": "INH",
+            "dnd-inhibited-notification": "DND!",
+            "dnd-inhibited-none": "DND"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
 }

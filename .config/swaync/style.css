@@ -1,255 +1,172 @@
-/* SwayNC Styles - Matching Waybar KDE Plasma Theme */
+/* ========================================================================
+   SINGULAR ACADEMIC THEME - ERROR-FREE GTK COMPLIANT
+   Matches: #222222 (Background), #285577 (Blue), #900000 (Red)
+======================================================================== */
+
+@define-color bg #222222;
+@define-color bg-inset #1a1a1a;
+@define-color border #333333;
+@define-color blue #285577;
+@define-color white #ffffff;
+@define-color fg-muted #bbbbbb;
+@define-color red #900000;
 
 * {
     all: unset;
-    font-family: "Noto Sans", "Iosevka Nerd Font", sans-serif;
+    font-family: monospace;
+    font-size: 11px;
+    border-radius: 0;
+    transition: none;
+}
+
+/* ========================================================================
+   CONTROL CENTER (MAIN PANEL)
+======================================================================== */
+.control-center {
+    background: @bg;
+    border: 1px solid #000000;
+}
+
+.widget-buttons-grid, .widget-mpris, .widget-volume,
+.widget-backlight, .widget-dnd, .widget-title {
+    background: @bg;
+    border-bottom: 2px solid #000000;
+    padding: 15px;
+}
+
+/* ========================================================================
+   WIDGET: BUTTONS GRID (TOGGLES)
+======================================================================== */
+.widget-buttons-grid button {
+    background: @bg;
+    border: 1px solid @border;
+    color: @white;
+    margin: 4px;
+    min-width: 65px;
+    min-height: 30px;
+}
+
+.widget-buttons-grid button:hover {
+    border: 1px solid @white;
+    background: @border;
+}
+
+.widget-buttons-grid button:checked {
+    background: @blue;
+    border: 1px solid @white;
+    color: @white;
+}
+
+/* ========================================================================
+   WIDGET: VOLUME & BACKLIGHT
+======================================================================== */
+.widget-volume {
+    padding-bottom: 20px;
+}
+
+.per-app-volume {
+    margin-top: 15px;
+    padding: 10px;
+    background: @bg-inset;
+    border: 1px solid @border;
+}
+
+scale trough {
+    background: @border;
+    border: 1px solid #000000;
+    min-height: 8px;
+}
+
+scale trough highlight {
+    background: @blue;
+}
+
+/* ========================================================================
+   WIDGET: MPRIS (MEDIA PLAYER)
+======================================================================== */
+.widget-mpris-player {
+    background: @bg-inset;
+    border: 1px solid @border;
+    padding: 10px;
+}
+
+.widget-mpris-title { color: @white; font-weight: bold; }
+.widget-mpris-subtitle { color: @blue; }
+
+/* ========================================================================
+   WIDGET: TITLE & DND
+======================================================================== */
+.widget-title > label {
     font-size: 14px;
+    font-weight: bold;
+    color: @white;
 }
 
-/* Notification Row */
-.notification-row {
-    outline: none;
-    margin: 0;
-    padding: 0;
+.widget-title button {
+    background: @bg;
+    border: 1px solid @red;
+    color: @red;
+    padding: 2px 12px;
 }
 
-.notification-row:focus,
-.notification-row:hover {
-    background: rgba(61, 174, 233, 0.1);
-    /* KDE Blue hover */
+.widget-title button:hover {
+    background: @red;
+    color: @white;
 }
 
-/* Individual Notification */
+.widget-dnd switch {
+    background: @border;
+    border: 1px solid #000000;
+    min-width: 45px;
+    min-height: 16px;
+}
+
+.widget-dnd switch:checked {
+    background: @blue;
+    border: 1px solid @white;
+}
+
+.widget-dnd switch slider {
+    background: @white;
+    min-width: 12px;
+    min-height: 12px;
+}
+
+/* ========================================================================
+   POPUP NOTIFICATIONS
+======================================================================== */
 .notification {
-    background: #2b2b2b;
-    /* KDE Dark Gray - matching Waybar */
-    border-radius: 8px;
-    margin: 6px 12px;
-    padding: 12px;
-    border: 1px solid #3daee9;
-    /* KDE Blue border */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-/* Urgency Levels */
-.notification.low {
-    border-left: 4px solid #3daee9;
-    /* Blue for low */
-}
-
-.notification.normal {
-    border-left: 4px solid #2ecc71;
-    /* Green for normal */
+    background: @bg;
+    border: 1px solid #000000;
+    border-left: 4px solid @blue;
+    margin: 10px;
+    box-shadow: 4px 4px 0px #000000;
 }
 
 .notification.critical {
-    border-left: 4px solid #da4453;
-    /* Red for critical */
-    animation: blink-border 1s ease-in-out infinite;
+    border-left: 4px solid @red;
 }
 
-@keyframes blink-border {
-
-    0%,
-    100% {
-        border-color: #da4453;
-    }
-
-    50% {
-        border-color: #f67400;
-    }
-}
-
-/* Notification Content */
 .notification-content {
-    background: transparent;
-    padding: 0;
+    padding: 12px;
 }
 
-/* App Icon */
-.image {
-    margin-right: 12px;
-    padding: 4px;
-    border-radius: 4px;
-}
-
-/* Close Button */
-.close-button {
-    background: #f67400;
-    /* KDE Orange */
-    color: #ffffff;
-    border-radius: 4px;
-    padding: 4px 8px;
-    margin: 4px;
-    font-weight: bold;
-    transition: background 0.2s;
-}
-
-.close-button:hover {
-    background: #da4453;
-    /* KDE Red on hover */
-}
-
-/* Notification Actions */
-.notification-default-action,
-.notification-action {
-    padding: 6px 12px;
-    margin: 4px 0;
-    border-radius: 4px;
-    color: #eff0f1;
-    background: transparent;
-    transition: background 0.2s;
-}
-
-.notification-default-action:hover,
-.notification-action:hover {
-    background: rgba(61, 174, 233, 0.2);
-    /* KDE Blue hover */
-}
-
-/* Summary (Title) */
 .summary {
-    font-size: 15px;
     font-weight: bold;
-    color: #eff0f1;
-    /* KDE Light text */
+    font-size: 12px;
+    color: @white;
     margin-bottom: 4px;
 }
 
-/* Timestamp */
-.time {
-    font-size: 11px;
-    color: #3daee9;
-    /* KDE Blue */
-    font-weight: normal;
-}
-
-/* Body text */
 .body {
-    font-size: 13px;
-    color: #eff0f1;
-    margin-top: 6px;
+    color: @fg-muted;
 }
 
-/* Control Center Panel */
-.control-center {
-    background: #2b2b2b;
-    /* KDE Dark Gray - matching Waybar */
-    border-radius: 8px;
-    border: 1px solid #3daee9;
-    /* KDE Blue border */
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+.close-button {
+    background: @bg;
+    color: @white;
 }
 
-.control-center-list {
-    background: transparent;
-    padding: 6px;
-}
-
-.control-center-list-placeholder {
-    color: #eff0f1;
-    opacity: 0.6;
-    padding: 20px;
-    text-align: center;
-}
-
-/* Floating Notifications */
-.floating-notifications {
-    background: transparent;
-}
-
-.blank-window {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-/* Widget: Title */
-.widget-title {
-    color: #eff0f1;
-    background: #31363b;
-    /* Slightly lighter than base */
-    padding: 10px 12px;
-    margin: 8px 8px 4px 8px;
-    font-size: 15px;
-    font-weight: bold;
-    border-radius: 6px;
-    border-bottom: 2px solid #3daee9;
-    /* KDE Blue accent */
-}
-
-.widget-title>button {
-    font-size: 13px;
-    color: #ffffff;
-    background: #f67400;
-    /* KDE Orange */
-    border-radius: 4px;
-    padding: 4px 12px;
-    font-weight: bold;
-    transition: background 0.2s;
-}
-
-.widget-title>button:hover {
-    background: #da4453;
-    /* KDE Red on hover */
-}
-
-/* Widget: Do Not Disturb */
-.widget-dnd {
-    background: #31363b;
-    padding: 10px 12px;
-    margin: 4px 8px;
-    border-radius: 6px;
-    font-size: 14px;
-    color: #eff0f1;
-}
-
-.widget-dnd>switch {
-    background: #4d5057;
-    border-radius: 12px;
-    border: 1px solid #3daee9;
-}
-
-.widget-dnd>switch:checked {
-    background: #3daee9;
-    /* KDE Blue when active */
-}
-
-.widget-dnd>switch slider {
-    background: #eff0f1;
-    border-radius: 10px;
-}
-
-/* Widget: Label */
-.widget-label {
-    margin: 8px 12px;
-    color: #eff0f1;
-}
-
-.widget-label>label {
-    font-size: 14px;
-    color: #eff0f1;
-}
-
-/* Widget: Media Player (MPRIS) */
-.widget-mpris {
-    background: #31363b;
-    padding: 12px;
-    margin: 4px 8px;
-    border-radius: 6px;
-    border: 1px solid #3daee9;
-}
-
-.widget-mpris-player {
-    padding: 6px;
-    margin: 4px;
-}
-
-.widget-mpris-title {
-    font-weight: bold;
-    font-size: 14px;
-    color: #eff0f1;
-}
-
-.widget-mpris-subtitle {
-    font-size: 12px;
-    color: #bdc3c7;
+.close-button:hover {
+    background: @red;
 }

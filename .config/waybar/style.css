@@ -19,13 +19,13 @@ tooltip {
     color: #ffffff;
     border: 1px solid #000000;
     border-radius: 0;
-    padding: 20px;
-    font-size: 14px;
+    padding: 22px;
+    font-size: 22px;
 }
 
 tooltip label {
     color: #ffffff;
-    font-size: 14px;
+    font-size: 22px;
 }
 
 calendar {
