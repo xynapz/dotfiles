@@ -1,0 +1,16 @@
+{
+  "dankLauncherKeys": {
+    "enabled": false,
+    "providers": [
+      "sway"
+    ]
+  },
+  "nepaliCalendar": {
+    "enabled": true,
+    "showDevanagari": true,
+    "dateFormat": "YYYY Month dd"
+  },
+  "dockerManager": {
+    "enabled": true
+  }
+}

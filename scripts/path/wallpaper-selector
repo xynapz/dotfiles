@@ -15,28 +15,10 @@ elif [ -n "$DISPLAY" ]; then
     SESSION_TYPE="x11"
 fi
 
-# Helper: Run launcher (Wayland: bemenu, X11: dmenu)
+# Helper: Run launcher (Wayland: fuzzel, X11: dmenu)
 run_launcher() {
     if [ "$SESSION_TYPE" == "wayland" ]; then
-        # Catppuccin Colors (Mocha)
-        local BG="#1e1e2e"
-        local FG="#cdd6f4"
-        local SELBG="#89b4fa"
-        local SELFG="#1e1e2e"
-        local BORDER="#89dceb"
-
-        bemenu -i -l 12 -p "Set Wallpaper:" \
-            --fn "monospace 13" \
-            --tb "$BG" --tf "$FG" \
-            --fb "$BG" --ff "$FG" \
-            --nb "$BG" --nf "$FG" \
-            --hb "$SELBG" --hf "$SELFG" \
-            --sb "$SELBG" --sf "$SELFG" \
-            --ab "$BG" --af "$FG" \
-            --bdr "$BORDER" -B 2 \
-            --hp 10 \
-            --ch 25 \
-            -c -W 0.4 -M 600
+        fuzzel --dmenu --prompt "Set Wallpaper: "
     else
         # X11 dmenu (simple fallback)
         dmenu -i -l 15 -p "Set Wallpaper:"
@@ -47,12 +29,8 @@ set_wallpaper() {
     local file="$1"
     
     if [ "$SESSION_TYPE" == "wayland" ]; then
-        # Ensure swww is running
-        if ! pgrep -x "swww-daemon" > /dev/null; then
-            swww init &
-            sleep 1
-        fi
-        swww img "$file" --transition-type grow --transition-pos 0.5,0.5 --transition-step 90
+        # Use Sway's native output background command
+        swaymsg output "*" bg "$file" fill
     else
         # X11 Fallback requires feh, nitrogen, or xwallpaper
         if command -v feh >/dev/null 2>&1; then

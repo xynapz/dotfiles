@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# QuickShell Lockscreen Launcher
+# Launches the QuickShell lockscreen using the session lock protocol
+
+LOCKSCREEN_PATH="$HOME/.config/quickshell/lockscreen/shell.qml"
+
+if [ ! -f "$LOCKSCREEN_PATH" ]; then
+    notify-send "Lockscreen Error" "QuickShell lockscreen not found at $LOCKSCREEN_PATH" -u critical
+    exit 1
+fi
+
+exec quickshell -p "$LOCKSCREEN_PATH"

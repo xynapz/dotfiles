@@ -1,0 +1,119 @@
+#+TITLE: Evil Mode Keybindings
+#+AUTHOR: Angel Dhakal
+#+STARTUP: overview
+#+OPTIONS: toc:2
+
+* Overview
+
+Doom Emacs uses *Evil* mode - Vim-style modal editing.
+
+| State  | Indicator | Purpose                    |
+|--------+-----------+----------------------------|
+| NORMAL | [N]       | Navigation and commands    |
+| INSERT | [I]       | Text insertion             |
+| VISUAL | [V]       | Selection                  |
+
+* Escape to Normal
+
+| Key   | Action           |
+|-------+------------------|
+| =ESC= | Return to NORMAL |
+| =C-g= | Cancel / NORMAL  |
+
+* Movement (Normal Mode)
+
+| Key | Action               |
+|-----+----------------------|
+| =h= | Left                 |
+| =j= | Down                 |
+| =k= | Up                   |
+| =l= | Right                |
+| =w= | Next word            |
+| =b= | Previous word        |
+| =e= | End of word          |
+| =0= | Start of line        |
+| =$= | End of line          |
+| =gg= | Start of file       |
+| =G=  | End of file         |
+
+* Text Objects
+
+| Key  | Object             |
+|------+--------------------|
+| =iw= | Inner word         |
+| =aw= | A word (with space)|
+| =i"= | Inside quotes      |
+| =a"= | Around quotes      |
+| =ib= | Inside parentheses |
+| =ab= | Around parentheses |
+
+* Actions (Verbs)
+
+| Key | Action              |
+|-----+---------------------|
+| =d= | Delete              |
+| =c= | Change              |
+| =y= | Yank (copy)         |
+| =p= | Paste after         |
+| =P= | Paste before        |
+| =u= | Undo                |
+| =C-r= | Redo              |
+
+* Common Operations
+
+| Keys   | Action              |
+|--------+---------------------|
+| =dd=   | Delete line         |
+| =yy=   | Yank line           |
+| =cc=   | Change line         |
+| =ciw=  | Change inner word   |
+| =diw=  | Delete inner word   |
+| =ci"=  | Change inside ""    |
+| =dt.=  | Delete to .         |
+
+* Insert Mode
+
+| Key | Action              |
+|-----+---------------------|
+| =i= | Insert before       |
+| =a= | Append after        |
+| =I= | Insert at line start|
+| =A= | Append at line end  |
+| =o= | Open line below     |
+| =O= | Open line above     |
+
+* Visual Mode
+
+| Key | Action              |
+|-----+---------------------|
+| =v= | Character visual    |
+| =V= | Line visual         |
+| =C-v= | Block visual      |
+
+* Search
+
+| Key | Action              |
+|-----+---------------------|
+| =/= | Search forward      |
+| =?= | Search backward     |
+| =n= | Next match          |
+| =N= | Previous match      |
+| =*= | Search word under cursor |
+
+* Quick Reference
+
+| Task              | Keys              |
+|-------------------+-------------------|
+| Delete word       | =dw= or =diw=     |
+| Change word       | =cw= or =ciw=     |
+| Delete line       | =dd=              |
+| Copy line         | =yy=              |
+| Delete to EOL     | =D=               |
+| Undo              | =u=               |
+| Save file         | =:w= or =SPC f s= |
+| Quit              | =:q=              |
+| Save and quit     | =:wq= or =ZZ=     |
+
+* Learning
+
+Run =SPC h t= for Evil tutor inside Doom Emacs.

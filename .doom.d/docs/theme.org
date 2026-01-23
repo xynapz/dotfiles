@@ -1,0 +1,51 @@
+#+TITLE: Themes
+#+AUTHOR: Angel Dhakal
+#+STARTUP: overview
+#+OPTIONS: toc:2
+
+* Available Themes
+
+** xz-nord (Custom)
+
+Custom variant of the [[https://www.nordtheme.com/][Nord theme]] with darker backgrounds.
+
+Located in =themes/xz-nord-theme.el=
+
+| Color | Original | xz-nord   | Usage     |
+|-------+----------+-----------+-----------|
+| nord0 | =#2E3440= | =#1b1d1e= | Main bg   |
+| nord1 | =#3B4252= | =#262829= | hl-line   |
+
+Comment color: =#616e88= (brighter for visibility)
+
+** Catppuccin
+
+Popular pastel theme with multiple flavors:
+
+| Flavor    | Style         |
+|-----------+---------------|
+| latte     | Light         |
+| frappe    | Light-dark    |
+| macchiato | Dark (current)|
+| mocha     | Darkest       |
+
+* Switching Themes
+
+Edit =config.el=:
+
+#+begin_src elisp
+;; For xz-nord:
+(setq doom-theme 'xz-nord)
+
+;; For Catppuccin:
+(setq doom-theme 'catppuccin)
+(setq catppuccin-flavor 'macchiato)  ; or latte, frappe, mocha
+#+end_src
+
+Then reload: =M-x doom/reload-theme= or restart Emacs.
+
+* Customizing xz-nord
+
+Edit =themes/xz-nord-theme.el= to modify colors.
+
+The theme uses the Doom theme framework (=def-doom-theme=).

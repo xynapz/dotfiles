@@ -1,6 +1,4 @@
-" ==========================
 " Plugin Manager: vim-plug
-" ==========================
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -19,9 +17,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 
 call plug#end()
 
-" ==========================
 " General settings
-" ==========================
 set nocompatible
 set encoding=utf-8
 set backspace=indent,eol,start
@@ -45,9 +41,7 @@ let g:clipboard = {
             \   'cache_enabled': 1,
             \ }
 
-" ==========================
 " UI and display
-" ==========================
 set number
 set relativenumber
 set showcmd
@@ -61,17 +55,13 @@ set cmdheight=2
 set updatetime=300
 set shortmess+=c
 
-" ==========================
 " Search
-" ==========================
 set hlsearch
 set incsearch
 set ignorecase
 set smartcase
 
-" ==========================
 " Indentation
-" ==========================
 set autoindent
 set smartindent
 set tabstop=4
@@ -81,9 +71,7 @@ set smarttab
 set wrap
 set linebreak
 
-" ==========================
 " File handling
-" ==========================
 set autoread
 set noswapfile
 set nobackup
@@ -99,9 +87,7 @@ set noerrorbells
 set lazyredraw
 set ttyfast
 
-" ==========================
 " Colors
-" ==========================
 syntax enable
 set termguicolors
 set background=dark
@@ -120,21 +106,15 @@ highlight CursorColumn cterm=NONE ctermbg=236 guibg=#2d2d2d
 highlight LineNr ctermfg=grey guifg=#5c6370
 highlight CursorLineNr cterm=bold ctermfg=yellow guifg=#e5c07b
 
-" ==========================
 " Folding
-" ==========================
 set foldmethod=syntax
 set foldlevelstart=10
 set foldnestmax=10
 
-" ==========================
 " Leader key
-" ==========================
 let mapleader = " "
 
-" ==========================
 " Key mappings
-" ==========================
 nnoremap <leader>h :nohlsearch<CR>
 
 nnoremap <leader>w :w<CR>
@@ -167,9 +147,7 @@ nnoremap <space> za
 vnoremap < <gv
 vnoremap > >gv
 
-" ==========================
 " Autocmds
-" ==========================
 autocmd FileType c,cpp setlocal tabstop=8 shiftwidth=8 noexpandtab
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType javascript,html,css,json setlocal tabstop=2 shiftwidth=2 expandtab
@@ -187,15 +165,10 @@ if !isdirectory($HOME."/.vim/undo")
     call mkdir($HOME."/.vim/undo", "p", 0700)
 endif
 
-" ==========================
 " Statusline
-" ==========================
 set statusline=%#PmenuSel#\ %f\ %#LineNr#\ %m%r%h%w\ %=%#CursorColumn#\ %y\ %#PmenuSel#\ %l:%c\ %#LineNr#\ %p%%\
 
-" ==========================
 " NERDTree keybinds
-" ==========================
-" Toggle file tree
 nnoremap <leader>e :NERDTreeToggle<CR>
 
 " Focus current file in tree

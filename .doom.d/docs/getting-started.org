@@ -1,0 +1,67 @@
+#+TITLE: Getting Started
+#+OPTIONS: toc:nil
+
+* Installation
+
+1. Clone the repository:
+   #+begin_src sh
+   git clone https://github.com/xynapz/dotfiles ~/dotfiles
+   ln -s ~/dotfiles/.doom.d ~/.doom.d
+   #+end_src
+
+2. Install Doom Emacs:
+   #+begin_src sh
+   git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
+   ~/.config/emacs/bin/doom install
+   #+end_src
+
+3. Sync packages:
+   #+begin_src sh
+   doom sync
+   #+end_src
+
+4. *Important*: For vterm support, install:
+   - Fedora: =sudo dnf install cmake libtool libvterm=
+
+* Modal Editing (Evil)
+
+This config uses *Evil* mode (Vim-style keybindings).
+
+Quick start:
+- =SPC h t= — Evil tutor
+- =SPC ?= — Keybinding cheatsheet
+
+| State  | Key to Enter | Purpose          |
+|--------+--------------+------------------|
+| NORMAL | =ESC= / =jk= | Navigate/command |
+| INSERT | =i= / =a=    | Type text        |
+| VISUAL | =v=          | Selection        |
+
+* Verification
+
+To verify everything is working:
+1. Open a Python file (=test.py=)
+2. Check if LSP starts (mode line shows language server)
+3. Try completion (start typing)
+4. Try =SPC p f= for project file finding
+
+* Troubleshooting
+
+** Icons are boxes
+Run =M-x nerd-icons-install-fonts= and restart Emacs.
+
+** VTerm error
+Ensure CMake is installed. Run =M-x vterm-module-compile=.
+
+** LSP not Starting
+Most likely the language server is missing. Check =FEDORA_SETUP.md=.
+
+* Key Files
+
+| File             | Purpose              |
+|------------------+----------------------|
+| =init.el=        | Doom modules         |
+| =config.el=      | Custom configuration |
+| =packages.el=    | Additional packages  |
+| =themes/=        | Custom themes        |
+| =snippets/=      | Yasnippet snippets   |

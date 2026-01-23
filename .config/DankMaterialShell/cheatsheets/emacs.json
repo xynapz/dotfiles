@@ -1,0 +1,178 @@
+{
+    "title": "Emacs Keybinds",
+    "provider": "emacs",
+    "binds": {
+        "Leader": [
+            {
+                "key": "SPC .",
+                "desc": "Find file",
+                "subcat": "File"
+            },
+            {
+                "key": "SPC ,",
+                "desc": "Switch buffer",
+                "subcat": "Buffer"
+            },
+            {
+                "key": "SPC <",
+                "desc": "Switch buffer (all)",
+                "subcat": "Buffer"
+            },
+            {
+                "key": "SPC SPC",
+                "desc": "Find file in project",
+                "subcat": "File"
+            },
+            {
+                "key": "SPC /",
+                "desc": "Search project (ripgrep)",
+                "subcat": "Search"
+            },
+            {
+                "key": "SPC *",
+                "desc": "Search project for symbol",
+                "subcat": "Search"
+            }
+        ],
+        "Code": [
+            {
+                "key": "SPC c a",
+                "desc": "Code actions"
+            },
+            {
+                "key": "SPC c d",
+                "desc": "Jump to definition"
+            },
+            {
+                "key": "SPC c D",
+                "desc": "Jump to references"
+            },
+            {
+                "key": "SPC c f",
+                "desc": "Format buffer/region"
+            },
+            {
+                "key": "SPC c r",
+                "desc": "Rename symbol"
+            },
+            {
+                "key": "SPC c x",
+                "desc": "List diagnostics"
+            }
+        ],
+        "File": [
+            {
+                "key": "SPC f f",
+                "desc": "Find file"
+            },
+            {
+                "key": "SPC f r",
+                "desc": "Recent files"
+            },
+            {
+                "key": "SPC f s",
+                "desc": "Save file"
+            },
+            {
+                "key": "SPC f p",
+                "desc": "Find in config"
+            }
+        ],
+        "Buffer": [
+            {
+                "key": "SPC b b",
+                "desc": "Switch buffer"
+            },
+            {
+                "key": "SPC b d",
+                "desc": "Kill buffer"
+            },
+            {
+                "key": "SPC b n",
+                "desc": "Next buffer"
+            },
+            {
+                "key": "SPC b p",
+                "desc": "Previous buffer"
+            }
+        ],
+        "Window": [
+            {
+                "key": "SPC w v",
+                "desc": "Split vertical"
+            },
+            {
+                "key": "SPC w s",
+                "desc": "Split horizontal"
+            },
+            {
+                "key": "SPC w c",
+                "desc": "Close window"
+            },
+            {
+                "key": "SPC w w",
+                "desc": "Other window"
+            }
+        ],
+        "Git": [
+            {
+                "key": "SPC g g",
+                "desc": "Magit status"
+            },
+            {
+                "key": "SPC g b",
+                "desc": "Checkout branch"
+            }
+        ],
+        "Project": [
+            {
+                "key": "SPC p p",
+                "desc": "Switch project"
+            },
+            {
+                "key": "SPC p f",
+                "desc": "Find file in project"
+            }
+        ],
+        "Help": [
+            {
+                "key": "SPC h k",
+                "desc": "Describe key"
+            },
+            {
+                "key": "SPC h f",
+                "desc": "Describe function"
+            },
+            {
+                "key": "SPC h b b",
+                "desc": "Browse bindings"
+            }
+        ],
+        "Navigation": [
+            {
+                "key": "gd",
+                "desc": "Go to definition"
+            },
+            {
+                "key": "gD",
+                "desc": "Find references"
+            },
+            {
+                "key": "gr",
+                "desc": "Eval region"
+            },
+            {
+                "key": "K",
+                "desc": "Lookup documentation"
+            },
+            {
+                "key": "Ctrl+o",
+                "desc": "Jump back"
+            },
+            {
+                "key": "Ctrl+i",
+                "desc": "Jump forward"
+            }
+        ]
+    }
+}
