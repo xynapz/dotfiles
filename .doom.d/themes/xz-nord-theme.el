@@ -1,7 +1,7 @@
 ;;; xz-nord-theme.el --- A darker Nord theme for Doom Emacs -*- lexical-binding: t; no-byte-compile: t; -*-
 
 ;; Based on Nord Theme by Sven Greb (MIT License)
-;; Modified by Angel Dhakal - darker background variant
+;; Modified by xynapz - darker background variant
 
 ;;; Code:
 
@@ -54,7 +54,7 @@
    (builtin        nord9)
    (comments       base5)
    (doc-comments   base5)
-   (constants      nord9)
+   (constants      orange)
    (functions      nord8)
    (keywords       nord9)
    (methods        nord8)
