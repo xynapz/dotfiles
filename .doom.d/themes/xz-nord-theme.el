@@ -84,7 +84,7 @@
    (line-number-current-line :foreground nord8 :background bg)
    (mode-line :background base3 :foreground nord8)
    (mode-line-inactive :background base1 :foreground fg)
-   (show-paren-match :foreground bg :background nord8)
+   (show-paren-match :foreground fg :background base3 :weight 'bold)
    (show-paren-mismatch :background red)
 
    ;; Org mode

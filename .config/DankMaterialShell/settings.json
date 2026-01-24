@@ -25,7 +25,7 @@
   "useFahrenheit": false,
   "nightModeEnabled": false,
   "animationSpeed": 4,
-  "customAnimationDuration": 172,
+  "customAnimationDuration": 100,
   "wallpaperFillMode": "Fill",
   "blurredWallpaperLayer": false,
   "blurWallpaperOnOverview": false,
@@ -144,7 +144,7 @@
   "appLauncherGridColumns": 4,
   "spotlightCloseNiriOverview": true,
   "niriOverviewOverlayEnabled": true,
-  "useAutoLocation": false,
+  "useAutoLocation": true,
   "weatherEnabled": true,
   "networkPreference": "auto",
   "vpnLastConnected": "",
@@ -175,7 +175,7 @@
   "fontFamily": "IBM Plex Mono",
   "monoFontFamily": "IBM Plex Mono",
   "fontWeight": 500,
-  "fontScale": 1,
+  "fontScale": 1.15,
   "notepadUseMonospace": true,
   "notepadFontFamily": "",
   "notepadFontSize": 14,
@@ -328,9 +328,20 @@
         "focusedWindow"
       ],
       "centerWidgets": [
-        "music",
-        "clock",
-        "weather",
+        {
+          "id": "music",
+          "enabled": true,
+          "mediaSize": 0
+        },
+        {
+          "id": "clock",
+          "enabled": true,
+          "clockCompactMode": false
+        },
+        {
+          "id": "weather",
+          "enabled": true
+        },
         {
           "id": "nepaliCalendar",
           "enabled": true
@@ -350,12 +361,18 @@
           "enabled": true
         },
         {
-          "id": "cpuUsage",
+          "id": "notepadButton",
           "enabled": true
         },
         {
+          "id": "cpuUsage",
+          "enabled": true,
+          "minimumWidth": true
+        },
+        {
           "id": "memUsage",
-          "enabled": true
+          "enabled": true,
+          "showSwap": false
         },
         {
           "id": "battery",
@@ -371,10 +388,10 @@
         }
       ],
       "spacing": 0,
-      "innerPadding": 3,
+      "innerPadding": 9,
       "bottomGap": 0,
-      "transparency": 1,
-      "widgetTransparency": 1,
+      "transparency": 0.98,
+      "widgetTransparency": 0.98,
       "squareCorners": true,
       "noBackground": false,
       "gothCornersEnabled": false,

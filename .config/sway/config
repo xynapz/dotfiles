@@ -75,13 +75,12 @@ for_window [window_type="dialog"] floating enable
 for_window [app_id="pavucontrol"] floating enable
 for_window [app_id="nm-connection-editor"] floating enable
 
-# GNOME Apps - No Border
+# Apps - No Border
 for_window [app_id="^org\.gnome\..*"] border none
-
-# Terminal Apps - No Border
 for_window [app_id="^org\.wezfurlong\.wezterm$"] border none
 for_window [app_id="^Alacritty$"] border none
-for_window [class="^zen$"] border none
+for_window [class="^org\.mozilla\.firefox$"] border none
+for_window [class="^brave$"] border none
 for_window [app_id="^com\.mitchellh\.ghostty$"] border none
 for_window [app_id="^kitty$"] border none
 for_window [app_id="^foot$"] border none
@@ -91,19 +90,12 @@ for_window [app_id="^emacs$"] border none
 # Floating Windows
 for_window [app_id="^gnome-calculator$"] floating enable
 for_window [app_id="^blueman-manager$"] floating enable
-
-# Open DMS windows as floating by default (QuickShell)
-for_window [app_id="^org\.quickshell$"] floating enable
-
-# Float LXQt Polkit agent and center it
-for_window [app_id="lxqt-policykit-agent"] {
+for_window [app_id="^org\.quickshell$"] {
     floating enable
     border pixel 2
     sticky enable
     move position center
 }
-
-# Float LXQt Polkit agent and center it
 for_window [app_id="imv"] {
     floating enable
     border pixel 2
@@ -217,7 +209,6 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 bindsym $mod+f fullscreen
 bindsym $mod+Shift+space floating toggle
-# bindsym $mod+space focus mode_toggle (Disabled for Spotlight)
 bindsym $mod+a focus parent
 
 bindsym $mod+Shift+minus move scratchpad
