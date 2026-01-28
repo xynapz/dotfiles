@@ -11,6 +11,23 @@
     "dateFormat": "YYYY Month dd"
   },
   "dockerManager": {
+    "enabled": true,
+    "terminalApp": "foot --hold"
+  },
+  "emojiLauncher": {
     "enabled": true
+  },
+  "commandRunner": {
+    "enabled": true,
+    "history": [
+      "pkill waybar",
+      "waybar"
+    ]
+  },
+  "dankPomodoroTimer": {
+    "enabled": true
+  },
+  "grimblast": {
+    "enabled": false
   }
 }

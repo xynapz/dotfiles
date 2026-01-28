@@ -1,16 +1,26 @@
 #!/usr/bin/env bash
-# Usage: ./color-picker.sh [options]
-# Wraps 'dms color pick', copies output to clipboard, and sends a notification.
+# Usage: ./color-picker.sh [--rgb|--hsl|--hsv|--cmyk]
+# Picks a color using dms, copies to clipboard, and sends notification.
 
-# Run dms to pick color. Pass arguments directly (e.g. --rgb).
-# We do NOT use -a here because we want to capture the output manually to ensure consistent behavior.
-COLOR=$(dms color pick "$@")
+# Parse format argument (default: hex)
+FORMAT="hex"
+case "$1" in
+    --rgb)  FORMAT="rgb" ;;
+    --hsl)  FORMAT="hsl" ;;
+    --hsv)  FORMAT="hsv" ;;
+    --cmyk) FORMAT="cmyk" ;;
+esac
 
-# If valid output obtained
-if [ -n "$COLOR" ]; then
-    # Copy to clipboard without newline
+# Use --json for clean output (no ANSI codes)
+JSON=$(dms color pick --json)
+
+# Exit if cancelled
+[ -z "$JSON" ] && exit 0
+
+# Extract the requested format using jq
+COLOR=$(echo "$JSON" | jq -r ".$FORMAT")
+
+if [ -n "$COLOR" ] && [ "$COLOR" != "null" ]; then
     echo -n "$COLOR" | wl-copy
-    
-    # Send notification
     notify-send "Color Picked" "$COLOR"
 fi

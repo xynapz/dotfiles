@@ -1,13 +1,4 @@
 ### Variables
-# Shift = Shift Key
-# Control = Control Key
-# Mod1 = Alt Key
-# Mod2 = Num Lock
-# Mod3 = Scroll Lock
-# Mod4 = Super Key (Windows Key)
-# Mod5 = Hyper Key (Apple Key)
-# Space = Space Key
-
 set $mod Mod4
 set $left h
 set $down j
@@ -16,6 +7,15 @@ set $right l
 set $term foot
 set $menu fuzzel
 set $editor-emacs "emacsclient -c"
+set $scripts ~/.config/sway/scripts
+
+### Appearance
+default_border pixel 2
+default_floating_border pixel 2
+gaps inner 6
+gaps outer 0
+smart_gaps on
+smart_borders on
 
 ### Output Configuration
 output HDMI-A-1 resolution 2560x1440@99.9Hz position 0,0
@@ -48,8 +48,6 @@ input type:keyboard {
 ### Startup & Services
 exec emacs --daemon
 exec wl-paste --watch cliphist store
-exec xdg-desktop-portal-wlr &
-exec xdg-desktop-portal &
 
 exec_always {
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
@@ -63,45 +61,27 @@ exec swayidle -w \
     timeout 1200 'swaymsg "output eDP-1 power off"' resume 'swaymsg "output eDP-1 power on"' \
     before-sleep 'dms ipc call lock lock'
 
-# Prevent sleep for fullscreen apps
-for_window [class="^.*"] inhibit_idle fullscreen
-for_window [app_id="^.*"] inhibit_idle fullscreen
-
 ### Window Rules
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="bubble"] floating enable
-for_window [window_role="dialog"] floating enable
+# Fullscreen apps prevent idle
+for_window [class=".*"] inhibit_idle fullscreen
+for_window [app_id=".*"] inhibit_idle fullscreen
+
+# Dialogs float
+for_window [window_role="(pop-up|bubble|dialog)"] floating enable
 for_window [window_type="dialog"] floating enable
-for_window [app_id="pavucontrol"] floating enable
-for_window [app_id="nm-connection-editor"] floating enable
 
-# Apps - No Border
-for_window [app_id="^org\.gnome\..*"] border none
-for_window [app_id="^org\.wezfurlong\.wezterm$"] border none
-for_window [app_id="^Alacritty$"] border none
-for_window [class="^org\.mozilla\.firefox$"] border none
-for_window [class="^brave$"] border none
+# System utilities float
+for_window [app_id="(pavucontrol|nm-connection-editor|gnome-calculator|blueman-manager)"] floating enable
+
+# Apps - No Border (terminals, browsers, editors)
+for_window [app_id="(foot|kitty|Alacritty|emacs|thunar)"] border none
+for_window [app_id="^org\.(gnome\..*|wezfurlong\.wezterm|quickshell)$"] border none
 for_window [app_id="^com\.mitchellh\.ghostty$"] border none
-for_window [app_id="^kitty$"] border none
-for_window [app_id="^foot$"] border none
-for_window [app_id="^thunar$"] border none
-for_window [app_id="^emacs$"] border none
+for_window [class="(firefox|brave)"] border none
 
-# Floating Windows
-for_window [app_id="^gnome-calculator$"] floating enable
-for_window [app_id="^blueman-manager$"] floating enable
-for_window [app_id="^org\.quickshell$"] {
-    floating enable
-    border pixel 2
-    sticky enable
-    move position center
-}
-for_window [app_id="imv"] {
-    floating enable
-    border pixel 2
-    sticky enable
-    move position center
-}
+# Floating popups (centered with border)
+for_window [app_id="^org\.quickshell$"] floating enable, sticky enable, move position center
+for_window [app_id="imv"] floating enable, border pixel 2, sticky enable, move position center
 
 ### General Key Bindings
 floating_modifier $mod normal
@@ -151,8 +131,8 @@ bindsym --locked XF86MonBrightnessDown exec "dms ipc call brightness decrement 5
 bindsym --locked XF86MonBrightnessUp exec "dms ipc call brightness increment 5" ""
 
 # Color Picker
-bindsym $mod+p exec /home/xynapz/.config/sway/scripts/color-picker.sh
-bindsym $mod+Control+p exec /home/xynapz/.config/sway/scripts/color-picker.sh --rgb
+bindsym $mod+p exec $scripts/color-picker.sh
+bindsym $mod+Control+p exec $scripts/color-picker.sh --rgb
 
 # Navigation
 bindsym $mod+$left focus left

@@ -206,15 +206,54 @@
         projectile-enable-caching t
         projectile-indexing-method 'alien))
 
-;;; VTERM
+;;; VTERM - Terminal Multiplexer Workflow
+;; Philosophy: Use Emacs as the multiplexer instead of tmux
+;; Named terminals for different purposes, quick keybindings
 
 (use-package! vterm-toggle
-  :bind ("C-c t" . vterm-toggle)
   :custom
   (vterm-toggle-fullscreen-p nil)
   (vterm-toggle-scope 'project))
 
 (set-popup-rule! "^\\*vterm" :size 0.4 :vslot -4 :select t :quit nil :ttl nil)
+
+;; Named terminal management
+(defun xz/vterm-named (name)
+  "Create or switch to a named vterm buffer."
+  (if-let ((buf (get-buffer name)))
+      (if (eq buf (current-buffer))
+          (bury-buffer)
+        (pop-to-buffer buf))
+    (let ((vterm-buffer-name name))
+      (vterm))))
+
+(defun xz/vterm-main ()
+  "Main terminal - general purpose."
+  (interactive)
+  (xz/vterm-named "*vterm-main*"))
+
+(defun xz/vterm-server ()
+  "Server terminal - for running dev servers."
+  (interactive)
+  (xz/vterm-named "*vterm-server*"))
+
+(defun xz/vterm-ssh ()
+  "SSH terminal - for remote connections."
+  (interactive)
+  (xz/vterm-named "*vterm-ssh*"))
+
+(defun xz/vterm-project ()
+  "Project-scoped terminal (uses vterm-toggle)."
+  (interactive)
+  (vterm-toggle))
+
+;; Quick access keybindings under SPC o (open)
+(map! :leader
+      :prefix ("o" . "open")
+      :desc "Toggle vterm" "t" #'xz/vterm-project
+      :desc "Main terminal" "T" #'xz/vterm-main
+      :desc "Server terminal" "s" #'xz/vterm-server
+      :desc "SSH terminal" "S" #'xz/vterm-ssh)
 
 (use-package! nginx-mode
   :mode ("nginx\\.conf\\'" "/nginx/.*\\.conf\\'"))
@@ -313,8 +352,25 @@
           (shell . t)
           (C . t))))
 
-(map! :leader
-      :desc "Toggle vterm" "o t" #'vterm-toggle)
-
 (map! :n "C-a" #'evil-numbers/inc-at-pt
       :n "C-S-a" #'evil-numbers/dec-at-pt)
+
+;;; TERMINAL CLIPBOARD SUPPORT
+(unless (display-graphic-p)
+  (cond
+   ;; Wayland
+   ((executable-find "wl-copy")
+    (setq interprogram-cut-function
+          (lambda (text &optional _)
+            (start-process "wl-copy" nil "wl-copy" text)))
+    (setq interprogram-paste-function
+          (lambda ()
+            (shell-command-to-string "wl-paste -n | tr -d \\r"))))
+   ;; X11 - xclip
+   ((executable-find "xclip")
+    (setq interprogram-cut-function
+          (lambda (text &optional _)
+            (start-process "xclip" nil "xclip" "-selection" "clipboard" "-i" text)))
+    (setq interprogram-paste-function
+          (lambda ()
+            (shell-command-to-string "xclip -selection clipboard -o"))))))
