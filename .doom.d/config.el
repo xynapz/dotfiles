@@ -79,22 +79,22 @@
         lsp-ui-sideline-show-diagnostics t
         lsp-ui-sideline-show-code-actions t))
 
-;; CODE FORMATTING - Doom's built-in +format module
-;; Uses format-all under the hood. Formatters are auto-detected.
-;; To disable format-on-save for specific modes:
-;; (add-hook! 'go-mode-hook (format-on-save-mode -1))
-
 ;; Set formatters per mode if needed (optional overrides)
 (after! format
-  ;; Use LSP formatter if available, fallback to format-all
   (setq +format-with-lsp t)
-
-  ;; Specific formatter overrides (optional)
-  ;; (set-formatter! 'black '("black" "-q" "-") :modes '(python-mode python-ts-mode))
-  ;; (set-formatter! 'prettier '("prettier" "--stdin-filepath" filepath) :modes '(js-mode typescript-mode))
-  )
+)
 
 ;; LANGUAGE SETTINGS
+
+;; GLOBAL TAB/INDENT DEFAULTS - Single source of truth
+(setq-default tab-width 4
+              indent-tabs-mode nil
+              standard-indent 4
+              evil-shift-width 4)  ; Evil > and < operators
+
+;; EditorConfig - ensures formatters respect project settings
+(use-package! editorconfig
+  :config (editorconfig-mode 1))
 
 ;; Web development - 2 space indent
 (setq-hook! '(js-mode-hook js-ts-mode-hook typescript-mode-hook
@@ -122,6 +122,41 @@
 
 ;; Bash - 2 spaces
 (setq-hook! 'bash-ts-mode-hook
+  tab-width 2
+  indent-tabs-mode nil)
+
+;; Lua - 2 spaces (Lua community standard)
+(setq-hook! '(lua-mode-hook lua-ts-mode-hook)
+  tab-width 2
+  indent-tabs-mode nil)
+
+;; PHP - 4 spaces (PSR-12 standard)
+(setq-hook! 'php-mode-hook
+  tab-width 4
+  indent-tabs-mode nil)
+
+;; Nix - 2 spaces
+(setq-hook! '(nix-mode-hook nix-ts-mode-hook)
+  tab-width 2
+  indent-tabs-mode nil)
+
+;; Java - 4 spaces
+(setq-hook! '(java-mode-hook java-ts-mode-hook)
+  tab-width 4
+  indent-tabs-mode nil)
+
+;; LaTeX - 2 spaces
+(setq-hook! '(latex-mode-hook LaTeX-mode-hook)
+  tab-width 2
+  indent-tabs-mode nil)
+
+;; Dockerfile - 4 spaces
+(setq-hook! 'dockerfile-mode-hook
+  tab-width 4
+  indent-tabs-mode nil)
+
+;; Terraform - 2 spaces (terraform fmt standard)
+(setq-hook! 'terraform-mode-hook
   tab-width 2
   indent-tabs-mode nil)
 

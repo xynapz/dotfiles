@@ -63,10 +63,15 @@
        data
        emacs-lisp
        (go +lsp +tree-sitter)
+       (java +lsp +tree-sitter)
        (javascript +lsp +tree-sitter)
        (json +lsp +tree-sitter)
+       (latex +lsp)
+       (lua +lsp +tree-sitter)
        markdown
+       (nix +lsp +tree-sitter)
        org
+       (php +lsp +tree-sitter)
        (python +lsp +pyright +tree-sitter)
        (rust +lsp +tree-sitter)
        (sh +lsp +tree-sitter)

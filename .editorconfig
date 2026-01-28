@@ -1,0 +1,25 @@
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# 2-space languages
+[*.{js,ts,jsx,tsx,css,scss,html,json,yaml,yml,lua,nix,tf,tex}]
+indent_size = 2
+
+# Go: tabs
+[*.go]
+indent_style = tab
+
+# Makefile: tabs required
+[Makefile]
+indent_style = tab
+
+# Shell: 2 spaces
+[*.{sh,bash,zsh}]
+indent_size = 2
