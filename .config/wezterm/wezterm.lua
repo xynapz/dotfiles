@@ -4,7 +4,7 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 local act = wezterm.action
 
--- XZ-NORD COLORSCHEME (matches xz-nord-theme.el)
+-- XZ-NORD COLORSCHEME (vibrant terminal variant)
 local xz_nord = {
   -- Base colors from xz-nord-theme.el
   background = "#1b1d1e",
@@ -23,26 +23,36 @@ local xz_nord = {
   inactive_tab_bg = "#262829",
   inactive_tab_fg = "#616e88",
 
-  -- ANSI colors (Nord palette)
+  -- ANSI colors (vibrant variant - more saturated for terminal pop)
   ansi = {
-    "#3B4252", -- black (nord1)
-    "#BF616A", -- red
-    "#A3BE8C", -- green
-    "#EBCB8B", -- yellow
-    "#81A1C1", -- blue (nord9)
-    "#B48EAD", -- magenta
-    "#88C0D0", -- cyan (nord8)
+    "#3B4252", -- black
+    "#FF6B7A", -- red (vibrant coral-red)
+    "#8FD98F", -- green (vivid mint)
+    "#FFD866", -- yellow (warm gold)
+    "#7AA2F7", -- blue (electric periwinkle)
+    "#C792EA", -- magenta (bright lavender)
+    "#7DCFFF", -- cyan (bright sky)
     "#E5E9F0", -- white
   },
   brights = {
-    "#4C566A", -- bright black (nord3)
-    "#BF616A", -- bright red
-    "#A3BE8C", -- bright green
-    "#EBCB8B", -- bright yellow
-    "#81A1C1", -- bright blue
-    "#B48EAD", -- bright magenta
-    "#8FBCBB", -- bright cyan (nord7)
+    "#616E88", -- bright black (visible)
+    "#FF8A98", -- bright red (soft coral)
+    "#9EE99E", -- bright green (neon mint)
+    "#FFE099", -- bright yellow (cream gold)
+    "#89B4FA", -- bright blue (soft periwinkle)
+    "#DDA0DD", -- bright magenta (plum)
+    "#89DDFF", -- bright cyan (ice blue)
     "#ECEFF4", -- bright white
+  },
+
+  -- Extra accent colors for indexed colors 16-255
+  indexed = {
+    [16] = "#FF9E64",  -- orange
+    [17] = "#FF7A93",  -- pink
+    [18] = "#73DACA",  -- teal
+    [19] = "#BB9AF7",  -- purple
+    [20] = "#7AA2F7",  -- indigo
+    [21] = "#5DE4C7",  -- seafoam
   },
 }
 
@@ -57,6 +67,7 @@ config.colors = {
   scrollbar_thumb = xz_nord.scrollbar_thumb,
   ansi = xz_nord.ansi,
   brights = xz_nord.brights,
+  indexed = xz_nord.indexed,
 
   tab_bar = {
     background = xz_nord.tab_bar_bg,
