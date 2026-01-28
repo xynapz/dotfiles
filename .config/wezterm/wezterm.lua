@@ -4,106 +4,28 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 local act = wezterm.action
 
--- XZ-NORD COLORSCHEME (vibrant terminal variant)
-local xz_nord = {
-  -- Base colors from xz-nord-theme.el
-  background = "#1b1d1e",
-  foreground = "#D8DEE9",
-  cursor_bg = "#88C0D0",
-  cursor_fg = "#1b1d1e",
-  cursor_border = "#88C0D0",
-  selection_bg = "#434C5E",
-  selection_fg = "#D8DEE9",
-  scrollbar_thumb = "#434C5E",
+-- COLORSCHEME (built-in themes)
+-- Try: "Tokyo Night", "Catppuccin Mocha", "Dracula+", "Kanagawa (Gogh)", "Kanagawa Dragon (Gogh)", "rose-pine", "Nord", "Kolorit"
+config.color_scheme = "Kanagawa Dragon (Gogh)"
 
-  -- Tab bar
-  tab_bar_bg = "#1b1d1e",
-  active_tab_bg = "#434C5E",
-  active_tab_fg = "#88C0D0",
-  inactive_tab_bg = "#262829",
-  inactive_tab_fg = "#616e88",
-
-  -- ANSI colors (vibrant variant - more saturated for terminal pop)
-  ansi = {
-    "#3B4252", -- black
-    "#FF6B7A", -- red (vibrant coral-red)
-    "#8FD98F", -- green (vivid mint)
-    "#FFD866", -- yellow (warm gold)
-    "#7AA2F7", -- blue (electric periwinkle)
-    "#C792EA", -- magenta (bright lavender)
-    "#7DCFFF", -- cyan (bright sky)
-    "#E5E9F0", -- white
+-- FONT (Iosevka - ligatures forcefully disabled)
+config.font = wezterm.font({
+  family = "Iosevka",
+  weight = "Light",  -- Thinner weight to match Foot
+  harfbuzz_features = {
+    "calt=0",  -- Contextual alternates
+    "clig=0",  -- Contextual ligatures
+    "liga=0",  -- Standard ligatures
+    "dlig=0",  -- Discretionary ligatures
   },
-  brights = {
-    "#616E88", -- bright black (visible)
-    "#FF8A98", -- bright red (soft coral)
-    "#9EE99E", -- bright green (neon mint)
-    "#FFE099", -- bright yellow (cream gold)
-    "#89B4FA", -- bright blue (soft periwinkle)
-    "#DDA0DD", -- bright magenta (plum)
-    "#89DDFF", -- bright cyan (ice blue)
-    "#ECEFF4", -- bright white
-  },
-
-  -- Extra accent colors for indexed colors 16-255
-  indexed = {
-    [16] = "#FF9E64",  -- orange
-    [17] = "#FF7A93",  -- pink
-    [18] = "#73DACA",  -- teal
-    [19] = "#BB9AF7",  -- purple
-    [20] = "#7AA2F7",  -- indigo
-    [21] = "#5DE4C7",  -- seafoam
-  },
-}
-
-config.colors = {
-  foreground = xz_nord.foreground,
-  background = xz_nord.background,
-  cursor_bg = xz_nord.cursor_bg,
-  cursor_fg = xz_nord.cursor_fg,
-  cursor_border = xz_nord.cursor_border,
-  selection_bg = xz_nord.selection_bg,
-  selection_fg = xz_nord.selection_fg,
-  scrollbar_thumb = xz_nord.scrollbar_thumb,
-  ansi = xz_nord.ansi,
-  brights = xz_nord.brights,
-  indexed = xz_nord.indexed,
-
-  tab_bar = {
-    background = xz_nord.tab_bar_bg,
-    active_tab = {
-      bg_color = xz_nord.active_tab_bg,
-      fg_color = xz_nord.active_tab_fg,
-      intensity = "Bold",
-    },
-    inactive_tab = {
-      bg_color = xz_nord.inactive_tab_bg,
-      fg_color = xz_nord.inactive_tab_fg,
-    },
-    inactive_tab_hover = {
-      bg_color = xz_nord.active_tab_bg,
-      fg_color = xz_nord.foreground,
-    },
-    new_tab = {
-      bg_color = xz_nord.inactive_tab_bg,
-      fg_color = xz_nord.inactive_tab_fg,
-    },
-    new_tab_hover = {
-      bg_color = xz_nord.active_tab_bg,
-      fg_color = xz_nord.active_tab_fg,
-    },
-  },
-}
-
--- FONT (Iosevka Term - matching Emacs)
-config.font = wezterm.font("Iosevka", { weight = "Regular" })
-config.font_size = 16.0
+})
+config.font_size = 18.0
 config.line_height = 1.0
 config.cell_width = 1.0
 
--- Font rendering
-config.freetype_load_target = "Light"
-config.freetype_render_target = "HorizontalLcd"
+-- Font rendering (Normal = thinner, crisper glyphs)
+config.freetype_load_target = "Normal"
+config.freetype_render_target = "Normal"
 
 -- WINDOW APPEARANCE
 config.window_background_opacity = 0.998
@@ -144,7 +66,7 @@ config.enable_scroll_bar = false
 config.keys = {
   -- Pane splits (Ctrl+Shift)
   { key = "Enter", mods = "CTRL|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-  { key = "\\", mods = "CTRL|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+  { key = "|", mods = "CTRL|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 
   -- Pane navigation (Ctrl+Shift+hjkl)
   { key = "h", mods = "CTRL|SHIFT", action = act.ActivatePaneDirection("Left") },

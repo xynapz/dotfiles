@@ -16,6 +16,10 @@
 ;; EDITOR
 (setq display-line-numbers-type 'relative)
 
+;; Disable prettify-symbols (e.g., -> becoming →, <= becoming ≤)
+(global-prettify-symbols-mode -1)
+(setq prettify-symbols-unprettify-at-point nil)
+
 ;; Org directory
 (setq org-directory "~/org/")
 

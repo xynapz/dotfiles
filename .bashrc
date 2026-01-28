@@ -32,7 +32,7 @@ case $- in
 *) return ;;
 esac
 export OSH='/home/xynapz/.oh-my-bash'
-OSH_THEME="powerline-multiline"
+OSH_THEME="pzq"
 OMB_USE_SUDO=true
 # completions
 completions=(
@@ -48,6 +48,8 @@ aliases=(
 plugins=(
     git
     bashmarks
+    colored-man-pages
+    fzf
 )
 # source oh-my-bash
 source "$OSH"/oh-my-bash.sh
