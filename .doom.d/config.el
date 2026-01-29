@@ -86,7 +86,7 @@
 ;; Set formatters per mode if needed (optional overrides)
 (after! format
   (setq +format-with-lsp t)
-)
+  )
 
 ;; LANGUAGE SETTINGS
 ;; Each language sets BOTH tab-width AND its native indent variable
@@ -415,7 +415,7 @@
            "* %? :note:\n:PROPERTIES:\n:CREATED: %U\n:END:\n%i" :empty-lines 1)))
 
   ;; Refile
-  (setq org-refile-targets '((nil :maxlevel . 3)
+  (setq org-refile-targets '((nil :maxlevel . 2)
                              (org-agenda-files :maxlevel . 2))
         org-refile-use-outline-path 'file
         org-outline-path-complete-in-steps nil
@@ -435,22 +435,29 @@
 (map! :n "C-a" #'evil-numbers/inc-at-pt
       :n "C-S-a" #'evil-numbers/dec-at-pt)
 
-;;; TERMINAL CLIPBOARD SUPPORT
+;; Decode WezTerm's C-S-a sequence for "C-S-a" evil-numbers/dec-at-pt
 (unless (display-graphic-p)
-  (cond
-   ;; Wayland
-   ((executable-find "wl-copy")
-    (setq interprogram-cut-function
-          (lambda (text &optional _)
-            (start-process "wl-copy" nil "wl-copy" text)))
-    (setq interprogram-paste-function
-          (lambda ()
-            (shell-command-to-string "wl-paste -n | tr -d \\r"))))
-   ;; X11 - xclip
-   ((executable-find "xclip")
-    (setq interprogram-cut-function
-          (lambda (text &optional _)
-            (start-process "xclip" nil "xclip" "-selection" "clipboard" "-i" text)))
-    (setq interprogram-paste-function
-          (lambda ()
-            (shell-command-to-string "xclip -selection clipboard -o"))))))
+  (define-key input-decode-map (kbd "\e[97;6u") (kbd "C-S-a")))
+
+;;; TERMINAL CLIPBOARD SUPPORT
+(when (string-equal (getenv "XDG_SESSION_TYPE") "wayland")
+  (executable-find "wl-copy")
+  (executable-find "wl-paste")
+  (defun my-wl-copy (text)
+    "Copy with wl-copy if in terminal, otherwise use the original value of `interprogram-cut-function'."
+    (if (display-graphic-p)
+        (gui-select-text text)
+      (let ((wl-copy-process
+             (make-process :name "wl-copy"
+                           :buffer nil
+                           :command '("wl-copy")
+                           :connection-type 'pipe)))
+        (process-send-string wl-copy-process text)
+        (process-send-eof wl-copy-process))))
+  (defun my-wl-paste ()
+    "Paste with wl-paste if in terminal. otherwise use the original value of `interprogram-paste-function'"
+    (if (display-graphic-p)
+        (gui-selection-value)
+      (shell-command-to-string "wl-paste --no-newline")))
+  (setq interprogram-cut-function #'my-wl-copy)
+  (setq interprogram-paste-function #'my-wl-paste))

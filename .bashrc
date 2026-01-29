@@ -58,6 +58,9 @@ alias penv='source ./.venv/bin/activate'
 alias ta='tmux attach -t'
 alias em='emacs -nw'
 alias tree="tree -I '.git|node_modules|vendor|__pycache__|.venv|target|build|dist'"
+alias ds="doom sync"
+alias emk="pkill -f emacs"
+alias emd="emacs --daemon"
 
 # Git (common shortcuts)
 alias gs='git status -sb'

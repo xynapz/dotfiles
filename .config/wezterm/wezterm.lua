@@ -44,14 +44,8 @@ config.tab_bar_at_bottom = true
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_max_width = 32
 
--- No audible bell
+-- No bells at all
 config.audible_bell = "Disabled"
-config.visual_bell = {
-  fade_in_function = "EaseIn",
-  fade_in_duration_ms = 50,
-  fade_out_function = "EaseOut",
-  fade_out_duration_ms = 50,
-}
 
 -- WAYLAND OPTIMIZATIONS
 config.enable_wayland = true
@@ -106,6 +100,9 @@ config.keys = {
 
   -- Search
   { key = "f", mods = "CTRL|SHIFT", action = act.Search({ CaseInSensitiveString = "" }) },
+
+  -- Specific fix for Emacs C-S-a collision
+  { key = "a", mods = "CTRL|SHIFT", action = act.SendString("\x1b[97;6u") },
 
   -- Toggle fullscreen
   { key = "F11", mods = "", action = act.ToggleFullScreen },
