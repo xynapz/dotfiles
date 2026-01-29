@@ -29,12 +29,12 @@ config.freetype_render_target = "Normal"
 
 -- WINDOW APPEARANCE
 config.window_background_opacity = 0.998
-config.window_decorations = "RESIZE"
+config.window_decorations = "NONE"  -- No title bar, no buttons
 config.window_padding = {
-  left = 8,
-  right = 8,
-  top = 8,
-  bottom = 8,
+  left = 0,
+  right = 0,
+  top = 0,
+  bottom = 0,
 }
 
 -- Tab bar (minimal, bottom, auto-hide)

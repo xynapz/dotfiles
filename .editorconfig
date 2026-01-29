@@ -8,18 +8,38 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
+# C/C++ - 4 spaces
+[*.{c,cpp,cc,cxx,h,hpp,hxx}]
+indent_size = 4
+
+# Python - 4 spaces (PEP 8)
+[*.py]
+indent_size = 4
+
+# Java - 4 spaces
+[*.java]
+indent_size = 4
+
+# Rust - 4 spaces
+[*.rs]
+indent_size = 4
+
+# PHP - 4 spaces (PSR-12)
+[*.php]
+indent_size = 4
+
 # 2-space languages
-[*.{js,ts,jsx,tsx,css,scss,html,json,yaml,yml,lua,nix,tf,tex}]
+[*.{js,jsx,ts,tsx,css,scss,html,json,yaml,yml,lua,nix,tf,tex,rb}]
 indent_size = 2
 
-# Go: tabs
+# Shell - 2 spaces
+[*.{sh,bash,zsh}]
+indent_size = 2
+
+# Go - tabs (gofmt)
 [*.go]
 indent_style = tab
 
-# Makefile: tabs required
+# Makefile - tabs required
 [Makefile]
 indent_style = tab
-
-# Shell: 2 spaces
-[*.{sh,bash,zsh}]
-indent_size = 2

@@ -89,79 +89,120 @@
 )
 
 ;; LANGUAGE SETTINGS
+;; Each language sets BOTH tab-width AND its native indent variable
+;; This ensures Emacs indent matches formatter output
 
-;; GLOBAL TAB/INDENT DEFAULTS - Single source of truth
+;; GLOBAL DEFAULTS
 (setq-default tab-width 4
               indent-tabs-mode nil
               standard-indent 4
-              evil-shift-width 4)  ; Evil > and < operators
+              evil-shift-width 4)
 
-;; EditorConfig - ensures formatters respect project settings
+;; EditorConfig - makes external tools respect project settings
 (use-package! editorconfig
   :config (editorconfig-mode 1))
 
-;; Web development - 2 space indent
-(setq-hook! '(js-mode-hook js-ts-mode-hook typescript-mode-hook
-              typescript-ts-mode-hook tsx-ts-mode-hook
-              css-mode-hook css-ts-mode-hook html-mode-hook)
+;; C/C++ - 4 spaces
+(setq-hook! '(c-mode-hook c++-mode-hook c-ts-mode-hook c++-ts-mode-hook)
+  tab-width 4
+  c-basic-offset 4
+  indent-tabs-mode nil)
+
+;; Python - 4 spaces (PEP 8)
+(setq-hook! '(python-mode-hook python-ts-mode-hook)
+  tab-width 4
+  python-indent-offset 4
+  indent-tabs-mode nil)
+
+;; JavaScript/TypeScript - 2 spaces
+(setq-hook! '(js-mode-hook js-ts-mode-hook js2-mode-hook
+              typescript-mode-hook typescript-ts-mode-hook tsx-ts-mode-hook)
   tab-width 2
   js-indent-level 2
   typescript-indent-level 2
-  css-indent-offset 2)
+  indent-tabs-mode nil)
 
-;; Go - tabs
-(setq-hook! 'go-ts-mode-hook
+;; Web (HTML/CSS) - 2 spaces
+(setq-hook! '(html-mode-hook mhtml-mode-hook
+              css-mode-hook css-ts-mode-hook scss-mode-hook)
+  tab-width 2
+  css-indent-offset 2
+  sgml-basic-offset 2
+  indent-tabs-mode nil)
+
+;; Go - tabs (gofmt standard)
+(setq-hook! '(go-mode-hook go-ts-mode-hook)
   tab-width 4
   indent-tabs-mode t)
 
-;; Rust - 4 spaces
-(setq-hook! 'rust-ts-mode-hook
+;; Rust - 4 spaces (rustfmt)
+(setq-hook! '(rust-mode-hook rust-ts-mode-hook)
   tab-width 4
-  indent-tabs-mode nil)
-
-;; YAML - 2 spaces
-(setq-hook! 'yaml-ts-mode-hook
-  tab-width 2
-  indent-tabs-mode nil)
-
-;; Bash - 2 spaces
-(setq-hook! 'bash-ts-mode-hook
-  tab-width 2
-  indent-tabs-mode nil)
-
-;; Lua - 2 spaces (Lua community standard)
-(setq-hook! '(lua-mode-hook lua-ts-mode-hook)
-  tab-width 2
-  indent-tabs-mode nil)
-
-;; PHP - 4 spaces (PSR-12 standard)
-(setq-hook! 'php-mode-hook
-  tab-width 4
-  indent-tabs-mode nil)
-
-;; Nix - 2 spaces
-(setq-hook! '(nix-mode-hook nix-ts-mode-hook)
-  tab-width 2
+  rust-indent-offset 4
   indent-tabs-mode nil)
 
 ;; Java - 4 spaces
 (setq-hook! '(java-mode-hook java-ts-mode-hook)
   tab-width 4
+  c-basic-offset 4
+  indent-tabs-mode nil)
+
+;; Shell/Bash - 2 spaces
+(setq-hook! '(sh-mode-hook bash-ts-mode-hook)
+  tab-width 2
+  sh-basic-offset 2
+  indent-tabs-mode nil)
+
+;; Lua - 2 spaces
+(setq-hook! '(lua-mode-hook lua-ts-mode-hook)
+  tab-width 2
+  lua-indent-level 2
+  indent-tabs-mode nil)
+
+;; PHP - 4 spaces (PSR-12)
+(setq-hook! 'php-mode-hook
+  tab-width 4
+  c-basic-offset 4
+  indent-tabs-mode nil)
+
+;; Ruby - 2 spaces
+(setq-hook! '(ruby-mode-hook ruby-ts-mode-hook)
+  tab-width 2
+  ruby-indent-level 2
+  indent-tabs-mode nil)
+
+;; YAML - 2 spaces
+(setq-hook! '(yaml-mode-hook yaml-ts-mode-hook)
+  tab-width 2
+  yaml-indent-offset 2
+  indent-tabs-mode nil)
+
+;; JSON - 2 spaces
+(setq-hook! '(json-mode-hook json-ts-mode-hook)
+  tab-width 2
+  js-indent-level 2
+  indent-tabs-mode nil)
+
+;; Nix - 2 spaces
+(setq-hook! '(nix-mode-hook nix-ts-mode-hook)
+  tab-width 2
+  nix-indent-function 'nix-indent-line
+  indent-tabs-mode nil)
+
+;; Terraform - 2 spaces
+(setq-hook! 'terraform-mode-hook
+  tab-width 2
   indent-tabs-mode nil)
 
 ;; LaTeX - 2 spaces
 (setq-hook! '(latex-mode-hook LaTeX-mode-hook)
   tab-width 2
+  LaTeX-indent-level 2
   indent-tabs-mode nil)
 
 ;; Dockerfile - 4 spaces
 (setq-hook! 'dockerfile-mode-hook
   tab-width 4
-  indent-tabs-mode nil)
-
-;; Terraform - 2 spaces (terraform fmt standard)
-(setq-hook! 'terraform-mode-hook
-  tab-width 2
   indent-tabs-mode nil)
 
 ;; C/C++ SMART HEADER DETECTION
