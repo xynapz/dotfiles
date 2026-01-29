@@ -1,6 +1,6 @@
 # .bash_profile
+# Login shell configuration
+# Sourced by: bash on login (SSH, TTY, etc.)
 
-# Source my .profile
-if [ -f "$HOME/.profile" ]; then
-    . "$HOME/.profile"
-fi
+# Source .profile (environment, PATH)
+[ -f "$HOME/.profile" ] && . "$HOME/.profile"
