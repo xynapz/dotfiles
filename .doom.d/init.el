@@ -63,18 +63,18 @@
        (cc +lsp +tree-sitter)
        data
        emacs-lisp
-       (go +lsp +tree-sitter)
-       (java +lsp +tree-sitter)
+       ;;(go +lsp +tree-sitter)
+       ;;(java +lsp +tree-sitter)
        (javascript +lsp +tree-sitter)
        (json +lsp +tree-sitter)
        (latex +lsp)
        (lua +lsp +tree-sitter)
        markdown
-       (nix +lsp +tree-sitter)
+       ;;(nix +lsp +tree-sitter)
        org
-       (php +lsp +tree-sitter)
+       ;;(php +lsp +tree-sitter)
        (python +lsp +pyright +tree-sitter)
-       (rust +lsp +tree-sitter)
+       ;;(rust +lsp +tree-sitter)
        (sh +lsp +tree-sitter)
        (terraform +lsp)
        (web +lsp +tree-sitter)

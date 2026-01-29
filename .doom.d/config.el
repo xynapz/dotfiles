@@ -5,8 +5,8 @@
       user-mail-address "xynapz@aol.com")
 
 ;; FONTS
-(setq doom-font (font-spec :family "Iosevka" :size 23)
-      doom-variable-pitch-font (font-spec :family "Iosevka" :size 23)
+(setq doom-font (font-spec :family "Iosevka" :size 24)
+      doom-variable-pitch-font (font-spec :family "Iosevka" :size 24)
       doom-big-font (font-spec :family "Iosevka" :size 26))
 
 ;; THEME
@@ -279,9 +279,9 @@
 ;;; PROJECTILE
 
 (after! projectile
-  (setq projectile-project-search-path '("~/xynapz/")
+  (setq projectile-project-search-path nil  ; Don't scan at startup
         projectile-enable-caching t
-        projectile-indexing-method 'alien))
+        projectile-indexing-method 'hybrid))
 
 ;;; VTERM - Terminal Multiplexer Workflow
 ;; Philosophy: Use Emacs as the multiplexer instead of tmux
@@ -437,25 +437,23 @@
 (unless (display-graphic-p)
   (define-key input-decode-map (kbd "\e[97;6u") (kbd "C-S-a")))
 
-;;; TERMINAL CLIPBOARD SUPPORT
-(when (string-equal (getenv "XDG_SESSION_TYPE") "wayland")
-  (executable-find "wl-copy")
-  (executable-find "wl-paste")
-  (defun my-wl-copy (text)
-    "Copy with wl-copy if in terminal, otherwise use the original value of `interprogram-cut-function'."
-    (if (display-graphic-p)
-        (gui-select-text text)
+;;; TERMINAL CLIPBOARD SUPPORT (deferred to not block startup)
+(add-hook! 'doom-after-init-hook
+  (when (and (not (display-graphic-p))
+             (string-equal (getenv "XDG_SESSION_TYPE") "wayland")
+             (executable-find "wl-copy")
+             (executable-find "wl-paste"))
+    (defun my-wl-copy (text)
+      "Copy with wl-copy in terminal."
       (let ((wl-copy-process
              (make-process :name "wl-copy"
                            :buffer nil
                            :command '("wl-copy")
                            :connection-type 'pipe)))
         (process-send-string wl-copy-process text)
-        (process-send-eof wl-copy-process))))
-  (defun my-wl-paste ()
-    "Paste with wl-paste if in terminal. otherwise use the original value of `interprogram-paste-function'"
-    (if (display-graphic-p)
-        (gui-selection-value)
-      (shell-command-to-string "wl-paste --no-newline")))
-  (setq interprogram-cut-function #'my-wl-copy)
-  (setq interprogram-paste-function #'my-wl-paste))
+        (process-send-eof wl-copy-process)))
+    (defun my-wl-paste ()
+      "Paste with wl-paste in terminal."
+      (shell-command-to-string "wl-paste --no-newline"))
+    (setq interprogram-cut-function #'my-wl-copy)
+    (setq interprogram-paste-function #'my-wl-paste)))
