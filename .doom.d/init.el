@@ -49,6 +49,7 @@
        debugger
        direnv
        docker
+       editorconfig
        (eval +overlay)
        lookup
        (lsp +peek)

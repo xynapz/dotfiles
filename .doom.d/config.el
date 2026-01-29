@@ -98,10 +98,6 @@
               standard-indent 4
               evil-shift-width 4)
 
-;; EditorConfig - makes external tools respect project settings
-(use-package! editorconfig
-  :config (editorconfig-mode 1))
-
 ;; C/C++ - 4 spaces
 (setq-hook! '(c-mode-hook c++-mode-hook c-ts-mode-hook c++-ts-mode-hook)
   tab-width 4
@@ -247,6 +243,7 @@
 
 ;; Auto-activate .venv and restart LSP
 (use-package! pyvenv
+  :defer t
   :config
   (defun xz/auto-activate-python-env ()
     "Auto-activate .venv and configure pyright to use it."
@@ -291,6 +288,7 @@
 ;; Named terminals for different purposes, quick keybindings
 
 (use-package! vterm-toggle
+  :defer t
   :custom
   (vterm-toggle-fullscreen-p nil)
   (vterm-toggle-scope 'project))
