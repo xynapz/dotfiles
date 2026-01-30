@@ -4,7 +4,7 @@
 {
   services.mako = {
     enable = true;
-    enable = true;
+
     defaultTimeout = 5000;
     iconPath = "${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark";
     settings = {
