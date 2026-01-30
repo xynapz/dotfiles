@@ -4,10 +4,10 @@
 {
   programs.git = {
     enable = true;
-    userName = "xynapz";
-    userEmail = "xynapz@aol.com";
-    
     settings = {
+      user.name = "xynapz";
+      user.email = "xynapz@aol.com";
+      
       init.defaultBranch = "main";
       core.editor = "emacs -nw";
       pull.rebase = true; push.autoSetupRemote = true; fetch.prune = true;
