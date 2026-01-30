@@ -2,7 +2,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  programs.emacs = { enable = true; package = pkgs.emacs29; extraPackages = epkgs: [ epkgs.vterm ]; };
+  programs.emacs = { enable = true; package = pkgs.emacs; extraPackages = epkgs: [ epkgs.vterm ]; };
 
   home.file.".doom.d" = { source = ../../config/doom; recursive = true; };
 
