@@ -22,7 +22,7 @@
     };
 
     style = ''
-      * { font-family: "Iosevka", monospace; font-size: 14px; }
+      * { font-family: "IBM Plex Mono", monospace; font-size: 14px; }
       window#waybar { background-color: rgba(30, 34, 42, 0.95); color: #eceff4; border-bottom: 2px solid #3b4252; }
       #workspaces button { padding: 0 8px; background-color: transparent; color: #d8dee9; }
       #workspaces button.focused { background-color: rgba(136, 192, 208, 0.3); border-bottom: 2px solid #88c0d0; }

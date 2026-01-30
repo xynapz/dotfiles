@@ -37,7 +37,6 @@
   };
 
   # AUDIO (PipeWire)
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -69,13 +68,13 @@
 
   # FONTS
   fonts.packages = with pkgs; [
-    iosevka jetbrains-mono ibm-plex noto-fonts noto-fonts-emoji
+    iosevka jetbrains-mono ibm-plex noto-fonts noto-fonts-color-emoji
     nerd-fonts.iosevka nerd-fonts.jetbrains-mono
   ];
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
-      monospace = [ "Iosevka" "JetBrains Mono" ];
+      monospace = [ "IBM Plex Mono" ];
       sansSerif = [ "IBM Plex Sans" "Noto Sans" ];
     };
   };
