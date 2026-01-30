@@ -37,7 +37,7 @@
       }
       ff() { find . -type f -iname "*$1*" 2>/dev/null; }
       fdir() { find . -type d -iname "*$1*" 2>/dev/null; }
-      up() { local count="${1:-1}"; local path=""; for ((i=0;i<count;i++)); do path="../$path"; done; cd "$path" || return; }
+      up() { local count="''${1:-1}"; local path=""; for ((i=0;i<count;i++)); do path="../$path"; done; cd "$path" || return; }
       ccat() { [ -f "$1" ] && source-highlight --failsafe -f esc -i "$1" 2>/dev/null || cat "$@"; }
     '';
 
