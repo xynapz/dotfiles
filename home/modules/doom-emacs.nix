@@ -14,5 +14,5 @@
     aspell aspellDicts.en aspellDicts.en-computers
   ];
 
-  services.emacs = { enable = true; defaultEditor = true; startWithUserSession = "graphical"; };
+  services.emacs = { enable = true; defaultEditor = false; startWithUserSession = "graphical"; };
 }
