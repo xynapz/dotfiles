@@ -5,11 +5,11 @@
   services.mako = {
     enable = true;
 
-    defaultTimeout = 5000;
-    iconPath = "${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark";
     settings = {
       "default" = {
         font = "IBM Plex Mono 12";
+        default-timeout = 5000;
+        icon-path = "${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark";
         background-color = "#2e3440ee"; text-color = "#eceff4"; border-color = "#4c566a";
         border-size = 2; border-radius = 8; width = 350; height = 150;
         margin = "10"; padding = "15"; anchor = "top-right";
