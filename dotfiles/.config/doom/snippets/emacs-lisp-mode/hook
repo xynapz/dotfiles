@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: add-hook
-# key: hook
-# --
-(add-hook '${1:mode-hook} #'${2:function})$0

@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: println
-# key: log
-# --
-println!("${1:{:?}}", ${2:var});$0

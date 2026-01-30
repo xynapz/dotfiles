@@ -1,5 +1,0 @@
-#!/bin/bash
-
-tmux new-session -d -s dotfiles -c $HOME/dotfiles
-tmux new-session -d -s angeld -c $HOME/xynapz/angeld/ \; send-keys "penv" C-m
-tmux new-session -d -s byte_arena -c $HOME/xynapz/byte-arena

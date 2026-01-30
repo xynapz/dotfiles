@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: transition
-# key: trans
-# --
-transition: ${1:all} ${2:0.3s} ${3:ease};$0

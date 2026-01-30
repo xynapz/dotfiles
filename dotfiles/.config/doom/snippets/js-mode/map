@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: map
-# key: map
-# --
-${1:array}.map(${2:item} => ${3:item})$0

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: main function
-# key: main
-# --
-fn main() {
-    $0
-}
