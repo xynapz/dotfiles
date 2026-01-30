@@ -45,7 +45,7 @@
   home.packages = with pkgs; [
     wezterm foot firefox thunar
     nodejs python3 go rustup gcc gnumake cmake
-    ripgrep fd fzf bat eza zoxide delta dust duf procs bottom
+    ripgrep fd bat eza dust duf procs bottom
     imv mpv wl-clipboard cliphist grim slurp swappy wf-recorder
     pavucontrol blueman libnotify unzip p7zip tree calc
     iosevka jetbrains-mono sourceHighlight imagemagick
