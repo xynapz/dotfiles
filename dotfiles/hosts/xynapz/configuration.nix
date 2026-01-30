@@ -1,0 +1,94 @@
+# NixOS System Configuration for xynapz
+{ config, pkgs, lib, ... }:
+
+{
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
+  # BOOT
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # NETWORKING
+  networking.hostName = "xynapz";
+  networking.networkmanager.enable = true;
+
+  # LOCALE & TIME
+  time.timeZone = "America/New_York";
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  # GRAPHICS & WAYLAND
+  hardware.graphics.enable = true;
+
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+    extraPackages = with pkgs; [
+      swaylock swayidle wl-clipboard wl-clip-persist cliphist
+      grim slurp mako fuzzel waybar brightnessctl pamixer playerctl
+    ];
+  };
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+
+  # AUDIO (PipeWire)
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
+  # BLUETOOTH
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
+
+  # USER
+  users.users.xynapz = {
+    isNormalUser = true;
+    description = "xynapz";
+    extraGroups = [ "wheel" "networkmanager" "video" "audio" "docker" ];
+    shell = pkgs.bash;
+  };
+
+  # SYSTEM PACKAGES
+  environment.systemPackages = with pkgs; [
+    git vim wget curl htop unzip ripgrep fd jq tree
+    pciutils usbutils lshw
+    iosevka jetbrains-mono ibm-plex
+    nerd-fonts.iosevka nerd-fonts.jetbrains-mono
+  ];
+
+  # FONTS
+  fonts.packages = with pkgs; [
+    iosevka jetbrains-mono ibm-plex noto-fonts noto-fonts-emoji
+    nerd-fonts.iosevka nerd-fonts.jetbrains-mono
+  ];
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = {
+      monospace = [ "Iosevka" "JetBrains Mono" ];
+      sansSerif = [ "IBM Plex Sans" "Noto Sans" ];
+    };
+  };
+
+  # SERVICES
+  virtualisation.docker.enable = true;
+  security.polkit.enable = true;
+  services.dbus.enable = true;
+
+  # NIX SETTINGS
+  nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.gc = { automatic = true; dates = "weekly"; options = "--delete-older-than 14d"; };
+
+  system.stateVersion = "24.11";
+}

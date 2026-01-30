@@ -5,7 +5,9 @@ set $down j
 set $up k
 set $right l
 set $term wezterm
+set $file-manager thunar
 set $menu fuzzel
+set $browser firefox
 set $editor-emacs "emacsclient -c"
 set $scripts ~/.config/sway/scripts
 
@@ -88,6 +90,9 @@ floating_modifier $mod normal
 
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+Return exec $editor-emacs
+bindsym $mod+Shift+b exec $browser
+bindsym $mod+f exec $file-manager
+
 
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+c reload
@@ -187,7 +192,7 @@ bindsym $mod+b splith
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
-bindsym $mod+f fullscreen
+bindsym $mod+Shift+f fullscreen
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+a focus parent
 
