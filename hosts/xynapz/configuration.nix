@@ -15,11 +15,19 @@
   networking.networkmanager.enable = true;
 
   # LOCALE & TIME
-  time.timeZone = "America/New_York";
+  time.timeZone = "America/Toronto";
   i18n.defaultLocale = "en_US.UTF-8";
 
   # GRAPHICS & WAYLAND
   hardware.graphics.enable = true;
+
+  # DISPLAY MANAGER (SDDM)
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "sugar-candy";
+    package = pkgs.kdePackages.sddm;
+  };
 
   programs.sway = {
     enable = true;
@@ -65,6 +73,14 @@
     bibata-cursors papirus-icon-theme # Themes for Greeter
     iosevka jetbrains-mono ibm-plex
     nerd-fonts.iosevka nerd-fonts.jetbrains-mono
+
+    # SDDM Sugar Candy Theme
+    (pkgs.libsForQt5.callPackage "${pkgs.fetchFromGitHub {
+      owner = "Kangie";
+      repo = "sddm-sugar-candy";
+      rev = "a1bfb85babde7daf4119083d8c4ef04a2f2cab3a";
+      sha256 = "sha256-p4oWMx5q2+MSTQiYZdU1Fy5BhKdlpqBBqLzfzrqt+rU=";
+    }}" {})
   ];
 
   # FONTS
@@ -90,5 +106,5 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.gc = { automatic = true; dates = "weekly"; options = "--delete-older-than 14d"; };
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.11";
 }
