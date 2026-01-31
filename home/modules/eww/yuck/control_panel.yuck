@@ -1,14 +1,47 @@
+(defpoll vol :interval "1s" "./scripts/audio.sh vol")
+(defpoll mic :interval "1s" "./scripts/audio.sh mic")
+(defpoll mic_status :interval "1s" "./scripts/audio.sh mic-status")
+(defvar brightness 50) 
+
 (defwindow control_panel
   :monitor 0
   :geometry (geometry :x "1%"
                       :y "50px"
-                      :width "25%"
-                      :height "30%"
+                      :width "20%"
                       :anchor "top right")
   :stacking "fg"
-  (box :class "control-panel" :orientation "v" :space-evenly false
-    (label :text "Control Panel" :class "title")
-    (box :orientation "h" :space-evenly true
-      (button :class "btn" :onclick "notify-send 'Wifi Toggled'" "📶 Wifi")
-      (button :class "btn" :onclick "notify-send 'BT Toggled'" "🔵 BT"))
-    (scale :min 0 :max 100 :value 50 :class "vol-slider")))
+  (box :class "control-panel" :orientation "v" :space-evenly false :spacing 20
+    
+    ; User Profile
+    (box :class "profile" :orientation "h" :space-evenly false :spacing 15
+      (box :class "face" :style "background-image: url('/home/xynapz/dotfiles/face.jpg');")
+      (box :orientation "v" :valign "center"
+        (label :class "username" :text "xynapz" :halign "start")
+        (label :class "uptime" :text {formattime(EWW_TIME, "%H:%M")} :halign "start")))
+
+    ; Sliders
+    (box :class "sliders" :orientation "v" :spacing 15
+      (box :orientation "h" :space-evenly false :spacing 10
+        (label :text "🔊" :class "icon")
+        (scale :class "vol-slider" :min 0 :max 100 :value vol :onchange "./scripts/audio.sh speaker-set {}" :hexpand true))
+      (box :orientation "h" :space-evenly false :spacing 10
+        (label :text "🎙️" :class "icon")
+        (scale :class "mic-slider" :min 0 :max 100 :value mic :onchange "./scripts/audio.sh mic-set {}" :hexpand true)
+        (button :class "mic-toggle ${mic_status}" :onclick "./scripts/audio.sh mic-toggle" (label :text {mic_status == "mic-on" ? "🎙️" : "🔇"})))
+      (box :orientation "h" :space-evenly false :spacing 10
+        (label :text "🔆" :class "icon")
+        (scale :class "bright-slider" :min 0 :max 100 :value brightness :onchange "brightnessctl s {}%" :hexpand true)))
+
+    ; Quick Toggles
+    (box :class "toggles" :orientation "h" :space-evenly true
+      (button :class "toggle-btn" :onclick "notify-send 'Wifi Toggled'" "📶")
+      (button :class "toggle-btn" :onclick "notify-send 'BT Toggled'" "🔵")
+      (button :class "toggle-btn" :onclick "notify-send 'DND Toggled'" "🌙")
+      (button :class "toggle-btn" :onclick "notify-send 'Air Toggled'" "✈️"))
+
+    ; Power Controls
+    (box :class "power-controls" :orientation "h" :space-evenly true
+      (button :class "power-btn" :onclick "swaymsg exit" "🚪")
+      (button :class "power-btn" :onclick "swaylock" "🔒")
+      (button :class "power-btn" :onclick "reboot" "🔄")
+      (button :class "power-btn dest" :onclick "poweroff" "⏻"))))

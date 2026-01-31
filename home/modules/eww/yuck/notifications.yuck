@@ -1,0 +1,25 @@
+(defvar notif_view "calendar") ; "calendar" or "list"
+
+(defwindow notifications_popup
+  :monitor 0
+  :geometry (geometry :x "0%"
+                      :y "50px"
+                      :width "25%"
+                      :height "60%"
+                      :anchor "top center")
+  :stacking "fg"
+  (box :class "notif-win" :orientation "v" :space-evenly false
+    (box :class "tabs" :orientation "h"
+      (button :class "tab ${notif_view == 'calendar' ? 'active' : ''}" 
+              :onclick "eww update notif_view=calendar" "Calendar")
+      (button :class "tab ${notif_view == 'list' ? 'active' : ''}" 
+              :onclick "eww update notif_view=list" "Notifications"))
+    
+    (stack :selected {notif_view == "calendar" ? 0 : 1}
+      (box :class "cal-view" 
+        (calendar :class "cal" :show-details true :show-heading true))
+      (scroll :vscroll true :hscroll false :height 300
+        (box :class "notif-list" :orientation "v" :spacing 10
+          (label :text "No new notifications" :class "placeholder" :visible true)
+          ; Real notifications would be generated here via a JSON listener
+        )))))

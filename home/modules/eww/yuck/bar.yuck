@@ -15,29 +15,28 @@
 
 (defwidget clock []
   (button :class "clock" 
-          :onclick "eww open --toggle calendar"
+          :onclick "eww open --toggle notifications_popup && eww open --toggle closer"
           (box :orientation "h" :space-evenly false :spacing 10
+            (label :text "🔔" :class "bell")
             (label :text "${time}" :class "time")
             (label :text "|" :class "sep")
             (label :text "${date}" :class "date"))))
 
 (defwidget sys_indicators []
   (button :class "sys-indicators"
-          :onclick "eww open --toggle control_panel"
+          :onclick "eww open --toggle control_panel && eww open --toggle closer"
           (box :orientation "h" :space-evenly false :spacing 15
             (label :text "📶" :class "icon")
             (label :text "🔊" :class "icon")
             (label :text "🔋" :class "icon"))))
 
+(deflisten workspaces_json :initial "[]" "./scripts/workspaces.py")
+
 (defwidget workspaces []
-  (box :class "workspaces" :orientation "h" :space-evenly true :spacing 5
-    (button :onclick "swaymsg workspace 1" "1")
-    (button :onclick "swaymsg workspace 2" "2")
-    (button :onclick "swaymsg workspace 3" "3")
-    (button :onclick "swaymsg workspace 4" "4")
-    (button :onclick "swaymsg workspace 5" "5")
-    (button :onclick "swaymsg workspace 6" "6")
-    (button :onclick "swaymsg workspace 7" "7")
-    (button :onclick "swaymsg workspace 8" "8")
-    (button :onclick "swaymsg workspace 9" "9")
-    (button :onclick "swaymsg workspace 10" "10")))
+  (box :class "workspaces" :orientation "h" :space-evenly false :spacing 8
+    (for ws in workspaces_json
+      (button :onclick "swaymsg workspace ${ws.name}"
+              :class {ws.focused ? "active" : "inactive"}
+              :tooltip "Workspace ${ws.name}"
+              (box :class "dot" :style {ws.focused ? "background-color: #88c0d0;" : "background-color: #4c566a;"})))))
+

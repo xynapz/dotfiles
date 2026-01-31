@@ -1,4 +1,5 @@
 (include "./yuck/variables.yuck")
 (include "./yuck/bar.yuck")
 (include "./yuck/control_panel.yuck")
-(include "./yuck/calendar.yuck")
+(include "./yuck/notifications.yuck")
+(include "./yuck/closer.yuck")

@@ -1,0 +1,41 @@
+.notif-win {
+    background-color: #1e222a;
+    border-radius: 12px;
+    border: 1px solid #3b4252;
+    padding: 10px;
+}
+
+.tabs {
+    margin-bottom: 20px;
+    background-color: #2e3440;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.tab {
+    padding: 8px;
+    border-radius: 6px;
+    color: #d8dee9;
+}
+
+.tab.active {
+    background-color: #3b4252;
+    color: #88c0d0;
+    font-weight: bold;
+}
+
+.cal {
+    padding: 10px;
+    background-color: transparent;
+    color: #eceff4;
+}
+
+.notif-list {
+    padding: 10px;
+}
+
+.placeholder {
+    color: #4c566a;
+    font-style: italic;
+    margin-top: 50px;
+}

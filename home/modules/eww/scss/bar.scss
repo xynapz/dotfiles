@@ -19,12 +19,21 @@
   color: #eceff4;
 }
 
-.workspaces button {
-  padding: 0 8px;
-  color: #d8dee9;
-  font-weight: bold;
+.workspaces {
+  padding: 0 5px;
 }
 
-.workspaces button:hover {
-  color: #88c0d0;
+.workspaces button {
+  padding: 0 4px;
+}
+
+.workspaces .dot {
+  min-width: 10px;
+  min-height: 10px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.workspaces button:hover .dot {
+  background-color: #81a1c1;
 }
