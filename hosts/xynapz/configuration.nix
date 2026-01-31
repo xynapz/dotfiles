@@ -21,25 +21,57 @@
   # GRAPHICS & WAYLAND
   hardware.graphics.enable = true;
 
-  # DISPLAY MANAGER (SDDM)
+  # DISPLAY MANAGER (SDDM) - Multi-monitor setup
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
     package = pkgs.kdePackages.sddm;
     theme = "breeze";
+    
     settings = {
+      General = {
+        DisplayServer = "wayland";
+        GreeterEnvironment = "QT_SCREEN_SCALE_FACTORS=1;QT_WAYLAND_SHELL_INTEGRATION=layer-shell";
+      };
+      
       Theme = {
+        Current = "breeze";
         CursorTheme = "Bibata-Modern-Classic";
+        CursorSize = 24;
+      };
+
+      Wayland = {
+        CompositorCommand = "${pkgs.kdePackages.kwin}/bin/kwin_wayland --no-lockscreen --no-global-shortcuts --locale1";
       };
     };
   };
 
-  # Qt theming for SDDM
+  # Qt and GTK theming
   qt = {
     enable = true;
-    platformTheme = "gnome";
-    style = "adwaita-dark";
+    platformTheme = "kde";
+    style = "breeze";
   };
+
+  environment.systemPackages = with pkgs; [
+    git vim wget curl htop unzip ripgrep fd jq tree
+    pciutils usbutils lshw
+    bibata-cursors papirus-icon-theme
+    iosevka jetbrains-mono ibm-plex
+    nerd-fonts.iosevka nerd-fonts.jetbrains-mono
+    
+    # SDDM themes and dependencies (all from nixpkgs)
+    kdePackages.breeze
+    kdePackages.breeze-icons
+    kdePackages.kwin
+    kdePackages.qt6ct
+    kdePackages.ocean-sound-theme
+    kdePackages.plasma5support
+    libsForQt5.qt5ct
+    libsForQt5.qt5.qtgraphicaleffects
+    libsForQt5.qt5.qtquickcontrols2
+    libsForQt5.qt5.qtsvg
+  ];
 
   programs.sway = {
     enable = true;
@@ -77,23 +109,6 @@
     extraGroups = [ "wheel" "networkmanager" "video" "audio" "docker" ];
     shell = pkgs.bash;
   };
-
-  # SYSTEM PACKAGES
-  environment.systemPackages = with pkgs; [
-    git vim wget curl htop unzip ripgrep fd jq tree
-    pciutils usbutils lshw
-    bibata-cursors papirus-icon-theme
-    iosevka jetbrains-mono ibm-plex
-    nerd-fonts.iosevka nerd-fonts.jetbrains-mono
-    
-    # SDDM and Qt theming
-    kdePackages.breeze
-    kdePackages.breeze-icons
-    kdePackages.qt6ct
-    libsForQt5.qt5ct
-    adwaita-qt
-    adwaita-qt6
-  ];
 
   # FONTS
   fonts.packages = with pkgs; [
