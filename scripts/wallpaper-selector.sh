@@ -24,7 +24,7 @@ if [ -n "$SELECTED" ]; then
     ln -sf "$FULL_PATH" "$CURRENT_WALLPAPER"
     
     # Optional: Notify
-    notify-send "Wallpaper Changed" "Applied: $SELECTED"
+    notify-send "Wallpaper Changed" "Applied: $SELECTED" || true
     
     # Optional: Update lockscreen background if you want (requires reload or extra hooks)
     # pkill swaylock; swaylock -f -i "$FULL_PATH" & # Example

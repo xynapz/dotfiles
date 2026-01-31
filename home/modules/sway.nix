@@ -43,7 +43,7 @@
       startup = [
         { command = "emacs --daemon"; }
         { command = "wl-paste --watch cliphist store"; }
-        { command = "mako"; }
+
 
         { command = "test -e ~/.current-wallpaper || ln -sf ~/dotfiles/wallpapers/abstract.png ~/.current-wallpaper"; }
         { command = "swayidle -w timeout 600 'swaylock -f' timeout 1200 'swaymsg \"output * power off\"' resume 'swaymsg \"output * power on\"' before-sleep 'swaylock -f'"; }
