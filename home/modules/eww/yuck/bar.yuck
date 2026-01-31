@@ -30,7 +30,7 @@
             (label :text "🔊" :class "icon")
             (label :text "🔋" :class "icon"))))
 
-(deflisten workspaces_json :initial "[]" "./scripts/workspaces.py")
+(deflisten workspaces_json :initial "[]" "${EWW_CONFIG_DIR}/scripts/workspaces.py")
 
 (defwidget workspaces []
   (box :class "workspaces" :orientation "h" :space-evenly false :spacing 8

@@ -1,13 +1,13 @@
-(defpoll vol :interval "1s" "./scripts/audio.sh vol")
-(defpoll mic :interval "1s" "./scripts/audio.sh mic")
-(defpoll mic_status :interval "1s" "./scripts/audio.sh mic-status")
+(defpoll vol :interval "1s" "${EWW_CONFIG_DIR}/scripts/audio.sh vol")
+(defpoll mic :interval "1s" "${EWW_CONFIG_DIR}/scripts/audio.sh mic")
+(defpoll mic_status :interval "1s" "${EWW_CONFIG_DIR}/scripts/audio.sh mic-status")
 (defvar brightness 50) 
 
 (defwindow control_panel
   :monitor 0
   :geometry (geometry :x "1%"
                       :y "50px"
-                      :width "20%"
+                      :width "25%"
                       :anchor "top right")
   :stacking "fg"
   (box :class "control-panel" :orientation "v" :space-evenly false :spacing 20
@@ -23,11 +23,11 @@
     (box :class "sliders" :orientation "v" :spacing 15
       (box :orientation "h" :space-evenly false :spacing 10
         (label :text "🔊" :class "icon")
-        (scale :class "vol-slider" :min 0 :max 100 :value vol :onchange "./scripts/audio.sh speaker-set {}" :hexpand true))
+        (scale :class "vol-slider" :min 0 :max 100 :value vol :onchange "${EWW_CONFIG_DIR}/scripts/audio.sh speaker-set {}" :hexpand true))
       (box :orientation "h" :space-evenly false :spacing 10
         (label :text "🎙️" :class "icon")
-        (scale :class "mic-slider" :min 0 :max 100 :value mic :onchange "./scripts/audio.sh mic-set {}" :hexpand true)
-        (button :class "mic-toggle ${mic_status}" :onclick "./scripts/audio.sh mic-toggle" (label :text {mic_status == "mic-on" ? "🎙️" : "🔇"})))
+        (scale :class "mic-slider" :min 0 :max 100 :value mic :onchange "${EWW_CONFIG_DIR}/scripts/audio.sh mic-set {}" :hexpand true)
+        (button :class "mic-toggle ${mic_status}" :onclick "${EWW_CONFIG_DIR}/scripts/audio.sh mic-toggle" (label :text {mic_status == "mic-on" ? "🎙️" : "🔇"})))
       (box :orientation "h" :space-evenly false :spacing 10
         (label :text "🔆" :class "icon")
         (scale :class "bright-slider" :min 0 :max 100 :value brightness :onchange "brightnessctl s {}%" :hexpand true)))

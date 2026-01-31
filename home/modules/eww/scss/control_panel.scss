@@ -1,81 +1,130 @@
 .control-panel {
     background-color: #1e222a;
-    border-radius: 16px;
+    border-radius: 20px;
     padding: 24px;
-    border: 1px solid #3b4252;
+    border: 1px solid #45475a;
+    font-family: 'Inter', sans-serif;
+}
+
+.title {
+    color: #cdd6f4;
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.profile {
+    margin-bottom: 20px;
 }
 
 .profile .face {
-    min-width: 50px;
-    min-height: 50px;
+    min-width: 60px;
+    min-height: 60px;
     background-size: cover;
-    border-radius: 50%;
-    background-color: #4c566a;
+    border-radius: 20px;
+    background-color: #313244;
+    border: 2px solid #cba6f7;
 }
 
-.start-text .username {
-    font-weight: bold;
-    font-size: 16px;
-    color: #eceff4;
+.username {
+    font-weight: 800;
+    font-size: 18px;
+    color: #cdd6f4;
 }
 
-.start-text .uptime {
-    color: #d8dee9;
-    font-size: 12px;
+.uptime {
+    color: #a6adc8;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.sliders {
+    margin: 15px 0;
 }
 
 .sliders .icon {
-    color: #88c0d0;
-    font-size: 16px;
+    color: #cba6f7;
+    font-size: 20px;
+    min-width: 30px;
+    margin-right: 10px;
 }
 
 scale trough {
     all: unset;
-    background-color: #3b4252;
-    border-radius: 20px;
-    min-height: 6px;
+    background-color: #313244;
+    border-radius: 12px;
+    min-height: 12px;
+    min-width: 100px;
 }
 
 scale trough highlight {
     all: unset;
-    background-color: #88c0d0;
-    border-radius: 20px;
+    background-color: #cba6f7;
+    border-radius: 12px;
 }
 
 .mic-toggle {
-    padding: 8px;
-    border-radius: 8px;
-    background-color: #3b4252;
+    padding: 0 12px;
+    border-radius: 12px;
+    background-color: #313244;
+    color: #cdd6f4;
+    font-size: 16px;
+    transition: all 0.2s;
+    min-width: 40px;
+}
+
+.mic-toggle:hover {
+    background-color: #45475a;
 }
 
 .mic-toggle.mic-off {
-    background-color: #bf616a;
-    color: #eceff4;
+    background-color: #f38ba8;
+    color: #1e1e2e;
+}
+
+.toggles {
+    margin: 20px 0;
 }
 
 .toggle-btn {
-    background-color: #2e3440;
-    border-radius: 50%;
-    min-width: 40px;
-    min-height: 40px;
-    color: #eceff4;
+    background-color: #313244;
+    border-radius: 24px;
+    margin: 0 5px;
+    padding: 10px 0;
+    color: #cdd6f4;
+    font-size: 20px;
+    transition: all 0.2s;
 }
 
 .toggle-btn:hover {
-    background-color: #4c566a;
+    background-color: #cba6f7;
+    color: #1e1e2e;
+}
+
+.power-controls {
+    margin-top: 10px;
 }
 
 .power-btn {
-    background-color: #2e3440;
-    border-radius: 8px;
-    padding: 10px;
-    color: #eceff4;
+    background-color: #313244;
+    border-radius: 12px;
+    padding: 12px;
+    margin: 0 5px;
+    color: #cdd6f4;
+    font-size: 18px;
+    transition: all 0.2s;
 }
 
 .power-btn:hover {
-    background-color: #4c566a;
+    background-color: #cdd6f4;
+    color: #1e1e2e;
+}
+
+.power-btn.dest {
+    color: #f38ba8;
 }
 
 .power-btn.dest:hover {
-    background-color: #bf616a;
+    background-color: #f38ba8;
+    color: #1e1e2e;
 }

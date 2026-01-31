@@ -1,39 +1,74 @@
 .bar {
   background-color: #1e222a;
-  color: #eceff4;
+  color: #cdd6f4;
   padding: 0 12px;
+  font-weight: 600;
+}
+
+.workspaces {
+  padding: 0 8px;
+  background-color: #313244;
+  border-radius: 16px;
+  margin: 4px 0;
+}
+
+.workspaces button {
+  padding: 0 6px;
+}
+
+.workspaces .dot {
+  min-width: 8px;
+  min-height: 8px;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.workspaces button.active .dot {
+  background-color: #cba6f7;
+  min-width: 24px;
+  border-radius: 10px;
+}
+
+.workspaces button.inactive .dot {
+  background-color: #585b70;
+}
+
+.workspaces button:hover .dot {
+  background-color: #89b4fa;
 }
 
 .clock {
   font-weight: bold;
-  color: #88c0d0;
-  background-color: #2e3440;
-  padding: 0 15px;
-  border-radius: 12px;
+  background-color: #313244;
+  padding: 4px 16px;
+  border-radius: 16px;
+  margin: 4px 0;
+}
+
+.clock:hover {
+  background-color: #45475a;
+  color: #cba6f7;
+}
+
+.clock .bell {
+  color: #cba6f7;
+  font-size: 16px;
+  margin-right: 8px;
 }
 
 .sys-indicators {
-  background-color: #2e3440;
-  padding: 0 15px;
-  border-radius: 12px;
-  color: #eceff4;
+  background-color: #313244;
+  padding: 4px 16px;
+  border-radius: 16px;
+  margin: 4px 0;
 }
 
-.workspaces {
-  padding: 0 5px;
+.sys-indicators:hover {
+  background-color: #45475a;
 }
 
-.workspaces button {
-  padding: 0 4px;
-}
-
-.workspaces .dot {
-  min-width: 10px;
-  min-height: 10px;
-  border-radius: 50%;
-  transition: background-color 0.3s;
-}
-
-.workspaces button:hover .dot {
-  background-color: #81a1c1;
+.sys-indicators .icon {
+  font-size: 16px;
+  margin-right: 6px;
+  color: #cdd6f4;
 }
