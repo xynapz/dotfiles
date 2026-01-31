@@ -22,7 +22,7 @@
       };
 
       output = {
-        "*" = { bg = "/home/xynapz/dotfiles/wallpapers/abstract.png fill"; };
+        "*" = { bg = "${../../wallpapers/abstract.png} fill"; };
         "HDMI-A-1" = { resolution = "2560x1440@99.9Hz"; position = "0,0"; };
         "eDP-1" = { resolution = "1920x1080"; position = "2560,360"; };
       };
