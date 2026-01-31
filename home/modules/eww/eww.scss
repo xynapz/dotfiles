@@ -4,49 +4,5 @@
     font-size: 14px;
 }
 
-.bar {
-    background-color: #1e222a;
-    color: #eceff4;
-}
-
-.sidestuff {
-    margin-right: 12px;
-}
-
-.metric {
-    margin-right: 20px;
-}
-
-.metric .label {
-    margin-right: 10px;
-    font-weight: bold;
-}
-
-.metric scale trough {
-    all: unset;
-    background-color: #3b4252;
-    border-radius: 20px;
-    min-height: 8px;
-    min-width: 80px;
-}
-
-.metric scale trough highlight {
-    all: unset;
-    background-color: #88c0d0;
-    border-radius: 20px;
-}
-
-.workspaces button {
-    padding: 0 10px;
-    color: #d8dee9;
-}
-
-.workspaces button:hover {
-    background-color: #3b4252;
-}
-
-.time {
-    font-weight: bold;
-    color: #88c0d0;
-    margin-right: 12px;
-}
+@import "./scss/bar.scss";
+@import "./scss/control_panel.scss";

@@ -1,0 +1,14 @@
+(defwindow control_panel
+  :monitor 0
+  :geometry (geometry :x "1%"
+                      :y "50px"
+                      :width "25%"
+                      :height "30%"
+                      :anchor "top right")
+  :stacking "fg"
+  (box :class "control-panel" :orientation "v" :space-evenly false
+    (label :text "Control Panel" :class "title")
+    (box :orientation "h" :space-evenly true
+      (button :class "btn" :onclick "notify-send 'Wifi Toggled'" "📶 Wifi")
+      (button :class "btn" :onclick "notify-send 'BT Toggled'" "🔵 BT"))
+    (scale :min 0 :max 100 :value 50 :class "vol-slider")))

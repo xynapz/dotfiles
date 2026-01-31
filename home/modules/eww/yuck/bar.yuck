@@ -1,0 +1,43 @@
+(defwindow bar
+  :monitor 0
+  :windowtype "dock"
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "100%"
+                      :height "40px"
+                      :anchor "top center")
+  :stacking "fg"
+  :exclusive true
+  (centerbox :orientation "h"
+    (box :class "start" :halign "start" (workspaces))
+    (box :class "center" :halign "center" (clock))
+    (box :class "end" :halign "end" (sys_indicators))))
+
+(defwidget clock []
+  (button :class "clock" 
+          :onclick "eww open --toggle calendar"
+          (box :orientation "h" :space-evenly false :spacing 10
+            (label :text "${time}" :class "time")
+            (label :text "|" :class "sep")
+            (label :text "${date}" :class "date"))))
+
+(defwidget sys_indicators []
+  (button :class "sys-indicators"
+          :onclick "eww open --toggle control_panel"
+          (box :orientation "h" :space-evenly false :spacing 15
+            (label :text "📶" :class "icon")
+            (label :text "🔊" :class "icon")
+            (label :text "🔋" :class "icon"))))
+
+(defwidget workspaces []
+  (box :class "workspaces" :orientation "h" :space-evenly true :spacing 5
+    (button :onclick "swaymsg workspace 1" "1")
+    (button :onclick "swaymsg workspace 2" "2")
+    (button :onclick "swaymsg workspace 3" "3")
+    (button :onclick "swaymsg workspace 4" "4")
+    (button :onclick "swaymsg workspace 5" "5")
+    (button :onclick "swaymsg workspace 6" "6")
+    (button :onclick "swaymsg workspace 7" "7")
+    (button :onclick "swaymsg workspace 8" "8")
+    (button :onclick "swaymsg workspace 9" "9")
+    (button :onclick "swaymsg workspace 10" "10")))
