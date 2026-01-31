@@ -3,6 +3,8 @@
   :geometry (geometry :width "100%" :height "100%")
   :stacking "fg"
   :focusable false
+  :class "closer-window"
+  :namespace "eww-closer"
   (closer))
 
 (defwidget closer []
