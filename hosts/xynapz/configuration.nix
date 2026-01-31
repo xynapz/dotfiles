@@ -62,7 +62,7 @@
   environment.systemPackages = with pkgs; [
     git vim wget curl htop unzip ripgrep fd jq tree
     pciutils usbutils lshw
-    greetd greetd.regreet cage
+    greetd
     bibata-cursors papirus-icon-theme # Themes for Greeter
     iosevka jetbrains-mono ibm-plex
     nerd-fonts.iosevka nerd-fonts.jetbrains-mono
@@ -105,9 +105,9 @@
       };
       GTK = {
         application_prefer_dark_theme = true;
-        cursor_theme_name = "Bibata-Modern-Classic";
-        icon_theme_name = "Papirus-Dark";
-        theme_name = "Adwaita-dark";
+        cursor_theme_name = lib.mkForce "Bibata-Modern-Classic";
+        icon_theme_name = lib.mkForce "Papirus-Dark";
+        theme_name = lib.mkForce "Adwaita-dark";
       };
     };
   };
