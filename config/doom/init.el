@@ -65,17 +65,17 @@
        emacs-lisp
        ;;(go +lsp +tree-sitter)
        ;;(java +lsp +tree-sitter)
-       (javascript +lsp +tree-sitter)
-       (json +lsp +tree-sitter)
-       (latex +lsp)
-       (lua +lsp +tree-sitter)
+       (javascript +tree-sitter)
+       (json +tree-sitter)
+       (latex)
+       (lua +tree-sitter)
        markdown
-       ;;(nix +lsp +tree-sitter)
+       (nix +lsp)
        org
        ;;(php +lsp +tree-sitter)
        (python +lsp +pyright +tree-sitter)
        ;;(rust +lsp +tree-sitter)
-       (sh +lsp +tree-sitter)
+       (sh +tree-sitter)
        (terraform +lsp)
        (web +lsp +tree-sitter)
        (yaml +lsp)

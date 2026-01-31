@@ -25,6 +25,19 @@
         "eDP-1" = { resolution = "1920x1080"; position = "2560,360"; };
       };
 
+      workspaceOutputAssign = [
+        { workspace = "1"; output = "HDMI-A-1"; }
+        { workspace = "2"; output = "HDMI-A-1"; }
+        { workspace = "3"; output = "HDMI-A-1"; }
+        { workspace = "4"; output = "HDMI-A-1"; }
+        { workspace = "5"; output = "HDMI-A-1"; }
+        { workspace = "6"; output = "HDMI-A-1"; }
+        { workspace = "7"; output = "HDMI-A-1"; }
+        { workspace = "8"; output = "HDMI-A-1"; }
+        { workspace = "9"; output = "HDMI-A-1"; }
+        { workspace = "10"; output = "eDP-1"; }
+      ];
+
       startup = [
         { command = "emacs --daemon"; }
         { command = "wl-paste --watch cliphist store"; }

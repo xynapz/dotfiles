@@ -17,7 +17,7 @@
 
   home.username = "xynapz";
   home.homeDirectory = "/home/xynapz";
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.11";
   programs.home-manager.enable = true;
 
   # SESSION VARIABLES
@@ -41,14 +41,14 @@
     "$HOME/dotfiles/scripts"
   ];
 
-  # USER PACKAGES
   home.packages = with pkgs; [
-    wezterm foot firefox thunar
+    wezterm firefox thunar
     nodejs python3 go rustup gcc gnumake cmake
-    ripgrep fd bat eza dust duf procs bottom
+    ripgrep fd bat eza dust duf procs bottom fastfetch
     imv mpv wl-clipboard cliphist grim slurp swappy wf-recorder
-    pavucontrol blueman libnotify unzip p7zip tree calc
+    pavucontrol libnotify unzip p7zip tree calc
     iosevka jetbrains-mono sourceHighlight imagemagick
+    xarchiver nixd antigravity
   ];
 
   # XDG
