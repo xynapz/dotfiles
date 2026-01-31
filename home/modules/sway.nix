@@ -14,6 +14,7 @@
       gaps = { inner = 6; outer = 0; smartGaps = true; smartBorders = "on"; };
       window = { border = 2; titlebar = false; };
       floating = { border = 2; titlebar = false; };
+      bars = [];
 
       input = {
         "type:touchpad" = { dwt = "enabled"; tap = "enabled"; natural_scroll = "enabled"; middle_emulation = "enabled"; };
@@ -42,7 +43,8 @@
         { command = "emacs --daemon"; }
         { command = "wl-paste --watch cliphist store"; }
         { command = "mako"; }
-        { command = "waybar"; }
+        { command = "eww daemon"; }
+        { command = "eww open bar"; }
         { command = "swayidle -w timeout 600 'swaylock -f' timeout 1200 'swaymsg \"output * power off\"' resume 'swaymsg \"output * power on\"' before-sleep 'swaylock -f'"; }
         { always = true; command = "gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark' && gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"; }
       ];
