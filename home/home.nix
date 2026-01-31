@@ -6,6 +6,7 @@
     ./modules/shell.nix
     ./modules/wezterm.nix
     ./modules/sway.nix
+    ./modules/bar.nix
     ./modules/launcher.nix
     ./modules/notifications.nix
     ./modules/screenshots.nix

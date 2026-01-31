@@ -1,8 +1,0 @@
-(defpoll time :interval "1s" "date '+%H:%M'")
-(defpoll date :interval "1s" "date '+%b %d, %Y'")
-
-(defvar vol_reveal false)
-(defvar br_reveal false)
-(defvar music_reveal false)
-(defvar wifi_rev false)
-(defvar bt_rev false)

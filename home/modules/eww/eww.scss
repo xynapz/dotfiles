@@ -1,10 +1,197 @@
+/* Eww Bar Styles */
 * {
     all: unset;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 14px;
+    font-family: "IBM Plex Sans", "Iosevka Nerd Font";
+    font-size: 13px;
 }
 
-@import "./scss/bar.scss";
-@import "./scss/control_panel.scss";
-@import "./scss/notifications.scss";
-@import "./scss/closer.scss";
+.bar {
+    background-color: rgba(26, 26, 46, 0.95);
+    color: #ffffff;
+    border-bottom: 2px solid #4d4dff;
+    padding: 0 12px;
+}
+
+/* Workspaces */
+.workspaces {
+    padding: 4px;
+}
+
+.workspace {
+    padding: 6px 12px;
+    margin: 0 2px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #a0a0ff;
+    transition: all 200ms;
+}
+
+.workspace.focused {
+    background-color: #4d4dff;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.workspace:hover {
+    background-color: rgba(77, 77, 255, 0.5);
+}
+
+/* Window Title */
+.window-title {
+    padding: 0 12px;
+    color: #a0a0ff;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+/* Media */
+.media {
+    padding: 6px 12px;
+    background-color: rgba(77, 77, 255, 0.15);
+    border-radius: 6px;
+    color: #9999ff;
+}
+
+.media:hover {
+    background-color: rgba(77, 77, 255, 0.25);
+}
+
+.media-icon {
+    font-size: 14px;
+    color: #6666ff;
+}
+
+.media-text {
+    font-style: italic;
+    font-size: 12px;
+}
+
+/* Volume */
+.volume {
+    padding: 6px 10px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.volume:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.volume-icon {
+    font-size: 16px;
+    color: #8888ff;
+}
+
+.volume-slider scale {
+    min-height: 4px;
+    min-width: 100px;
+}
+
+.volume-slider trough {
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    min-height: 4px;
+}
+
+.volume-slider highlight {
+    background-color: #4d4dff;
+    border-radius: 8px;
+}
+
+.volume-slider:hover highlight {
+    background-color: #6666ff;
+}
+
+/* Brightness */
+.brightness {
+    padding: 6px 10px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.brightness:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.brightness-icon {
+    font-size: 16px;
+    color: #ffdd77;
+}
+
+.brightness-slider scale {
+    min-height: 4px;
+    min-width: 100px;
+}
+
+.brightness-slider trough {
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    min-height: 4px;
+}
+
+.brightness-slider highlight {
+    background-color: #ffdd77;
+    border-radius: 8px;
+}
+
+/* Network */
+.network {
+    padding: 6px 10px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+    font-size: 16px;
+    color: #77ddff;
+}
+
+.network:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Bluetooth */
+.bluetooth {
+    padding: 6px 10px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+    font-size: 16px;
+    color: #77bbff;
+}
+
+.bluetooth:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Battery */
+.battery {
+    padding: 6px 10px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.battery-icon {
+    font-size: 16px;
+    color: #77ff77;
+}
+
+.battery-text {
+    font-size: 11px;
+    color: #aaffaa;
+    font-weight: 500;
+}
+
+/* System Tray */
+.systray {
+    padding: 0 6px;
+}
+
+/* Clock */
+.clock {
+    padding: 6px 12px;
+    font-weight: 600;
+    color: #e0e0ff;
+    background-color: rgba(77, 77, 255, 0.2);
+    border-radius: 6px;
+}
+
+.clock:hover {
+    background-color: rgba(77, 77, 255, 0.3);
+}
