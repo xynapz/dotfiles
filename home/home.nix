@@ -42,6 +42,7 @@
   ];
 
   home.packages = with pkgs; [
+    home-manager
     wezterm firefox thunar
     nodejs python3 go rustup gcc gnumake cmake
     ripgrep fd bat eza dust duf procs bottom fastfetch
