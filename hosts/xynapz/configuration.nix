@@ -62,7 +62,6 @@
   environment.systemPackages = with pkgs; [
     git vim wget curl htop unzip ripgrep fd jq tree
     pciutils usbutils lshw
-    greetd regreet
     bibata-cursors papirus-icon-theme # Themes for Greeter
     iosevka jetbrains-mono ibm-plex
     nerd-fonts.iosevka nerd-fonts.jetbrains-mono
@@ -85,42 +84,6 @@
   virtualisation.docker.enable = true;
   security.polkit.enable = true;
   services.dbus.enable = true;
-
-  # GREETD (ReGreet - Graphical & Minimal)
-  environment.etc."greetd/wallpaper.png".source = ../../wallpapers/default.png;
-  environment.etc."greetd/sway-config".text = ''
-    exec "${pkgs.regreet}/bin/regreet";
-    include /etc/sway/config.d/*;
-    output * bg /etc/greetd/wallpaper.png fill
-    output HDMI-A-1 resolution 2560x1440@99.9Hz position 0,0
-    output eDP-1 resolution 1920x1080 position 2560,360
-  '';
-
-  programs.regreet = {
-    enable = true;
-    settings = {
-      background = {
-        path = "/etc/greetd/wallpaper.png";
-        fit = "Cover";
-      };
-      GTK = {
-        application_prefer_dark_theme = true;
-        cursor_theme_name = lib.mkForce "Bibata-Modern-Classic";
-        icon_theme_name = lib.mkForce "Papirus-Dark";
-        theme_name = lib.mkForce "Adwaita-dark";
-      };
-    };
-  };
-
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.sway}/bin/sway --config /etc/greetd/sway-config";
-        user = "greeter";
-      };
-    };
-  };
 
   # NIX SETTINGS
   nixpkgs.config.allowUnfree = true;

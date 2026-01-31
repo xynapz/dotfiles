@@ -45,7 +45,6 @@
         { command = "wl-paste --watch cliphist store"; }
 
 
-        { command = "test -e ~/.current-wallpaper || (find ~/Pictures/Wallpapers -type f | head -n 1 | xargs -I {} ln -sf {} ~/.current-wallpaper); swaymsg output '*' bg ~/.current-wallpaper fill"; }
         { command = "swayidle -w timeout 600 'swaylock -f' timeout 1200 'swaymsg \"output * power off\"' resume 'swaymsg \"output * power on\"' before-sleep 'swaylock -f'"; }
         { always = true; command = "gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark' && gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"; }
       ];
