@@ -89,7 +89,7 @@
   # GREETD (ReGreet - Graphical & Minimal)
   environment.etc."greetd/wallpaper.png".source = ../../wallpapers/abstract.png;
   environment.etc."greetd/sway-config".text = ''
-    exec "${pkgs.regreet}/bin/regreet";
+    exec "${pkgs.greetd.regreet}/bin/regreet";
     include /etc/sway/config.d/*;
     output * bg /etc/greetd/wallpaper.png fill
     output HDMI-A-1 resolution 2560x1440@99.9Hz position 0,0
