@@ -36,33 +36,18 @@
 
         # Module Configurations
         "custom/brand" = {
-          format = " ";
+          format = "";
           tooltip = false;
         };
 
         "sway/workspaces" = {
-          disable-scroll = false;
-          all-outputs = false;
-          format = "{icon}";
-          format-icons = {
-            "1" = "1";
-            "2" = "2";
-            "3" = "3";
-            "4" = "4";
-            "5" = "5";
-            "6" = "6";
-            "7" = "7";
-            "8" = "8";
-            "9" = "9";
-            "10" = "10";
-            urgent = "";
-            focused = "";
-            default = "";
-          };
+          disable-scroll = true;
+          all-outputs = true;
+          format = "{name}";
         };
 
         "custom/window-icon" = {
-          format = "";
+          format = "󰖲";
           tooltip = false;
         };
 
@@ -73,8 +58,8 @@
 
         clock = {
           interval = 1;
-          format = "{:%H:%M:%S}";
-          format-alt = "{:%A, %B %d, %Y}";
+          format = " {:%H:%M:%S}";
+          format-alt = " {:%A, %B %d, %Y}";
           tooltip-format = "<tt><small>{calendar}</small></tt>";
           calendar = {
             mode = "month";
@@ -104,9 +89,9 @@
 
         network = {
           interval = 3;
-          format-wifi = "  {signalStrength}%";
-          format-ethernet = " ";
-          format-disconnected = "󰖪 ";
+          format-wifi = "  {signalStrength}%";
+          format-ethernet = "󰈀";
+          format-disconnected = "󰖪";
           tooltip-format = "{ifname}: {ipaddr}/{cidr}";
           tooltip-format-wifi = "{essid} ({signalStrength}%): {ipaddr}";
           tooltip-format-ethernet = "{ifname}: {ipaddr}/{cidr}";
@@ -116,34 +101,34 @@
 
         cpu = {
           interval = 3;
-          format = "  {usage}%";
+          format = " {usage}%";
           tooltip = true;
         };
 
         memory = {
           interval = 3;
-          format = "  {percentage}%";
+          format = " {percentage}%";
           tooltip-format = "{used:0.1f}G / {total:0.1f}G used";
         };
 
         disk = {
           interval = 30;
-          format = "  {percentage_used}%";
+          format = " {percentage_used}%";
           path = "/";
           tooltip-format = "{used} / {total} used ({percentage_used}%)";
         };
 
         pulseaudio = {
           format = "{icon} {volume}%";
-          format-muted = "  0%";
+          format-muted = "󰝟 0%";
           format-icons = {
-            headphone = "";
-            hands-free = "";
-            headset = "";
-            phone = "";
-            portable = "";
-            car = "";
-            default = [ "" "" "" ];
+            headphone = "";
+            hands-free = "";
+            headset = "";
+            phone = "";
+            portable = "";
+            car = "";
+            default = [ "" "" "" ];
           };
           on-click = "pavucontrol";
           tooltip-format = "{desc}: {volume}%";
@@ -152,7 +137,7 @@
         backlight = {
           device = "intel_backlight";
           format = "{icon} {percent}%";
-          format-icons = [ "" "" "" "" "" "" "" "" "" ];
+          format-icons = [ "" "" "" "" "" "" "" "" "" ];
           on-scroll-up = "brightnessctl set +5%";
           on-scroll-down = "brightnessctl set 5%-";
         };
@@ -164,9 +149,9 @@
             critical = 15;
           };
           format = "{icon} {capacity}%";
-          format-charging = " {capacity}%";
-          format-plugged = " {capacity}%";
-          format-icons = [ "" "" "" "" "" ];
+          format-charging = "󰂄 {capacity}%";
+          format-plugged = " {capacity}%";
+          format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
           tooltip-format = "{timeTo}, {capacity}%";
         };
 
