@@ -62,6 +62,8 @@
   environment.systemPackages = with pkgs; [
     git vim wget curl htop unzip ripgrep fd jq tree
     pciutils usbutils lshw
+    greetd cage # Needed for ReGreet
+    bibata-cursors papirus-icon-theme # Themes for Greeter
     iosevka jetbrains-mono ibm-plex
     nerd-fonts.iosevka nerd-fonts.jetbrains-mono
   ];
@@ -83,6 +85,18 @@
   virtualisation.docker.enable = true;
   security.polkit.enable = true;
   services.dbus.enable = true;
+
+  # GREETD (ReGreet - Graphical & Minimal)
+  programs.regreet.enable = true;
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.cage}/bin/cage -s -- regreet";
+        user = "greeter";
+      };
+    };
+  };
 
   # NIX SETTINGS
   nixpkgs.config.allowUnfree = true;
