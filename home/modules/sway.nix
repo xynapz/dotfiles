@@ -22,7 +22,7 @@
       };
 
       output = {
-        "*" = { bg = "${../../wallpapers/abstract.png} fill"; };
+        "*" = { bg = "#000000 solid_color"; };
         "HDMI-A-1" = { resolution = "2560x1440@99.9Hz"; position = "0,0"; };
         "eDP-1" = { resolution = "1920x1080"; position = "2560,360"; };
       };
@@ -45,7 +45,7 @@
         { command = "wl-paste --watch cliphist store"; }
 
 
-        { command = "test -e ~/.current-wallpaper || ln -sf ~/dotfiles/wallpapers/abstract.png ~/.current-wallpaper; swaymsg output '*' bg ~/.current-wallpaper fill"; }
+        { command = "test -e ~/.current-wallpaper || (find ~/Pictures/Wallpapers -type f | head -n 1 | xargs -I {} ln -sf {} ~/.current-wallpaper); swaymsg output '*' bg ~/.current-wallpaper fill"; }
         { command = "swayidle -w timeout 600 'swaylock -f' timeout 1200 'swaymsg \"output * power off\"' resume 'swaymsg \"output * power on\"' before-sleep 'swaylock -f'"; }
         { always = true; command = "gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark' && gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"; }
       ];
