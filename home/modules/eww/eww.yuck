@@ -41,7 +41,7 @@
       (network)
       (bluetooth)
       (battery)
-      (systray)
+      (system-tray)
       (clock))))
 
 ;; Workspaces
@@ -178,8 +178,8 @@
     (label :class "battery-text" :text "${battery-capacity}%")))
 
 ;; System Tray (basic placeholder - would need stalonetray or similar)
-(defwidget systray []
-  (box :class "systray"))
+(defwidget system-tray []
+  (systray :class "systray" :pack-direction "ltr"))
 
 ;; Clock
 (defpoll time :interval "1s"
