@@ -87,12 +87,36 @@
   services.dbus.enable = true;
 
   # GREETD (ReGreet - Graphical & Minimal)
-  programs.regreet.enable = true;
+  environment.etc."greetd/wallpaper.png".source = ../../wallpapers/abstract.png;
+  environment.etc."greetd/sway-config".text = ''
+    exec "${pkgs.greetd.regreet}/bin/regreet";
+    include /etc/sway/config.d/*;
+    output * bg /etc/greetd/wallpaper.png fill
+    output HDMI-A-1 resolution 2560x1440@99.9Hz position 0,0
+    output eDP-1 resolution 1920x1080 position 2560,360
+  '';
+
+  programs.regreet = {
+    enable = true;
+    settings = {
+      background = {
+        path = "/etc/greetd/wallpaper.png";
+        fit = "Cover";
+      };
+      GTK = {
+        application_prefer_dark_theme = true;
+        cursor_theme_name = "Bibata-Modern-Classic";
+        icon_theme_name = "Papirus-Dark";
+        theme_name = "Adwaita-dark";
+      };
+    };
+  };
+
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.cage}/bin/cage -s -- regreet";
+        command = "${pkgs.sway}/bin/sway --config /etc/greetd/sway-config";
         user = "greeter";
       };
     };
