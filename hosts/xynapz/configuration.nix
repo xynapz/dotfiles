@@ -87,7 +87,7 @@
   services.dbus.enable = true;
 
   # GREETD (ReGreet - Graphical & Minimal)
-  environment.etc."greetd/wallpaper.png".source = ../../wallpapers/abstract.png;
+  environment.etc."greetd/wallpaper.png".source = ../../wallpapers/default.png;
   environment.etc."greetd/sway-config".text = ''
     exec "${pkgs.regreet}/bin/regreet";
     include /etc/sway/config.d/*;
