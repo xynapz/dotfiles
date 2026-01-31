@@ -62,7 +62,7 @@
   environment.systemPackages = with pkgs; [
     git vim wget curl htop unzip ripgrep fd jq tree
     pciutils usbutils lshw
-    greetd cage # Needed for ReGreet
+    greetd greetd.regreet cage
     bibata-cursors papirus-icon-theme # Themes for Greeter
     iosevka jetbrains-mono ibm-plex
     nerd-fonts.iosevka nerd-fonts.jetbrains-mono
