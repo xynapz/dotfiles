@@ -4,31 +4,34 @@
 {
   programs.bemenu = {
     enable = true;
-    
-    settings = {
-      line-height = 28;
-      prompt = "❯ ";
-      font = "IBM Plex Mono 14";
-      ignorecase = true;
-      wrap = true;
-      
-      # Colors (Matching system theme)
-      # Format: "item" = "fg bg"
-      tb = "#222222"; # Title bg (not commonly used alone, but consistent)
-      tf = "#3daee9"; # Title fg
-      fb = "#222222"; # Filter bg
-      ff = "#ffffff"; # Filter fg
-      nb = "#222222"; # Normal bg
-      nf = "#ffffff"; # Normal fg
-      hb = "#285577"; # Highlight bg (Selected item)
-      hf = "#ffffff"; # Highlight fg
-      sb = "#285577"; # Selected bg
-      sf = "#ffffff"; # Selected fg
-      scb = "#222222"; # Scrollbar bg
-      scf = "#3daee9"; # Scrollbar fg
-    };
   };
 
-  # Remove Fuzzel config as we are switching
-  # xdg.configFile."fuzzel/fuzzel.ini".source = ...; 
+  # Centralized environment variables for BeMenu
+  # This avoids polluting the command line in Sway and ensures consistency.
+  home.sessionVariables = {
+    BEMENU_OPTS = lib.concatStringsSep " " [
+      "-i"             # Case insensitive
+      "-l 15"          # Number of lines
+      "--center"       # Center on screen
+      "-W 0.40"        # Width (40% of screen)
+      "--fn 'IBM Plex Mono 14'"
+      "--prompt '❯ '"
+      "--wrap"
+      
+      # Colors (Matches Fuzzel/Waybar theme)
+      "--tb '#222222'" # Title bg
+      "--tf '#3daee9'" # Title fg
+      "--fb '#222222'" # Filter bg
+      "--ff '#ffffff'" # Filter fg
+      "--nb '#222222'" # Normal bg
+      "--nf '#ffffff'" # Normal fg
+      "--hb '#285577'" # Highlight bg (Selected item)
+      "--hf '#ffffff'" # Highlight fg
+      "--sb '#285577'" # Selected bg
+      "--sf '#ffffff'" # Selected fg
+      "--scb '#222222'" # Scrollbar bg
+      "--scf '#3daee9'" # Scrollbar fg
+      "--bdr '#000000'" # Border (if supported by runner)
+    ];
+  };
 }
