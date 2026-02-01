@@ -1,0 +1,247 @@
+/* Waybar Styles - Polished Pill Design v2 */
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(43, 43, 43, 0.9);
+    color: #eff0f1;
+}
+
+tooltip {
+    background: #2b2b2b;
+    border: 1px solid #3daee9;
+    border-radius: 10px;
+}
+
+tooltip label {
+    color: #eff0f1;
+}
+
+/* -----------------------------------------------------------------------------
+ * Module Styles
+ * -------------------------------------------------------------------------- */
+
+/* Standard Pill Style */
+#clock,
+#battery,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#tray,
+#backlight,
+#custom-notification,
+#custom-power,
+#language,
+#disk {
+    padding: 0 15px;
+    margin: 4px 3px;
+    background-color: #31363b;
+    color: #eff0f1;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+/* Hover Effects */
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover,
+#backlight:hover,
+#custom-notification:hover,
+#custom-power:hover {
+    background-color: #3daee9;
+    color: #2b2b2b;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#pulseaudio {
+    color: #f67400;
+}
+
+#backlight {
+    color: #fdcc31;
+}
+
+/* -----------------------------------------------------------------------------
+ * Brand Icon
+ * -------------------------------------------------------------------------- */
+
+#custom-brand {
+    background-color: #3daee9;
+    color: #2b2b2b;
+    font-family: "Iosevka", "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    padding: 0px 12px 0px 8px;
+    margin: 7px 7px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+#custom-brand:hover {
+    background-color: #eff0f1;
+    color: #3daee9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* -----------------------------------------------------------------------------
+ * Workspace Styles
+ * -------------------------------------------------------------------------- */
+
+#workspaces {
+    background-color: #31363b;
+    margin: 4px 15px 4px 3px;
+    padding: 0 5px;
+    border-radius: 15px;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    margin: 4px 2px;
+    background-color: transparent;
+    color: #bdc3c7;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+#workspaces button:hover {
+    background-color: #3daee9;
+    color: #2b2b2b;
+}
+
+#workspaces button.active {
+    background-color: #3daee9;
+    color: #2b2b2b;
+    min-width: 35px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.urgent {
+    background-color: #da4453;
+    color: #eff0f1;
+}
+
+/* -----------------------------------------------------------------------------
+ * Specific Module Tweaks
+ * -------------------------------------------------------------------------- */
+
+#custom-window-icon {
+    color: #eff0f1;
+    padding-right: 5px;
+    margin-left: 5px;
+}
+
+#window {
+    background-color: transparent;
+    color: #eff0f1;
+    margin: 0 5px;
+    padding: 0 5px;
+}
+
+#group-hardware {
+    background-color: #31363b;
+    padding: 0 5px 0 2px;
+    margin: 4px 3px;
+    border-radius: 15px;
+}
+
+#group-hardware #network {
+    background-color: transparent;
+    margin: 0;
+    padding: 0 5px 0 2px;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#group-hardware #cpu {
+    background-color: transparent;
+    margin: 0;
+    padding: 0 5px;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#group-hardware #memory {
+    background-color: transparent;
+    margin: 0;
+    padding: 0px 5px 0px 2px;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#group-hardware #disk {
+    background-color: transparent;
+    margin: 0;
+    padding: 0 5px;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* Colors */
+#network {
+    color: #3daee9;
+}
+
+#cpu {
+    color: #da4453;
+}
+
+#memory {
+    color: #1cdc9a;
+}
+
+#custom-power {
+    background-color: #da4453;
+    color: #eff0f1;
+    padding: 0 12px;
+}
+
+#pulseaudio,
+#battery {
+    padding: 0 16px 0 8px;
+}
+
+#backlight,
+#custom-power {
+    padding: 0 12px 0 8px;
+}
+
+#custom-power:hover {
+    background-color: #eff0f1;
+    color: #da4453;
+}
+
+#battery.charging {
+    color: #1cdc9a;
+}
+
+#battery.warning:not(.charging) {
+    color: #f67400;
+}
+
+#battery.critical:not(.charging) {
+    color: #da4453;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #da4453;
+        color: #eff0f1;
+    }
+}
