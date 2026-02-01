@@ -45,7 +45,8 @@
         { command = "emacs --daemon"; }
         { command = "wl-paste --watch cliphist store"; }
 
-        { command = "swayidle -w timeout 600 'swaylock -f' timeout 1200 'swaymsg \"output * power off\"' resume 'swaymsg \"output * power on\"' before-sleep 'swaylock -f'"; }
+        { command = "swaymsg output '*' bg ~/.current-wallpaper fill"; }
+        { command = "swayidle -w timeout 600 'swaylock -f -i ~/.current-wallpaper' timeout 1200 'swaymsg \"output * power off\"' resume 'swaymsg \"output * power on\"' before-sleep 'swaylock -f -i ~/.current-wallpaper'"; }
         { always = true; command = "gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark' && gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"; }
       ];
 
@@ -62,7 +63,7 @@
         "${mod}+v" = "exec ${scripts}/clipboard-menu.sh";
         "${mod}+Shift+w" = "exec ${scripts}/wallpaper-selector.sh";
         "${mod}+Shift+p" = "exec ${scripts}/power-menu.sh";
-        "${mod}+Mod1+l" = "exec swaylock -f";
+        "${mod}+Mod1+l" = "exec swaylock -f -i ~/.current-wallpaper";
 
         "XF86AudioMute" = "exec pamixer -t";
         "XF86AudioLowerVolume" = "exec pamixer -d 3";
