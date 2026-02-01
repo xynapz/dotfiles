@@ -58,7 +58,7 @@
         "${mod}+Shift+c" = "reload";
         "${mod}+Shift+e" = "exec swaynag -t warning -m 'Exit Sway?' -B 'Yes' 'swaymsg exit'";
 
-        "${mod}+space" = "exec ${scripts}/universal-wrapper.py --scan | bemenu | xargs -r ${scripts}/universal-wrapper.py --run";
+        "${mod}+space" = "exec . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh && ${scripts}/universal-wrapper.py --scan | bemenu | xargs -r ${scripts}/universal-wrapper.py --run";
         "${mod}+v" = "exec ${scripts}/clipboard-menu.sh";
         "${mod}+Shift+w" = "exec ${scripts}/wallpaper-selector.sh";
         "${mod}+Shift+p" = "exec ${scripts}/power-menu.sh";
