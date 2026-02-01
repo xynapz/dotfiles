@@ -58,7 +58,7 @@
         "${mod}+Shift+c" = "reload";
         "${mod}+Shift+e" = "exec swaynag -t warning -m 'Exit Sway?' -B 'Yes' 'swaymsg exit'";
 
-        "${mod}+space" = "exec fuzzel";
+        "${mod}+space" = "exec ${scripts}/universal-wrapper.py --scan | bemenu -i -l 15 --fn 'IBM Plex Mono 14' --tb '#222222' --tf '#3daee9' --fb '#222222' --ff '#ffffff' --nb '#222222' --nf '#ffffff' --hb '#285577' --hf '#ffffff' --sb '#285577' --sf '#ffffff' --scb '#222222' --scf '#3daee9' | xargs -r ${scripts}/universal-wrapper.py --run";
         "${mod}+v" = "exec ${scripts}/clipboard-menu.sh";
         "${mod}+Shift+w" = "exec ${scripts}/wallpaper-selector.sh";
         "${mod}+Shift+p" = "exec ${scripts}/power-menu.sh";
