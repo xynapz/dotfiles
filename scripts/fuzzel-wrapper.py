@@ -61,27 +61,12 @@ def main():
     if cmd.startswith("!"):
         real_cmd = cmd[1:]
         
-        # Check if we are already orphaned (Parent is not Fuzzel)
-        # If Fuzzel died before we started, we should probably just die too, 
-        # to enforce "Attached" semantics (User expects it to close instantly if Fuzzel is gone).
-        try:
-            ppid = os.getppid()
-            with open(f"/proc/{ppid}/comm", "r") as f:
-                parent_name = f.read().strip()
-            
-            # If parent is not fuzzel (and not a known wrapper/test runner), assume we are orphaned.
-            # Note: Adjust 'fuzzel' if your binary is named differently.
-            if "fuzzel" not in parent_name.lower():
-                # We are orphaned. Die immediately.
-                sys.exit(0)
-                
-            # Set PDEATHSIG on *this* python wrapper script, so if Fuzzel (parent) dies subsequently, we die.
-            set_pdeathsig()
-
-        except Exception:
-            # If we can't check parent, unsafe to proceed if strict attachment is required?
-            # Or just proceed and rely on PDEATHSIG if possible.
-            pass
+        # Note: We removed the strict orphan check because Fuzzel exits so fast that 
+        # it kills valid commands like 'pkill' before they can run.
+        # This means !long_running_app might persist if Fuzzel exits, but that's a necessary compromise
+        # unless we run in a terminal.
+        
+        set_pdeathsig()
         
         final_args = []
         if real_cmd:
@@ -92,7 +77,6 @@ def main():
             sys.exit(1)
 
         # Run attached with PDEATHSIG
-        # The child (cmd) will watch US (Python wrapper). If we die (because Fuzzel died), the child dies.
         p = subprocess.Popen(
             final_args,
             preexec_fn=set_pdeathsig
@@ -100,7 +84,6 @@ def main():
         try:
             p.wait()
         except KeyboardInterrupt:
-            # Handle Ctrl+C if run interactively, though Fuzzel usually doesn't have a terminal
             p.send_signal(signal.SIGTERM)
             p.wait()
         
