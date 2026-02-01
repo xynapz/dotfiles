@@ -106,7 +106,7 @@
       for_window [app_id=".*"] inhibit_idle fullscreen
       for_window [window_role="(pop-up|bubble|dialog)"] floating enable
       for_window [window_type="dialog"] floating enable
-      for_window [app_id="(pavucontrol|nm-connection-editor|blueman-manager)"] floating enable
+      for_window [app_id="(pavucontrol|nm-connection-editor|blueman-manager|nwg-bar)"] floating enable
       for_window [app_id="(foot|emacs|thunar)"] border none
       for_window [app_id="^org\.(wezfurlong\.wezterm)$"] border none
       for_window [class="(firefox|brave)"] border none
