@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Power menu using fuzzel
-chosen=$(printf "  Lock\n  Logout\n  Suspend\n  Reboot\n  Power Off" | fuzzel -d -p "Power: " -w 25 -l 5)
+chosen=$(printf "  Lock\n  Logout\n  Suspend\n  Reboot\n  Power Off" | bemenu --prompt "Power: ")
 case "$chosen" in
     *"Lock"*) swaylock -f ;;
     *"Logout"*) swaymsg exit ;;

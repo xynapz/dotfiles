@@ -9,7 +9,7 @@
     config = {
       modifier = "Mod4";
       terminal = "wezterm";
-      menu = "fuzzel";
+      menu = "bemenu";
 
       gaps = { inner = 6; outer = 0; smartGaps = true; smartBorders = "on"; };
       window = { border = 2; titlebar = false; };
@@ -58,7 +58,7 @@
         "${mod}+Shift+c" = "reload";
         "${mod}+Shift+e" = "exec swaynag -t warning -m 'Exit Sway?' -B 'Yes' 'swaymsg exit'";
 
-        "${mod}+space" = "exec bemenu";
+        "${mod}+space" = "exec sh -c '. /etc/profiles/per-user/xynapz/etc/profile.d/hm-session-vars.sh && ${scripts}/universal-wrapper.py --scan | bemenu | xargs -r ${scripts}/universal-wrapper.py --run'";
         "${mod}+v" = "exec ${scripts}/clipboard-menu.sh";
         "${mod}+Shift+w" = "exec ${scripts}/wallpaper-selector.sh";
         "${mod}+Shift+p" = "exec ${scripts}/power-menu.sh";
