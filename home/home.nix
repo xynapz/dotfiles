@@ -50,7 +50,7 @@
     imv mpv wl-clipboard cliphist grim slurp swappy wf-recorder
     pavucontrol libnotify unzip p7zip tree calc
     iosevka jetbrains-mono sourceHighlight imagemagick
-    xarchiver nixd antigravity
+    xarchiver nixd antigravity poppler_utils
   ];
 
   # XDG
