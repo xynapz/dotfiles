@@ -184,7 +184,7 @@
         "custom/power" = {
           format = "⏻";
           tooltip = false;
-          on-click = "$HOME/dotfiles/scripts/power-menu.sh";
+          on-click = "nwg-bar -t bar.json -s style.css";
         };
       };
     };

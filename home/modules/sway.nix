@@ -41,6 +41,7 @@
       ];
 
       startup = [
+        { command = "waybar"; }
         { command = "emacs --daemon"; }
         { command = "wl-paste --watch cliphist store"; }
 
