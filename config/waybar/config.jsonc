@@ -180,6 +180,6 @@
     "custom/power": {
         "format": "⏻",
         "tooltip": false,
-        "on-click": "nwg-bar -t bar.json -s style.css"
+        "on-click": "$HOME/dotfiles/scripts/power-menu.sh"
     }
 }
