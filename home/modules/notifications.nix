@@ -6,7 +6,7 @@
     enable = true;
 
     settings = {
-      "default" = {
+      "" = {
         font = "IBM Plex Mono 12";
         default-timeout = 5000;
         icon-path = "${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark";
