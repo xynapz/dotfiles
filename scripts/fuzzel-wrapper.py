@@ -60,9 +60,9 @@ def main():
     # Handle ! (Attached / Die with Parent)
     if cmd.startswith("!"):
         real_cmd = cmd[1:]
-        # Join args back into a shell string if we are using shell=True, 
-        # BUT the user usually types "!pkill waybar" which comes as ["!pkill", "waybar"]
-        # So we probably want to run the command directly but bind its lifetime.
+        
+        # Set PDEATHSIG on *this* python wrapper script, so if Fuzzel (parent) dies, we die.
+        set_pdeathsig()
         
         final_args = []
         if real_cmd:
@@ -73,14 +73,18 @@ def main():
             sys.exit(1)
 
         # Run attached with PDEATHSIG
-        # We need to wait for it, because if we exit, it dies (if we set pdeathsig correctly).
-        # Actually, if WE exit, Fuzzel exits.
-        # So we just run it and block.
+        # The child (cmd) will watch US (Python wrapper). If we die (because Fuzzel died), the child dies.
         p = subprocess.Popen(
             final_args,
             preexec_fn=set_pdeathsig
         )
-        p.wait()
+        try:
+            p.wait()
+        except KeyboardInterrupt:
+            # Handle Ctrl+C if run interactively, though Fuzzel usually doesn't have a terminal
+            p.send_signal(signal.SIGTERM)
+            p.wait()
+        
         sys.exit(p.returncode)
 
     # Normal Execution
