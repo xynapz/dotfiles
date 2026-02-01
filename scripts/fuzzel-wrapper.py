@@ -61,8 +61,27 @@ def main():
     if cmd.startswith("!"):
         real_cmd = cmd[1:]
         
-        # Set PDEATHSIG on *this* python wrapper script, so if Fuzzel (parent) dies, we die.
-        set_pdeathsig()
+        # Check if we are already orphaned (Parent is not Fuzzel)
+        # If Fuzzel died before we started, we should probably just die too, 
+        # to enforce "Attached" semantics (User expects it to close instantly if Fuzzel is gone).
+        try:
+            ppid = os.getppid()
+            with open(f"/proc/{ppid}/comm", "r") as f:
+                parent_name = f.read().strip()
+            
+            # If parent is not fuzzel (and not a known wrapper/test runner), assume we are orphaned.
+            # Note: Adjust 'fuzzel' if your binary is named differently.
+            if "fuzzel" not in parent_name.lower():
+                # We are orphaned. Die immediately.
+                sys.exit(0)
+                
+            # Set PDEATHSIG on *this* python wrapper script, so if Fuzzel (parent) dies subsequently, we die.
+            set_pdeathsig()
+
+        except Exception:
+            # If we can't check parent, unsafe to proceed if strict attachment is required?
+            # Or just proceed and rely on PDEATHSIG if possible.
+            pass
         
         final_args = []
         if real_cmd:
