@@ -12,6 +12,7 @@ if [ ! -d "$WALLPAPER_DIR" ]; then
 fi
 
 # List files and use fuzzel to select one
+source "$(dirname "$0")/bemenu-theme.sh"
 SELECTED=$(ls "$WALLPAPER_DIR" | bemenu --prompt "Wallpaper: ")
 
 if [ -n "$SELECTED" ]; then
