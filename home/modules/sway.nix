@@ -58,7 +58,7 @@
         "${mod}+Shift+c" = "reload";
         "${mod}+Shift+e" = "exec swaynag -t warning -m 'Exit Sway?' -B 'Yes' 'swaymsg exit'";
 
-        "${mod}+space" = "exec fuzzel --dmenu";
+        "${mod}+space" = "exec fuzzel";
         "${mod}+v" = "exec ${scripts}/clipboard-menu.sh";
         "${mod}+Shift+w" = "exec ${scripts}/wallpaper-selector.sh";
         "${mod}+Shift+p" = "exec ${scripts}/power-menu.sh";
