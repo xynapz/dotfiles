@@ -16,6 +16,10 @@
 ;; EDITOR
 (setq display-line-numbers-type 'relative)
 
+;; Respect visual lines for navigation
+(map! :n "j" #'evil-next-visual-line
+      :n "k" #'evil-previous-visual-line)
+
 ;; Disable prettify-symbols (e.g., -> becoming →, <= becoming ≤)
 (global-prettify-symbols-mode -1)
 (setq prettify-symbols-unprettify-at-point nil)
