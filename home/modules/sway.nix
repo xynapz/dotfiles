@@ -9,7 +9,7 @@
     config = {
       modifier = "Mod4";
       terminal = "wezterm";
-      menu = "bemenu";
+      menu = "fuzzel";
 
       gaps = { inner = 6; outer = 0; smartGaps = true; smartBorders = "on"; };
       window = { border = 2; titlebar = false; };
@@ -58,7 +58,7 @@
         "${mod}+Shift+c" = "reload";
         "${mod}+Shift+e" = "exec swaynag -t warning -m 'Exit Sway?' -B 'Yes' 'swaymsg exit'";
 
-        "${mod}+space" = "exec ${scripts}/bemenu-launcher.sh";
+        "${mod}+space" = "exec fuzzel --dmenu";
         "${mod}+v" = "exec ${scripts}/clipboard-menu.sh";
         "${mod}+Shift+w" = "exec ${scripts}/wallpaper-selector.sh";
         "${mod}+Shift+p" = "exec ${scripts}/power-menu.sh";

@@ -7,7 +7,7 @@
     ./modules/wezterm.nix
     ./modules/sway.nix
     ./modules/waybar.nix
-    ./modules/bemenu.nix
+
     ./modules/notifications.nix
     ./modules/screenshots.nix
     ./modules/lockscreen.nix
