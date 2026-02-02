@@ -8,17 +8,12 @@
       package = pkgs.orchis-theme;
     };
     iconTheme = {
-      name = "Papirus-Dark"; # Assuming this variant exists within pkgs.nordic or need to check actual content. For safety/common setup often just 'Nordic'.
-      # Actually 'Nordic' package often provides icons too.
-      # If pkgs.nordic contains icons, we can use it.
-      # Safest bet for icons if specific package unknown is often Papirus-Dark or similar if Nordic icons aren't redundant.
-      # BUT user asked for Nordic icons. Let's try 'Nordic-darker' if standard, or just 'Nordic'.
-      # Common: theme='Nordic', icons='Nordic-darker' (from same repo).
-      package = pkgs.papirus-icon-theme;
+      name = "WhiteSur-Dark";
+      package = pkgs.whitesur-icon-theme;
     };
     cursorTheme = {
-      name = "Bibata-Modern-Ice";
-      package = pkgs.bibata-cursors;
+      name = "WhiteSur-cursors-dark";
+      package = pkgs.whitesur-cursors;
     };
     gtk3.extraConfig = {
       Settings = ''
