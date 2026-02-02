@@ -7,13 +7,12 @@
     ./modules/wezterm.nix
     ./modules/sway.nix
     ./modules/waybar.nix
-
     ./modules/notifications.nix
     ./modules/screenshots.nix
     ./modules/lockscreen.nix
     ./modules/doom-emacs.nix
     ./modules/git.nix
-    ./modules/nwg-bar.nix
+    ./modules/fuzzel.nix
     ./modules/theme.nix
   ];
 
