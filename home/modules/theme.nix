@@ -4,7 +4,7 @@
   gtk = {
     enable = true;
     theme = {
-      name = "WhiteSur";
+      name = "WhiteSur-dark";
       package = pkgs.whitesur-gtk-theme;
     };
     iconTheme = {

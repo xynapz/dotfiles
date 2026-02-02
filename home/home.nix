@@ -10,7 +10,7 @@
     ./modules/notifications.nix
     ./modules/screenshots.nix
     ./modules/lockscreen.nix
-    ./modules/doom-emacs.nix
+    ./modules/emacs.nix
     ./modules/git.nix
     ./modules/fuzzel.nix
     ./modules/theme.nix
