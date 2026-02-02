@@ -4,7 +4,7 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Ant Dracula";
+      name = "Ant-Dracula";
       package = pkgs.nordic;
     };
     iconTheme = {
