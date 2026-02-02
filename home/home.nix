@@ -51,7 +51,7 @@
     pavucontrol libnotify unzip p7zip tree calc
     iosevka jetbrains-mono sourceHighlight imagemagick
     xarchiver nixd antigravity poppler-utils
-    kdePackages.kate kdePackages.dolphin kdePackages.dolphin-plugins
+    kdePackages.kate nautilus
   ];
 
   # XDG
