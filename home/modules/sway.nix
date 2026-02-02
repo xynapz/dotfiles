@@ -54,7 +54,7 @@
         "${mod}+Return" = "exec wezterm";
         "${mod}+Shift+Return" = "exec emacsclient -c";
         "${mod}+Shift+b" = "exec firefox";
-        "${mod}+f" = "exec thunar";
+        "${mod}+f" = "exec nautilus";
         "${mod}+Shift+q" = "kill";
         "${mod}+Shift+c" = "reload";
         "${mod}+Shift+e" = "exec swaynag -t warning -m 'Exit Sway?' -B 'Yes' 'swaymsg exit'";
