@@ -4,11 +4,11 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Ant-Dracula";
+      name = "Orchis";
       package = pkgs.nordic;
     };
     iconTheme = {
-      name = "Nordic-darker"; # Assuming this variant exists within pkgs.nordic or need to check actual content. For safety/common setup often just 'Nordic'.
+      name = "Tela"; # Assuming this variant exists within pkgs.nordic or need to check actual content. For safety/common setup often just 'Nordic'.
       # Actually 'Nordic' package often provides icons too.
       # If pkgs.nordic contains icons, we can use it.
       # Safest bet for icons if specific package unknown is often Papirus-Dark or similar if Nordic icons aren't redundant.
