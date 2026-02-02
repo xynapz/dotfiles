@@ -8,7 +8,7 @@
       package = pkgs.orchis-theme;
     };
     iconTheme = {
-      name = "WhiteSur-dark";
+      name = "WhiteSur-black";
       package = pkgs.whitesur-icon-theme;
     };
     cursorTheme = {
