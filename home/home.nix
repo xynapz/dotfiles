@@ -44,13 +44,14 @@
 
   home.packages = with pkgs; [
     home-manager
-    wezterm firefox thunar texliveFull
+    wezterm firefox texliveFull
     nodejs python3 go rustup gcc gnumake cmake
     ripgrep fd bat eza dust duf procs bottom fastfetch
     imv mpv wl-clipboard cliphist grim slurp swappy wf-recorder
     pavucontrol libnotify unzip p7zip tree calc
     iosevka jetbrains-mono sourceHighlight imagemagick
-    xarchiver nixd antigravity poppler-utils kdePackages.kate
+    xarchiver nixd antigravity poppler-utils
+    kdePackages.kate kdePackages.dolphin kdePackages.dolphin-plugins
   ];
 
   # XDG
