@@ -4,7 +4,7 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Ant";
+      name = "Ant Dracula";
       package = pkgs.nordic;
     };
     iconTheme = {
@@ -17,7 +17,7 @@
       package = pkgs.nordic;
     };
     cursorTheme = {
-      name = "Nordic-cursors";
+      name = "WhiteSur-cursors";
       package = pkgs.nordic;
     };
     gtk3.extraConfig = {
