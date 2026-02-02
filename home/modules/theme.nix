@@ -12,7 +12,7 @@
       package = pkgs.whitesur-icon-theme;
     };
     cursorTheme = {
-      name = "WhiteSur-cursors";
+      name = "WhiteSur-cursors-dark";
       package = pkgs.whitesur-cursors;
     };
     gtk3.extraConfig = {
