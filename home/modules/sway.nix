@@ -47,7 +47,6 @@
 
         { command = "swaymsg output '*' bg ~/.current-wallpaper fill"; }
         { command = "swayidle -w timeout 600 'swaylock -f -i ~/.current-wallpaper' timeout 1200 'swaymsg \"output * power off\"' resume 'swaymsg \"output * power on\"' before-sleep 'swaylock -f -i ~/.current-wallpaper'"; }
-        { always = true; command = "gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark' && gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"; }
       ];
 
       keybindings = let mod = config.wayland.windowManager.sway.config.modifier; scripts = "$HOME/dotfiles/scripts"; in {

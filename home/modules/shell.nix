@@ -58,6 +58,14 @@
     };
   };
 
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
+      "x-scheme-handler/terminal" = [ "org.wezfurlong.wezterm.desktop" ];
+    };
+  };
+
   programs.direnv = { enable = true; enableBashIntegration = true; nix-direnv.enable = true; };
   programs.fzf = { enable = true; enableBashIntegration = true; defaultOptions = [ "--height 40%" "--layout=reverse" "--border" ]; };
   programs.zoxide = { enable = true; enableBashIntegration = true; };

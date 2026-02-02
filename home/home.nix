@@ -14,6 +14,7 @@
     ./modules/doom-emacs.nix
     ./modules/git.nix
     ./modules/nwg-bar.nix
+    ./modules/theme.nix
   ];
 
   home.username = "xynapz";
@@ -23,6 +24,7 @@
 
   # SESSION VARIABLES
   home.sessionVariables = {
+    TERMINAL = "wezterm";
     EDITOR = "emacs -nw";
     VISUAL = "emacs -nw";
     PAGER = "less";
