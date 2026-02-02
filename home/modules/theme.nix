@@ -4,15 +4,15 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Orchis-Dark";
-      package = pkgs.orchis-theme;
+      name = "WhiteSur-Dark";
+      package = pkgs.whitesur-gtk-theme;
     };
     iconTheme = {
       name = "WhiteSur-dark";
       package = pkgs.whitesur-icon-theme;
     };
     cursorTheme = {
-      name = "WhiteSur-cursors-dark";
+      name = "WhiteSur-cursors";
       package = pkgs.whitesur-cursors;
     };
     gtk3.extraConfig = {
