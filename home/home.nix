@@ -52,7 +52,7 @@
     pavucontrol libnotify unzip p7zip tree calc
     iosevka jetbrains-mono sourceHighlight imagemagick
     xarchiver nixd antigravity poppler-utils
-    kdePackages.kate nautilus
+    kdePackages.kate nautilus discord
   ];
 
   # XDG
