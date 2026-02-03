@@ -26,7 +26,7 @@
     enable = true;
     wayland.enable = true;
     package = pkgs.kdePackages.sddm;
-    theme = "breeze";
+    theme = "sddm-astronaut-theme";
     
     settings = {
       General = {
@@ -58,6 +58,7 @@
     kdePackages.kwin
     kdePackages.ocean-sound-theme
     kdePackages.plasma5support
+    sddm-astronaut
   ];
 
 
