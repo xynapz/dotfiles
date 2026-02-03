@@ -66,6 +66,10 @@
     libsForQt5.qt5.qtsvg
   ];
 
+  environment.variables = {
+    QT_QPA_PLATFORMTHEME = "qt6ct";
+  };
+
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
