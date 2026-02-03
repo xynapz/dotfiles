@@ -53,7 +53,7 @@
     iosevka jetbrains-mono sourceHighlight imagemagick
     xarchiver nixd antigravity discord
     gnome-calculator gnome-calendar gnome-pomodoro nautilus
-    gedit evince eog gcolor3 amberol
+    gedit evince eog gcolor3 amberol spotdl
   ];
 
   # XDG
