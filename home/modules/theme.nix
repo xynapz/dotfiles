@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   gtk = {
@@ -39,6 +39,6 @@
   };
 
   home.sessionVariables = {
-    QT_QPA_PLATFORMTHEME = "qt6ct";
+    QT_QPA_PLATFORMTHEME = lib.mkForce "qt6ct";
   };
 }
