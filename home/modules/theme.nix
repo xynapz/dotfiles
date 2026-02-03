@@ -37,4 +37,8 @@
     enable = true;
     platformTheme.name = "gtk";
   };
+
+environment.variables = {
+    QT_QPA_PLATFORMTHEME = "qt6ct";
+  };
 }

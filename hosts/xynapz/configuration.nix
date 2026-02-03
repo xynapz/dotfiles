@@ -46,13 +46,6 @@
     };
   };
 
-  # Qt and GTK theming
-  qt = {
-    enable = true;
-    platformTheme = "kde";
-    style = "breeze";
-  };
-
   environment.systemPackages = with pkgs; [
     git vim wget curl htop unzip ripgrep fd jq tree
     pciutils usbutils lshw
