@@ -37,6 +37,9 @@
         DisplayServer = "wayland";
         GreeterEnvironment = "QT_SCREEN_SCALE_FACTORS=1;QT_WAYLAND_SHELL_INTEGRATION=layer-shell";
       };
+      Wayland = {
+        CompositorCommand = "${pkgs.kdePackages.kwin}/bin/kwin_wayland --no-lockscreen --no-global-shortcuts --locale1";
+      };
     };
   };
 
@@ -109,7 +112,7 @@
   # NIX SETTINGS
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.gc = { automatic = true; dates = "weekly"; options = "--delete-older-than 14d"; };
+  nix.gc = { automatic = true; dates = "weekly"; options = "--delete-older-than 7d"; };
 
   system.stateVersion = "25.11";
 }
