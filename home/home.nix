@@ -4,7 +4,6 @@
 {
   imports = [
     ./modules/shell.nix
-    ./modules/sddm.nix
     ./modules/wezterm.nix
     ./modules/sway.nix
     ./modules/waybar.nix
