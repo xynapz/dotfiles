@@ -45,15 +45,16 @@
 
   home.packages = with pkgs; [
     home-manager
-    wezterm firefox texliveFull
+    wezterm firefox texliveFull poppler-utils
     nodejs python3 go rustup gcc gnumake cmake
     ripgrep fd bat eza dust duf procs bottom fastfetch
     imv mpv wl-clipboard cliphist grim slurp swappy wf-recorder
     pavucontrol libnotify unzip p7zip tree calc
     iosevka jetbrains-mono sourceHighlight imagemagick
-    xarchiver nixd antigravity poppler-utils
-    kdePackages.kate nautilus discord
-    gnome-calculator gnome-calendar gnome-pomodoro
+    xarchiver nixd antigravity discord
+    kdePackages.kate kdePackages.okular kdePackages.spectacle kdePackages.kcolorchooser
+    kdePackages.kcolorpicker
+    gnome-calculator gnome-calendar gnome-pomodoro nautilus
   ];
 
   # XDG
