@@ -35,10 +35,14 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "gtk";
+    platformTheme.name = "qtct";
   };
 
   home.sessionVariables = {
     QT_QPA_PLATFORMTHEME = lib.mkForce "qt6ct";
   };
+
+  xdg.configFile."qt5ct/qt5ct.conf".source = ../../config/qt5ct/qt5ct.conf;
+  xdg.configFile."qt6ct/qt6ct.conf".source = ../../config/qt6ct/qt6ct.conf;
+  xdg.configFile."Kvantum/kvantum.kvconfig".source = ../../config/Kvantum/kvantum.kvconfig;
 }
