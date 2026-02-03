@@ -38,7 +38,7 @@
     platformTheme.name = "gtk";
   };
 
-environment.variables = {
+  home.sessionVariables = {
     QT_QPA_PLATFORMTHEME = "qt6ct";
   };
 }
