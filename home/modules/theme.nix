@@ -35,7 +35,10 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "qtct";
+  };
+
+  home.sessionVariables = {
+    QT_QPA_PLATFORMTHEME = lib.mkForce "qt6ct";
   };
 
   xdg.configFile."qt5ct/qt5ct.conf".source = ../../config/qt5ct/qt5ct.conf;
