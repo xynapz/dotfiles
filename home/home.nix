@@ -52,7 +52,6 @@
     pavucontrol libnotify unzip p7zip tree calc
     iosevka jetbrains-mono sourceHighlight imagemagick
     xarchiver nixd antigravity discord
-    kdePackages.kate
     gnome-calculator gnome-calendar gnome-pomodoro nautilus
     gedit evince eog gcolor3 amberol
   ];
