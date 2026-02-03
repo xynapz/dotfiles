@@ -52,7 +52,7 @@
     pavucontrol libnotify unzip p7zip tree calc
     iosevka jetbrains-mono sourceHighlight imagemagick
     xarchiver nixd antigravity discord
-    kvantum libsForQt5.qtstyleplugin-kvantum kdePackages.qtstyleplugin-kvantum
+    libsForQt5.qtstyleplugin-kvantum kdePackages.qtstyleplugin-kvantum
     kdePackages.kate kdePackages.okular kdePackages.kcolorchooser
     kdePackages.kcalc kdePackages.elisa kdePackages.gwenview
     gnome-calculator gnome-calendar gnome-pomodoro nautilus
