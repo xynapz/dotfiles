@@ -52,7 +52,8 @@
     pavucontrol libnotify unzip p7zip tree calc
     iosevka jetbrains-mono sourceHighlight imagemagick
     xarchiver nixd antigravity poppler-utils
-    kdePackages.kate nautilus discord gnome-calculator gnome-calendar
+    kdePackages.kate nautilus discord
+    gnome-calculator gnome-calendar gnome-pomodoro
   ];
 
   # XDG
