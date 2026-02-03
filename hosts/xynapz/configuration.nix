@@ -26,11 +26,6 @@
     enable = true;
     wayland.enable = true;
     package = pkgs.kdePackages.sddm;
-    extraPackages = with pkgs; [
-      kdePackages.qtsvg
-      kdePackages.qtmultimedia
-      kdePackages.qtvirtualkeyboard
-    ];
     theme = "sddm-astronaut-theme";
     settings = {
       General = {
@@ -45,7 +40,7 @@
     bibata-cursors papirus-icon-theme
     iosevka jetbrains-mono ibm-plex
     nerd-fonts.iosevka nerd-fonts.jetbrains-mono
-    sddm-astronaut
+    sddm-astronaut kdePackages.qtmultimedia kdePackages.qtsvg kdePackages.qtvirtualkeyboard
   ];
 
 
