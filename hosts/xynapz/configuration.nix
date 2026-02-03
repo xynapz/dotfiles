@@ -35,6 +35,7 @@
     settings = {
       General = {
         DisplayServer = "wayland";
+        GreeterEnvironment = "QT_SCREEN_SCALE_FACTORS=1;QT_WAYLAND_SHELL_INTEGRATION=layer-shell";
       };
     };
   };
