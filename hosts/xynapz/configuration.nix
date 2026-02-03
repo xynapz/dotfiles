@@ -21,35 +21,12 @@
   # GRAPHICS & WAYLAND
   hardware.graphics.enable = true;
 
-  # DISPLAY MANAGER (SDDM) - Multi-monitor setup
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-    package = pkgs.kdePackages.sddm;
-    extraPackages = with pkgs; [
-      kdePackages.qtmultimedia
-      kdePackages.qtsvg
-      kdePackages.qtvirtualkeyboard
-    ];
-    theme = "sddm-astronaut-theme";
-    settings = {
-      General = {
-        DisplayServer = "wayland";
-        GreeterEnvironment = "QT_SCREEN_SCALE_FACTORS=1;QT_WAYLAND_SHELL_INTEGRATION=layer-shell;KWIN_FORCE_SW_CURSOR=1;XCURSOR_THEME=Bibata-Modern-Ice";
-      };
-      Wayland = {
-        CompositorCommand = "${pkgs.kdePackages.kwin}/bin/kwin_wayland --no-lockscreen --no-global-shortcuts --locale1";
-      };
-    };
-  };
-
   environment.systemPackages = with pkgs; [
     git vim wget curl htop unzip ripgrep fd jq tree
     pciutils usbutils lshw
     bibata-cursors papirus-icon-theme
     iosevka jetbrains-mono ibm-plex
     nerd-fonts.iosevka nerd-fonts.jetbrains-mono
-    sddm-astronaut
   ];
 
   programs.sway = {

@@ -4,6 +4,7 @@
 {
   imports = [
     ./modules/shell.nix
+    ./modules/sddm.nix
     ./modules/wezterm.nix
     ./modules/sway.nix
     ./modules/waybar.nix
@@ -51,7 +52,7 @@
     wl-clipboard cliphist grim slurp swappy wf-recorder
     pavucontrol libnotify unzip p7zip tree calc
     iosevka jetbrains-mono sourceHighlight imagemagick
-    xarchiver nixd antigravity discord
+    xarchiver nixd antigravity discord sddm-astronaut
     gnome-calculator gnome-calendar gnome-pomodoro nautilus
     gedit evince eog gcolor3 yt-dlp yt-dlg rhythmbox
   ];
