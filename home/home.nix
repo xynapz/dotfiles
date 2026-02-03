@@ -44,7 +44,7 @@
   ];
 
   home.packages = with pkgs; [
-    home-manager
+    home-manager ffmpeg
     wezterm firefox texliveFull poppler-utils
     nodejs python3 go rustup gcc gnumake cmake
     ripgrep fd bat eza dust duf procs bottom fastfetch
@@ -53,7 +53,7 @@
     iosevka jetbrains-mono sourceHighlight imagemagick
     xarchiver nixd antigravity discord
     gnome-calculator gnome-calendar gnome-pomodoro nautilus
-    gedit evince eog gcolor3 amberol spotdl
+    gedit evince eog gcolor3 amberol yt-dlp yt-dlg
   ];
 
   # XDG
