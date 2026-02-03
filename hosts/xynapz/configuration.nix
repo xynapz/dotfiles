@@ -41,6 +41,7 @@
     iosevka jetbrains-mono ibm-plex
     nerd-fonts.iosevka nerd-fonts.jetbrains-mono
     sddm-astronaut kdePackages.qtmultimedia kdePackages.qtsvg kdePackages.qtvirtualkeyboard
+    qt6.qtmultimedia
   ];
 
 
