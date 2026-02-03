@@ -48,12 +48,12 @@
     wezterm firefox texliveFull poppler-utils
     nodejs python3 go rustup gcc gnumake cmake
     ripgrep fd bat eza dust duf procs bottom fastfetch
-    imv mpv wl-clipboard cliphist grim slurp swappy wf-recorder
+    wl-clipboard cliphist grim slurp swappy wf-recorder
     pavucontrol libnotify unzip p7zip tree calc
     iosevka jetbrains-mono sourceHighlight imagemagick
     xarchiver nixd antigravity discord
     gnome-calculator gnome-calendar gnome-pomodoro nautilus
-    gedit evince eog gcolor3 amberol yt-dlp yt-dlg rhythmbox
+    gedit evince eog gcolor3 yt-dlp yt-dlg rhythmbox
   ];
 
   # XDG
