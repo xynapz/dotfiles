@@ -53,22 +53,14 @@
     iosevka jetbrains-mono ibm-plex
     nerd-fonts.iosevka nerd-fonts.jetbrains-mono
     
-    # SDDM themes and dependencies (all from nixpkgs)
     kdePackages.breeze
     kdePackages.breeze-icons
     kdePackages.kwin
-    kdePackages.qt6ct
     kdePackages.ocean-sound-theme
     kdePackages.plasma5support
-    libsForQt5.qt5ct
-    libsForQt5.qt5.qtgraphicaleffects
-    libsForQt5.qt5.qtquickcontrols2
-    libsForQt5.qt5.qtsvg
   ];
 
-  environment.variables = {
-    QT_QPA_PLATFORMTHEME = "qt6ct";
-  };
+
 
   programs.sway = {
     enable = true;
