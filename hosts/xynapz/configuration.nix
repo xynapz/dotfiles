@@ -35,7 +35,7 @@
     settings = {
       General = {
         DisplayServer = "wayland";
-        GreeterEnvironment = "QT_SCREEN_SCALE_FACTORS=1;QT_WAYLAND_SHELL_INTEGRATION=layer-shell";
+        GreeterEnvironment = "QT_SCREEN_SCALE_FACTORS=1;QT_WAYLAND_SHELL_INTEGRATION=layer-shell;KWIN_FORCE_SW_CURSOR=1;XCURSOR_THEME=Bibata-Modern-Ice";
       };
       Wayland = {
         CompositorCommand = "${pkgs.kdePackages.kwin}/bin/kwin_wayland --no-lockscreen --no-global-shortcuts --locale1";
@@ -51,8 +51,6 @@
     nerd-fonts.iosevka nerd-fonts.jetbrains-mono
     sddm-astronaut
   ];
-
-
 
   programs.sway = {
     enable = true;
