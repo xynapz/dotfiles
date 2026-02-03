@@ -26,22 +26,15 @@
     enable = true;
     wayland.enable = true;
     package = pkgs.kdePackages.sddm;
+    extraPackages = with pkgs; [
+      kdePackages.qtsvg
+      kdePackages.qtmultimedia
+      kdePackages.qtvirtualkeyboard
+    ];
     theme = "sddm-astronaut-theme";
-    
     settings = {
       General = {
         DisplayServer = "wayland";
-        GreeterEnvironment = "QT_SCREEN_SCALE_FACTORS=1;QT_WAYLAND_SHELL_INTEGRATION=layer-shell";
-      };
-      
-      Theme = {
-        Current = "breeze";
-        CursorTheme = "Bibata-Modern-Classic";
-        CursorSize = 24;
-      };
-
-      Wayland = {
-        CompositorCommand = "${pkgs.kdePackages.kwin}/bin/kwin_wayland --no-lockscreen --no-global-shortcuts --locale1";
       };
     };
   };
@@ -52,12 +45,6 @@
     bibata-cursors papirus-icon-theme
     iosevka jetbrains-mono ibm-plex
     nerd-fonts.iosevka nerd-fonts.jetbrains-mono
-    
-    kdePackages.breeze
-    kdePackages.breeze-icons
-    kdePackages.kwin
-    kdePackages.ocean-sound-theme
-    kdePackages.plasma5support
     sddm-astronaut
   ];
 
