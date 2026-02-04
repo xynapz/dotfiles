@@ -154,6 +154,68 @@ sudo rm -rf ~/.local/share/waydroid
 sudo waydroid init -s GAPPS -f
 #+end_src
 
+* Online Accounts (Google, Microsoft, etc.)
+
+GNOME Online Accounts provides OAuth integration with cloud services. The
+declarative config is in =hosts/common/online-accounts.nix=. Credentials are
+stored encrypted in gnome-keyring, which auto-unlocks on login.
+
+** Adding an Account
+
+Since we are on Sway (not full GNOME), launch gnome-control-center explicitly:
+
+#+begin_src bash
+XDG_CURRENT_DESKTOP=GNOME gnome-control-center
+#+end_src
+
+Then:
+1. Navigate to "Online Accounts"
+2. Click "Add Account"
+3. Select your provider (Google, Microsoft, etc.)
+4. Complete the OAuth flow in the browser
+
+** Supported Services
+
+After adding a Google account:
+- Calendar syncs to GNOME Calendar
+- Contacts sync to GNOME Contacts
+- Google Drive appears in Nautilus sidebar
+- Files accessible via GVFS
+
+** Keyring Management
+
+Use Seahorse to manage stored credentials:
+
+#+begin_src bash
+seahorse
+#+end_src
+
+The keyring auto-unlocks on SDDM login via PAM integration.
+
+** Troubleshooting
+
+If accounts fail to authenticate:
+
+#+begin_src bash
+# Check GOA daemon
+systemctl --user status goa-daemon
+
+# Check keyring daemon
+systemctl --user status gnome-keyring-daemon
+
+# Restart services
+systemctl --user restart goa-daemon
+systemctl --user restart gnome-keyring-daemon
+#+end_src
+
+If the keyring is locked:
+
+#+begin_src bash
+# Unlock manually
+seahorse
+# Right-click "Login" keyring and unlock
+#+end_src
+
 * Git Configuration
 
 ** SSH Keys

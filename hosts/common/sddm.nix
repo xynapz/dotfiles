@@ -41,4 +41,7 @@ in {
   environment.systemPackages = with pkgs; [
     custom-sddm-astronaut
   ];
+
+  # Auto-unlock gnome-keyring on login
+  security.pam.services.sddm.enableGnomeKeyring = true;
 }
