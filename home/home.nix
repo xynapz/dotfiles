@@ -52,7 +52,7 @@
     pavucontrol libnotify unzip p7zip tree calc
     iosevka jetbrains-mono sourceHighlight imagemagick
     xarchiver nixd antigravity discord sddm-astronaut
-    gnome-calculator gnome-pomodoro nautilus
+    gnome-calculator gnome-pomodoro nautilus morgen
     gedit evince eog gcolor3 yt-dlp yt-dlg rhythmbox
   ];
 
