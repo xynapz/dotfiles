@@ -5,6 +5,7 @@
   imports = [
     ./hardware-configuration.nix
     ../common/sddm.nix
+    ../common/waydroid.nix
   ];
 
   # BOOT
@@ -63,7 +64,7 @@
   users.users.xynapz = {
     isNormalUser = true;
     description = "xynapz";
-    extraGroups = [ "wheel" "networkmanager" "video" "audio" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" "video" "audio" "docker" "kvm" ];
     shell = pkgs.bash;
   };
 

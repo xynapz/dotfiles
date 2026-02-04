@@ -1,0 +1,124 @@
+#+TITLE: System Manual Setup
+#+AUTHOR: xynapz
+#+DATE: 2026-02-03
+#+STARTUP: overview
+#+OPTIONS: toc:2
+
+* Introduction
+
+This document contains the manual/imperative steps required for the NixOS system
+that cannot be fully declarative. Run these after a fresh install or when
+setting up new features.
+
+* Waydroid (Android Container)
+
+Waydroid runs Android apps natively on your Wayland system. The declarative
+config is in =hosts/common/waydroid.nix=, but the Android image download is
+imperative.
+
+** Initial Setup (One-time)
+
+After enabling Waydroid in NixOS config and rebuilding:
+
+#+begin_src bash
+# Initialize Waydroid with Google Apps (for Play Store)
+sudo waydroid init -s GAPPS -f
+
+# Start the container service
+sudo systemctl start waydroid-container
+
+# Launch Android UI
+waydroid show-full-ui
+#+end_src
+
+** Daily Usage
+
+#+begin_src bash
+# Launch full Android UI
+waydroid show-full-ui
+
+# List installed apps
+waydroid app list
+
+# Launch specific app
+waydroid app launch <app_name>
+
+# Install APK file
+waydroid app install /path/to/app.apk
+#+end_src
+
+** Maintenance
+
+#+begin_src bash
+# Update Android system
+sudo waydroid upgrade
+
+# Stop current session
+waydroid session stop
+
+# Restart container
+sudo systemctl restart waydroid-container
+#+end_src
+
+** Reset Waydroid (Complete reinstall)
+
+#+begin_src bash
+# Stop everything
+waydroid session stop
+sudo systemctl stop waydroid-container
+
+# Remove all Waydroid data
+sudo rm -rf /var/lib/waydroid
+sudo rm -rf ~/.local/share/waydroid
+
+# Reinitialize
+sudo waydroid init -s GAPPS -f
+#+end_src
+
+* NixOS System Rebuild
+
+Standard commands for system updates:
+
+#+begin_src bash
+# Rebuild and switch
+sudo nixos-rebuild switch --flake ~/dotfiles#xynapz
+
+# Rebuild with boot entry (doesn't activate immediately)
+sudo nixos-rebuild boot --flake ~/dotfiles#xynapz
+
+# Test build without activation
+sudo nixos-rebuild test --flake ~/dotfiles#xynapz
+
+# Collect garbage (free space)
+sudo nix-collect-garbage -d
+#+end_src
+
+* Bluetooth Pairing
+
+Pair devices using bluetoothctl:
+
+#+begin_src bash
+bluetoothctl
+# Inside bluetoothctl:
+power on
+scan on
+# Wait for device to appear
+pair <MAC_ADDRESS>
+trust <MAC_ADDRESS>
+connect <MAC_ADDRESS>
+#+end_src
+
+* GPU Information
+
+Check GPU status:
+
+#+begin_src bash
+# List GPUs
+lspci | grep -i vga
+
+# Check Vulkan support (useful for Waydroid)
+vulkaninfo | head -20
+
+# OpenGL info
+glxinfo | grep "OpenGL"
+#+end_src
