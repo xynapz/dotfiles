@@ -6,7 +6,6 @@
     ./hardware-configuration.nix
     ../common/sddm.nix
     ../common/waydroid.nix
-    ../common/online-accounts.nix
   ];
 
   # BOOT
