@@ -6,17 +6,94 @@
 
 * Introduction
 
-This document contains the manual/imperative steps required for the NixOS system
-that cannot be fully declarative. Run these after a fresh install or when
-setting up new features.
+This document contains manual setup steps required for the NixOS system that
+cannot be fully declarative. These are one-time operations or user-specific
+configurations that need to be performed after a fresh install or when adding
+new features.
+
+* Initial System Setup
+
+** First Boot
+
+After installing NixOS and cloning the dotfiles repository:
+
+#+begin_src bash
+# Clone dotfiles
+git clone https://github.com/xynapz/dotfiles ~/dotfiles
+cd ~/dotfiles
+
+# Build and activate the system
+sudo nixos-rebuild switch --flake .#xynapz
+#+end_src
+
+** User Directories
+
+The XDG user directories are created automatically by Home Manager, but you may
+want to populate them:
+
+#+begin_src bash
+# Create wallpaper directory (required for wallpaper-selector.sh)
+mkdir -p ~/Pictures/Wallpapers
+mkdir -p ~/Pictures/Screenshots
+
+# Create initial wallpaper symlink
+ln -sf ~/Pictures/Wallpapers/default.jpg ~/.current-wallpaper
+#+end_src
+
+* Doom Emacs
+
+Doom Emacs requires a manual installation step because it clones its own
+repository and manages its own packages outside of Nix.
+
+** Installation
+
+#+begin_src bash
+# Clone Doom Emacs
+git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
+
+# Run the installer
+~/.emacs.d/bin/doom install
+#+end_src
+
+The Doom configuration is already linked from =config/doom= via Home Manager.
+
+** Maintenance
+
+#+begin_src bash
+# Sync packages after updating config/doom
+doom sync
+
+# Upgrade Doom itself
+doom upgrade
+
+# Rebuild all packages
+doom build
+
+# Run doctor to check for issues
+doom doctor
+#+end_src
+
+** Troubleshooting
+
+If Emacs daemon fails to start:
+
+#+begin_src bash
+# Kill existing daemon
+pkill -f emacs
+
+# Restart daemon
+emacs --daemon
+
+# Check daemon status
+emacsclient -e "(emacs-version)"
+#+end_src
 
 * Waydroid (Android Container)
 
-Waydroid runs Android apps natively on your Wayland system. The declarative
-config is in =hosts/common/waydroid.nix=, but the Android image download is
-imperative.
+Waydroid runs Android apps natively on Wayland. The declarative config is in
+=hosts/common/waydroid.nix=, but the Android image download is imperative.
 
-** Initial Setup (One-time)
+** Initial Setup
 
 After enabling Waydroid in NixOS config and rebuilding:
 
@@ -60,7 +137,9 @@ waydroid session stop
 sudo systemctl restart waydroid-container
 #+end_src
 
-** Reset Waydroid (Complete reinstall)
+** Reset Waydroid
+
+Complete reinstall if something breaks:
 
 #+begin_src bash
 # Stop everything
@@ -75,42 +154,219 @@ sudo rm -rf ~/.local/share/waydroid
 sudo waydroid init -s GAPPS -f
 #+end_src
 
-* NixOS System Rebuild
+* Git Configuration
 
-Standard commands for system updates:
+** SSH Keys
+
+Generate SSH keys for GitHub:
 
 #+begin_src bash
-# Rebuild and switch
-sudo nixos-rebuild switch --flake ~/dotfiles#xynapz
+# Generate new SSH key
+ssh-keygen -t ed25519 -C "xynapz@aol.com"
 
-# Rebuild with boot entry (doesn't activate immediately)
-sudo nixos-rebuild boot --flake ~/dotfiles#xynapz
+# Start ssh-agent
+eval "$(ssh-agent -s)"
 
-# Test build without activation
-sudo nixos-rebuild test --flake ~/dotfiles#xynapz
+# Add key to agent
+ssh-add ~/.ssh/id_ed25519
 
-# Collect garbage (free space)
-sudo nix-collect-garbage -d
+# Copy public key to clipboard
+wl-copy < ~/.ssh/id_ed25519.pub
 #+end_src
 
-* Bluetooth Pairing
+Then add the public key to GitHub at https://github.com/settings/keys
 
-Pair devices using bluetoothctl:
+** GitHub CLI
+
+#+begin_src bash
+# Login to GitHub
+gh auth login
+
+# Follow the prompts and select SSH
+#+end_src
+
+* Wallpaper System
+
+The wallpaper system uses a symlink at =~/.current-wallpaper= that points to the
+active wallpaper. This is used by Sway and Swaylock.
+
+** Setup
+
+#+begin_src bash
+# Create wallpaper directory
+mkdir -p ~/Pictures/Wallpapers
+
+# Add wallpapers to the directory
+cp /path/to/wallpapers/* ~/Pictures/Wallpapers/
+
+# Set initial wallpaper
+ln -sf ~/Pictures/Wallpapers/your-wallpaper.jpg ~/.current-wallpaper
+#+end_src
+
+** Usage
+
+Use =Mod+Shift+w= to open the wallpaper selector, which will:
+- Show all wallpapers in =~/Pictures/Wallpapers=
+- Update the =~/.current-wallpaper= symlink
+- Apply the wallpaper to all outputs
+
+* Bluetooth
+
+** Pairing Devices
 
 #+begin_src bash
 bluetoothctl
-# Inside bluetoothctl:
+#+end_src
+
+Inside bluetoothctl:
+
+#+begin_example
 power on
 scan on
-# Wait for device to appear
+# Wait for device to appear, note the MAC address
 pair <MAC_ADDRESS>
 trust <MAC_ADDRESS>
 connect <MAC_ADDRESS>
+exit
+#+end_example
+
+** Auto-connect
+
+Trusted devices will auto-connect on boot.
+
+* NixOS System Management
+
+** Rebuild Commands
+
+#+begin_src bash
+# Switch to new configuration
+sudo nixos-rebuild switch --flake ~/dotfiles#xynapz
+
+# Build but don't activate (next boot)
+sudo nixos-rebuild boot --flake ~/dotfiles#xynapz
+
+# Test without adding boot entry
+sudo nixos-rebuild test --flake ~/dotfiles#xynapz
+
+# List generations
+sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
+
+# Rollback to previous generation
+sudo nixos-rebuild switch --rollback
+#+end_src
+
+** Flake Updates
+
+#+begin_src bash
+# Update all inputs
+nix flake update
+
+# Update specific input
+nix flake lock --update-input nixpkgs
+
+# Rebuild after update
+sudo nixos-rebuild switch --flake ~/dotfiles#xynapz
+#+end_src
+
+** Garbage Collection
+
+#+begin_src bash
+# Automatic weekly cleanup is configured
+# Manual cleanup:
+sudo nix-collect-garbage -d
+
+# Remove old boot entries
+sudo nix-collect-garbage --delete-older-than 7d
+sudo nixos-rebuild boot --flake ~/dotfiles#xynapz
+#+end_src
+
+* Development Environments
+
+** Rust
+
+#+begin_src bash
+# Install stable toolchain
+rustup default stable
+
+# Install nightly
+rustup toolchain install nightly
+
+# Update toolchains
+rustup update
+#+end_src
+
+** Python Virtual Environments
+
+#+begin_src bash
+# Create venv
+python -m venv .venv
+
+# Activate (or use 'penv' alias)
+source .venv/bin/activate
+
+# Deactivate
+deactivate
+#+end_src
+
+** Node.js
+
+Node.js is installed globally via Home Manager. For project-specific versions,
+use direnv with a =.envrc= file:
+
+#+begin_src bash
+# In project directory
+echo "use node 20" > .envrc
+direnv allow
+#+end_src
+
+* Display Configuration
+
+** Monitor Setup
+
+The monitor configuration is in =home/modules/sway.nix=. If you change monitors:
+
+#+begin_src bash
+# List available outputs
+swaymsg -t get_outputs
+
+# Get detailed info
+swaymsg -t get_outputs | jq
+#+end_src
+
+Update the output section in =sway.nix= with the correct names and resolutions.
+
+** Refresh Rate
+
+To change refresh rate:
+
+#+begin_src nix
+output."HDMI-A-1" = {
+  resolution = "2560x1440@144Hz";  # Change Hz value
+  position = "0,0";
+};
+#+end_src
+
+* Audio
+
+PipeWire is configured declaratively. No manual setup required.
+
+** Troubleshooting
+
+#+begin_src bash
+# Restart PipeWire
+systemctl --user restart pipewire pipewire-pulse wireplumber
+
+# Check status
+systemctl --user status pipewire
+
+# List audio devices
+pactl list sinks short
+pactl list sources short
 #+end_src
 
 * GPU Information
 
-Check GPU status:
+** Check GPU Status
 
 #+begin_src bash
 # List GPUs
@@ -121,4 +377,49 @@ vulkaninfo | head -20
 
 # OpenGL info
 glxinfo | grep "OpenGL"
+#+end_src
+
+* Fonts
+
+Fonts are installed declaratively. To verify:
+
+#+begin_src bash
+# List available fonts
+fc-list | grep -i iosevka
+
+# Rebuild font cache
+fc-cache -fv
+#+end_src
+
+* Troubleshooting
+
+** Sway Won't Start
+
+#+begin_src bash
+# Check Sway config syntax
+sway --validate
+
+# Start Sway from TTY with debug output
+sway --debug 2> ~/sway.log
+#+end_src
+
+** Home Manager Issues
+
+#+begin_src bash
+# Check Home Manager status
+home-manager generations
+
+# Rollback Home Manager
+home-manager generations | head -2
+/nix/store/<hash>-home-manager-generation/activate
+#+end_src
+
+** SDDM Login Issues
+
+#+begin_src bash
+# Check SDDM logs
+journalctl -u display-manager -b
+
+# Restart SDDM
+sudo systemctl restart display-manager
 #+end_src
