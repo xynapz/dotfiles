@@ -1,0 +1,120 @@
+# =============================================================================
+# SECURITY - Never commit these
+# =============================================================================
+
+# Private keys and certificates
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+id_rsa*
+id_ed25519*
+id_ecdsa*
+id_dsa*
+*.gpg
+*.asc
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.secret
+*secret*
+*password*
+credentials*
+auth.json
+tokens.json
+
+# AWS/Cloud credentials
+.aws/
+.azure/
+.gcloud/
+credentials
+config.json
+
+# SSH known hosts (can leak server info)
+known_hosts
+
+# =============================================================================
+# EDITOR & OS GARBAGE
+# =============================================================================
+
+# Emacs
+*~
+\#*\#
+.#*
+*.elc
+auto-save-list/
+tramp
+eshell/history
+eshell/lastdir
+*.org~
+
+# Vim
+*.swp
+*.swo
+*.swn
+.*.sw?
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# JetBrains
+.idea/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+.directory
+.Trash-*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# =============================================================================
+# BUILD ARTIFACTS & CACHES
+# =============================================================================
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.eggs/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Rust
+target/
+
+# Go
+/bin/
+/pkg/
+
+# General
+*.log
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+build/
+dist/
+out/
