@@ -88,6 +88,88 @@ emacs --daemon
 emacsclient -e "(emacs-version)"
 #+end_src
 
+* Tailscale (Secure Remote Access)
+
+Tailscale creates a secure mesh VPN between your devices, allowing you to access
+your personal wiki (and other services) from your phone regardless of location.
+The declarative config is in =hosts/common/tailscale.nix=.
+
+** Initial Authentication
+
+After enabling Tailscale in NixOS config and rebuilding:
+
+#+begin_src bash
+# Authenticate (opens browser for login)
+sudo tailscale up
+
+# Verify connection and get your Tailscale IP
+tailscale status
+#+end_src
+
+Note your laptop's Tailscale IP (looks like =100.x.y.z=). This IP is stable and
+won't change unless you reinstall Tailscale.
+
+** Android Setup
+
+1. Install *Tailscale* from Google Play Store on your S25 Ultra
+2. Log in with the same account you used on NixOS
+3. Approve the device in your admin console if prompted: https://login.tailscale.com/admin/machines
+
+** Accessing Services via Tailscale
+
+Your personal wiki (Flask on port 5000) is accessible from your phone:
+
+#+begin_src
+http://100.x.y.z:5000
+#+end_src
+
+Replace =100.x.y.z= with your laptop's Tailscale IP from =tailscale status=.
+
+Bookmark this URL on your phone for quick access.
+
+** Daily Usage
+
+#+begin_src bash
+# Check connection status
+tailscale status
+
+# Get your Tailscale IP
+tailscale ip -4
+
+# See connected devices
+tailscale status --active
+
+# Disconnect temporarily
+sudo tailscale down
+
+# Reconnect
+sudo tailscale up
+#+end_src
+
+** Troubleshooting
+
+If connection fails:
+
+#+begin_src bash
+# Check Tailscale daemon status
+systemctl status tailscaled
+
+# View logs
+journalctl -u tailscaled -n 50
+
+# Re-authenticate if needed
+sudo tailscale up --reset
+
+# Check firewall
+sudo iptables -L -n | grep tailscale
+#+end_src
+
+If Android can't connect:
+- Ensure both devices are logged into the same Tailscale account
+- Check that both devices appear in https://login.tailscale.com/admin/machines
+- Try toggling Tailscale off/on on the Android app
+- Verify the laptop is online: =tailscale ping <android-ip>=
+
 * Waydroid (Android Container)
 
 Waydroid runs Android apps natively on Wayland. The declarative config is in
