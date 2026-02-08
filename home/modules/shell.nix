@@ -50,11 +50,120 @@
     enable = true;
     enableBashIntegration = true;
     settings = {
+      # Two-line prompt configuration
+      format = lib.concatStrings [
+        "$username"
+        "$hostname"
+        "$directory"
+        "$git_branch"
+        "$git_status"
+        "$nix_shell"
+        "$python"
+        "$nodejs"
+        "$rust"
+        "$golang"
+        "$cmd_duration"
+        "$line_break"
+        "$character"
+      ];
+
       add_newline = true;
-      character = { success_symbol = "[❯](bold green)"; error_symbol = "[❯](bold red)"; };
-      directory = { truncation_length = 3; style = "bold cyan"; };
-      git_branch = { symbol = " "; style = "bold purple"; };
-      nix_shell = { symbol = " "; style = "bold blue"; };
+
+      # Character (prompt symbol on second line)
+      character = {
+        success_symbol = "[❯](bold green)";
+        error_symbol = "[❯](bold red)";
+        vimcmd_symbol = "[❮](bold green)";
+      };
+
+      # Username
+      username = {
+        show_always = false;
+        style_user = "bold yellow";
+        style_root = "bold red";
+        format = "[$user]($style) ";
+      };
+
+      # Hostname
+      hostname = {
+        ssh_only = true;
+        format = "[@$hostname]($style) ";
+        style = "bold dimmed green";
+      };
+
+      # Directory
+      directory = {
+        truncation_length = 3;
+        truncate_to_repo = true;
+        style = "bold cyan";
+        format = "[$path]($style)[$read_only]($read_only_style) ";
+        read_only = " 󰌾";
+        read_only_style = "red";
+      };
+
+      # Git Branch
+      git_branch = {
+        symbol = " ";
+        style = "bold purple";
+        format = "[$symbol$branch]($style) ";
+      };
+
+      # Git Status
+      git_status = {
+        style = "bold red";
+        format = "([$all_status$ahead_behind]($style) )";
+        conflicted = "🏳";
+        ahead = "⇡\${count}";
+        behind = "⇣\${count}";
+        diverged = "⇕⇡\${ahead_count}⇣\${behind_count}";
+        untracked = "?";
+        stashed = "$";
+        modified = "!";
+        staged = "+";
+        renamed = "»";
+        deleted = "✘";
+      };
+
+      # Nix Shell
+      nix_shell = {
+        symbol = " ";
+        style = "bold blue";
+        format = "[$symbol$state]($style) ";
+        impure_msg = "";
+        pure_msg = "";
+      };
+
+      # Programming Languages
+      python = {
+        symbol = " ";
+        style = "yellow";
+        format = "[\${symbol}\${pyenv_prefix}(\${version} )(\\($virtualenv\\) )]($style)";
+      };
+
+      nodejs = {
+        symbol = " ";
+        style = "bold green";
+        format = "[$symbol($version )]($style)";
+      };
+
+      rust = {
+        symbol = " ";
+        style = "bold red";
+        format = "[$symbol($version )]($style)";
+      };
+
+      golang = {
+        symbol = " ";
+        style = "bold cyan";
+        format = "[$symbol($version )]($style)";
+      };
+
+      # Command Duration
+      cmd_duration = {
+        min_time = 500;
+        style = "bold yellow";
+        format = "[took $duration]($style) ";
+      };
     };
   };
 
