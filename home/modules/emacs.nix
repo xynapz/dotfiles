@@ -30,7 +30,14 @@
     python312Packages.pyflakes  # import management
     python312Packages.isort     # import sorting
     python312Packages.pytest    # testing
-    python312Packages.nose2     # nosetests alternative
+    python312Packages.nose      # nosetests
+    pipenv                      # pipenv support
+
+    # Docker
+    dockfmt                     # docker formatting
+
+    # XML
+    libxml2                     # xmllint
 
     # Markdown
     pandoc            # doom doctor: markdown compiler
