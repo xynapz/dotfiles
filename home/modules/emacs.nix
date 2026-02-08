@@ -18,7 +18,7 @@
 
     # Formatters
     nodePackages.prettier black ruff shfmt
-    nixfmt-rfc-style  # doom doctor: nixfmt
+    nixfmt  # doom doctor: nixfmt
 
     # Linting/checking (doom doctor requirements)
     shellcheck        # shell script linting
