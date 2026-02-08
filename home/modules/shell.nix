@@ -50,8 +50,9 @@
     enable = true;
     enableBashIntegration = true;
     settings = {
-      # Two-line prompt configuration
+      # Classic two-line prompt with elegant styling
       format = lib.concatStrings [
+        "[┌─](bold white)"
         "$username"
         "$hostname"
         "$directory"
@@ -64,105 +65,106 @@
         "$golang"
         "$cmd_duration"
         "$line_break"
-        "$character"
+        "[└─](bold white)$character"
       ];
 
       add_newline = true;
 
       # Character (prompt symbol on second line)
       character = {
-        success_symbol = "[❯](bold green)";
-        error_symbol = "[❯](bold red)";
+        success_symbol = "[➜](bold green)";
+        error_symbol = "[✗](bold red)";
         vimcmd_symbol = "[❮](bold green)";
       };
 
       # Username
       username = {
         show_always = false;
-        style_user = "bold yellow";
-        style_root = "bold red";
-        format = "[$user]($style) ";
+        style_user = "bold bg:blue fg:black";
+        style_root = "bold bg:red fg:white";
+        format = "[ $user ]($style)";
       };
 
       # Hostname
       hostname = {
         ssh_only = true;
-        format = "[@$hostname]($style) ";
-        style = "bold dimmed green";
+        format = "[@$hostname ]($style)";
+        style = "bold bg:green fg:black";
       };
 
-      # Directory
+      # Directory with box styling
       directory = {
         truncation_length = 3;
         truncate_to_repo = true;
-        style = "bold cyan";
-        format = "[$path]($style)[$read_only]($read_only_style) ";
+        style = "bold bg:cyan fg:black";
+        format = "[ $path ]($style)[$read_only]($read_only_style)";
         read_only = " 󰌾";
-        read_only_style = "red";
+        read_only_style = "bold bg:red fg:white";
+        truncation_symbol = "…/";
       };
 
-      # Git Branch
+      # Git Branch with enhanced styling
       git_branch = {
-        symbol = " ";
-        style = "bold purple";
-        format = "[$symbol$branch]($style) ";
+        symbol = "";
+        style = "bold bg:purple fg:black";
+        format = "[ $symbol $branch ]($style)";
       };
 
-      # Git Status
+      # Git Status with detailed indicators
       git_status = {
-        style = "bold red";
-        format = "([$all_status$ahead_behind]($style) )";
-        conflicted = "🏳";
-        ahead = "⇡\${count}";
-        behind = "⇣\${count}";
-        diverged = "⇕⇡\${ahead_count}⇣\${behind_count}";
-        untracked = "?";
-        stashed = "$";
-        modified = "!";
-        staged = "+";
-        renamed = "»";
-        deleted = "✘";
+        style = "bold bg:yellow fg:black";
+        format = "([ $all_status$ahead_behind]($style))";
+        conflicted = "🏳 ";
+        ahead = "⇡\${count} ";
+        behind = "⇣\${count} ";
+        diverged = "⇕⇡\${ahead_count}⇣\${behind_count} ";
+        untracked = "?\${count} ";
+        stashed = "$\${count} ";
+        modified = "!\${count} ";
+        staged = "+\${count} ";
+        renamed = "»\${count} ";
+        deleted = "✘\${count} ";
       };
 
-      # Nix Shell
+      # Nix Shell with box styling
       nix_shell = {
-        symbol = " ";
-        style = "bold blue";
-        format = "[$symbol$state]($style) ";
+        symbol = "";
+        style = "bold bg:blue fg:white";
+        format = "[ $symbol nix ]($style)";
         impure_msg = "";
         pure_msg = "";
       };
 
-      # Programming Languages
+      # Programming Languages with box styling
       python = {
-        symbol = " ";
-        style = "yellow";
-        format = "[\${symbol}\${pyenv_prefix}(\${version} )(\\($virtualenv\\) )]($style)";
+        symbol = "";
+        style = "bold bg:yellow fg:black";
+        format = "[ \${symbol} \${pyenv_prefix}(\${version} )(\\($virtualenv\\) )]($style)";
       };
 
       nodejs = {
-        symbol = " ";
-        style = "bold green";
-        format = "[$symbol($version )]($style)";
+        symbol = "";
+        style = "bold bg:green fg:black";
+        format = "[ $symbol ($version) ]($style)";
       };
 
       rust = {
-        symbol = " ";
-        style = "bold red";
-        format = "[$symbol($version )]($style)";
+        symbol = "";
+        style = "bold bg:red fg:white";
+        format = "[ $symbol ($version) ]($style)";
       };
 
       golang = {
-        symbol = " ";
-        style = "bold cyan";
-        format = "[$symbol($version )]($style)";
+        symbol = "";
+        style = "bold bg:cyan fg:black";
+        format = "[ $symbol ($version) ]($style)";
       };
 
-      # Command Duration
+      # Command Duration with styling
       cmd_duration = {
         min_time = 500;
-        style = "bold yellow";
-        format = "[took $duration]($style) ";
+        style = "bold bg:white fg:black";
+        format = "[ 󱦟 $duration ]($style)";
       };
     };
   };
