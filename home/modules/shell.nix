@@ -11,24 +11,79 @@
     shellOptions = [ "histappend" "cmdhist" "autocd" "cdspell" "dirspell" "globstar" "nocaseglob" "checkwinsize" ];
 
     shellAliases = {
-      ls = "ls --color=auto"; grep = "grep --color=auto"; diff = "diff --color=auto";
-      fgrep = "fgrep --color=auto"; egrep = "egrep --color=auto";
+      # Modern ls via eza (with icons and git integration)
+      ls = "eza --icons --group-directories-first";
+      ll = "eza -la --icons --git --group-directories-first";
+      la = "eza -a --icons --group-directories-first";
+      lt = "eza -la --icons --git --sort=modified";
+      l = "eza --icons";
+      tree = "eza --tree --icons -I '.git|node_modules|__pycache__|.venv|target|build'";
+
+      # Cat/Less with syntax highlighting
+      cat = "bat --style=plain";
+      less = "bat --style=plain --paging=always";
+
+      # Help system: tldr first, fallback to man
+      help = "tldr";
+      "?" = "tldr";
+
+      # Navigation
+      ".." = "cd .."; "..." = "cd ../.."; "...." = "cd ../../.."; "....." = "cd ../../../..";
+
+      # Safety
       cp = "cp -i"; mv = "mv -i"; rm = "rm -i";
-      ".." = "cd .."; "..." = "cd ../.."; "...." = "cd ../../..";
-      ll = "ls -lh"; la = "ls -lAh"; l = "ls -CF"; lt = "ls -lhtr";
-      cat = "bat --style=plain"; tree = "tree -I '.git|node_modules|__pycache__|.venv|target|build'";
-      penv = "source ./.venv/bin/activate"; ta = "tmux attach -t";
-      em = "emacs -nw"; ds = "doom sync"; emk = "pkill -f emacs"; emd = "emacs --daemon";
-      e = "emacsclient -c -a ''";      # GUI emacs (instant via daemon)
-      et = "emacsclient -nw -a ''";    # Terminal emacs (instant via daemon)
+
+      # Grep with color
+      grep = "grep --color=auto";
+      fgrep = "fgrep --color=auto";
+      egrep = "egrep --color=auto";
+      diff = "diff --color=auto";
+
+      # Python
+      penv = "source ./.venv/bin/activate";
+      py = "python3";
+
+      # Emacs (via daemon - instant startup)
+      e = "emacsclient -c -a ''";       # GUI emacs
+      et = "emacsclient -nw -a ''";     # Terminal emacs
+      ds = "doom sync";                 # Sync doom config
+      emd = "emacs --daemon";           # Start daemon manually
+      emk = "pkill -f 'emacs --daemon'"; # Kill daemon
+
+      # Git
       gs = "git status -sb"; gl = "git log --oneline -20"; gd = "git diff";
       ga = "git add"; gc = "git commit"; gp = "git push"; gf = "git fetch --all --prune";
+      gco = "git checkout"; gb = "git branch";
+
+      # NixOS
       nrs = "sudo nixos-rebuild switch --flake ~/dotfiles#xynapz";
       nrb = "sudo nixos-rebuild boot --flake ~/dotfiles#xynapz";
+
+      # Misc tools
+      df = "duf";                        # Prettier df
+      du = "dust";                       # Prettier du
+      ps = "procs";                      # Prettier ps
+      top = "btm";                       # Bottom is better than top
+      fetch = "fastfetch";               # System info
+      md = "glow";                       # Markdown viewer
+      bench = "hyperfine";               # Benchmarking
+      loc = "tokei";                     # Code line counter
     };
 
     initExtra = ''
+      # Colored man pages (LESS_TERMCAP) - makes man pages beautiful
+      export LESS_TERMCAP_mb=$'\e[1;32m'      # begin blink (green)
+      export LESS_TERMCAP_md=$'\e[1;36m'      # begin bold (cyan)
+      export LESS_TERMCAP_me=$'\e[0m'         # end mode
+      export LESS_TERMCAP_se=$'\e[0m'         # end standout
+      export LESS_TERMCAP_so=$'\e[01;44;33m'  # standout (yellow on blue)
+      export LESS_TERMCAP_ue=$'\e[0m'         # end underline
+      export LESS_TERMCAP_us=$'\e[1;35m'      # begin underline (magenta)
+      export GROFF_NO_SGR=1                   # for older groff versions
+
+      # Utility functions
       mkcd() { mkdir -p "$1" && cd "$1"; }
+
       extract() {
         [ -f "$1" ] || { echo "'$1' is not a valid file"; return; }
         case "$1" in
@@ -37,10 +92,23 @@
           *.zip) unzip "$1" ;; *.7z) 7z x "$1" ;; *) echo "'$1' cannot be extracted" ;;
         esac
       }
-      ff() { find . -type f -iname "*$1*" 2>/dev/null; }
-      fdir() { find . -type d -iname "*$1*" 2>/dev/null; }
-      up() { local count="''${1:-1}"; local path=""; for ((i=0;i<count;i++)); do path="../$path"; done; cd "$path" || return; }
-      ccat() { [ -f "$1" ] && source-highlight --failsafe -f esc -i "$1" 2>/dev/null || cat "$@"; }
+
+      # Search functions
+      ff() { fd --type f "$1" 2>/dev/null || find . -type f -iname "*$1*" 2>/dev/null; }
+      fdir() { fd --type d "$1" 2>/dev/null || find . -type d -iname "*$1*" 2>/dev/null; }
+
+      # Directory navigation
+      up() {
+        local count="''${1:-1}"; local path=""
+        for ((i=0;i<count;i++)); do path="../$path"; done
+        cd "$path" || return
+      }
+
+      # Preview file with syntax highlighting
+      preview() { bat --style=numbers --color=always "$1" | head -100; }
+
+      # Quick JSON pretty print
+      json() { echo "$1" | jq .; }
     '';
 
     profileExtra = ''

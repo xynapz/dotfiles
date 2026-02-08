@@ -26,8 +26,10 @@
     TERMINAL = "wezterm";
     EDITOR = "emacsclient -nw -a ''";      # Terminal emacs via daemon (instant)
     VISUAL = "emacsclient -c -a ''";       # GUI emacs via daemon (instant)
-    PAGER = "less";
-    LESS = "-R -i -M -S -x4";
+    PAGER = "bat --style=plain --paging=always";  # Syntax highlighting everywhere
+    LESS = "-R -i -M -S -x4";  # Still used by programs that explicitly call less
+    MANPAGER = "sh -c 'col -bx | bat -l man -p'";  # Colored man pages
+    BAT_THEME = "Nord";  # Consistent theme
     XDG_CURRENT_DESKTOP = "sway";
     XDG_SESSION_TYPE = "wayland";
     MOZ_ENABLE_WAYLAND = "1";
@@ -48,6 +50,13 @@
     wezterm firefox texliveFull poppler-utils
     nodejs python3 go rustup gcc gnumake cmake
     ripgrep fd bat eza dust duf procs bottom fastfetch
+    tealdeer          # tldr - simplified man pages
+    jq yq             # JSON/YAML processing
+    httpie            # Modern HTTP client (http/https commands)
+    tokei             # Code statistics
+    hyperfine         # Command benchmarking
+    glow              # Markdown viewer in terminal
+    ncdu              # Interactive disk usage
     wl-clipboard cliphist grim slurp swappy wf-recorder
     pavucontrol libnotify unzip p7zip tree calc
     iosevka jetbrains-mono sourceHighlight imagemagick
