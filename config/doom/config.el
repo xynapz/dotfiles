@@ -1,5 +1,20 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+;;;; PERFORMANCE OPTIMIZATIONS
+;; Native compilation (generates .eln cache for faster startup)
+(setq native-comp-deferred-compilation t
+      native-comp-async-report-warnings-errors nil)
+
+;; GC optimization for daemon mode (gcmh will reset during idle)
+(setq gcmh-high-cons-threshold (* 128 1024 1024))  ; 128MB during work
+(setq read-process-output-max (* 1024 1024))       ; 1MB (default 4KB)
+
+;; Log startup time for diagnostics
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (message "Doom loaded in %s with %d garbage collections."
+                     (emacs-init-time) gcs-done)))
+
 ;; Identity (optional)
 (setq user-full-name "xinapx"
       user-mail-address "xynapz@aol.com")
@@ -343,90 +358,52 @@
 (use-package! dotenv-mode
   :mode ("\\.env\\'" "\\.env\\..*\\'"))
 
-;;; ORG MODE
+;;; ORG MODE - Simple Learning Log
 
 (after! org
-  ;; Directory structure
-  (setq org-default-notes-file (expand-file-name "inbox.org" org-directory))
+  ;; Point to your poneglyphs learning log
+  (setq org-directory "~/xynapz/xinapx-web/poneglyphs/meta/")
+  (setq org-default-notes-file (expand-file-name "default-log-entry.org" org-directory))
 
-  ;; TODO Keywords
+  ;; Simple TODO states
   (setq org-todo-keywords
-        '((sequence "TODO(t)" "NEXT(n)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELLED(c@)")))
+        '((sequence "TODO(t)" "DONE(d!)")))
 
-  (setq org-todo-keyword-faces
-        '(("TODO" . (:foreground "#BF616A" :weight bold))
-          ("NEXT" . (:foreground "#EBCB8B" :weight bold))
-          ("WAIT" . (:foreground "#D08770" :weight bold))
-          ("DONE" . (:foreground "#A3BE8C" :weight bold))
-          ("CANCELLED" . (:foreground "#4C566A" :weight bold))))
-
-  ;; Agenda
+  ;; Agenda files
   (setq org-agenda-files (list org-directory))
 
+  ;; ONE agenda view: Learning Log
   (setq org-agenda-custom-commands
-        '(("1" "Today"
-           ((agenda "" ((org-agenda-span 1)
-                        (org-agenda-start-day "today")
-                        (org-deadline-warning-days 0)
-                        (org-agenda-overriding-header "📅 Today")))
-            (todo "NEXT" ((org-agenda-overriding-header "⚡ Next Actions")))))
+        '(("L" "Learning Log"
+           ((tags "+math|+cs"
+                  ((org-agenda-overriding-header "📚 All Learning Entries")
+                   (org-agenda-sorting-strategy '(time-down))))))))
 
-          ("7" "This Week"
-           ((agenda "" ((org-agenda-span 7)
-                        (org-agenda-start-on-weekday nil)
-                        (org-deadline-warning-days 7)
-                        (org-agenda-overriding-header "📅 This Week")))
-            (todo "NEXT" ((org-agenda-overriding-header "⚡ Next Actions")))
-            (todo "WAIT" ((org-agenda-overriding-header "⏳ Waiting On")))))
-
-          ("d" "Dashboard"
-           ((agenda "" ((org-agenda-span 'day)
-                        (org-deadline-warning-days 7)))
-            (todo "NEXT" ((org-agenda-overriding-header "⚡ Next Actions")))
-            (todo "WAIT" ((org-agenda-overriding-header "⏳ Waiting On")))
-            (tags-todo "inbox" ((org-agenda-overriding-header "📥 Inbox")))))
-
-          ("p" "Projects"
-           ((tags-todo "+project" ((org-agenda-overriding-header "🚀 Active Projects")))))
-
-          ("l" "Learning"
-           ((tags-todo "+learning" ((org-agenda-overriding-header "📚 Learning")))
-            (tags-todo "+reading" ((org-agenda-overriding-header "📖 Reading List")))))))
-
-  ;; Capture Templates
+  ;; TWO capture templates: Log and Error
   (setq org-capture-templates
-        `(("t" "Task" entry (file org-default-notes-file)
-           "* TODO %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n%i" :empty-lines 1)
+        `(("L" "Log Session" entry
+           (file+headline org-default-notes-file "Log")
+           "* %^{What did you study/code?} %^g
+:PROPERTIES:
+:DATE: %U
+:DURATION: %^{Duration (e.g. 2h)}
+:END:
+%?" :empty-lines 1)
 
-          ("T" "Task with Dates" entry (file org-default-notes-file)
-           "* TODO %?\nSCHEDULED: %^t\nDEADLINE: %^t\n:PROPERTIES:\n:CREATED: %U\n:END:\n%i" :empty-lines 1)
+          ("E" "Error/Bug" entry
+           (file+headline org-default-notes-file "Errors")
+           "* %^{What was the error?} %^g
+:PROPERTIES:
+:DATE: %U
+:END:
+** What went wrong
+%?
+** Why it happened
 
-          ("c" "Code Task" entry (file org-default-notes-file)
-           "* TODO %?\nSCHEDULED: %^t\nDEADLINE: %^t\n:PROPERTIES:\n:CREATED: %U\n:SOURCE: %a\n:END:\n%i" :empty-lines 1)
+** Lesson learned
+" :empty-lines 1)))
 
-          ("p" "Project" entry (file ,(expand-file-name "projects.org" org-directory))
-           "* TODO %? :project:\n:PROPERTIES:\n:CREATED: %U\n:END:\n** Goals\n** Tasks\n*** TODO \n** Notes\n" :empty-lines 1)
-
-          ("l" "Learning" entry (file ,(expand-file-name "learning.org" org-directory))
-           "* TODO %? :learning:\n:PROPERTIES:\n:CREATED: %U\n:SOURCE: \n:END:\n** Notes\n** Questions\n** Summary\n" :empty-lines 1)
-
-          ("j" "Journal" entry (file+datetree ,(expand-file-name "journal.org" org-directory))
-           "* %<%H:%M> %?\n" :empty-lines 1)
-
-          ("n" "Note" entry (file org-default-notes-file)
-           "* %? :note:\n:PROPERTIES:\n:CREATED: %U\n:END:\n%i" :empty-lines 1)))
-
-  ;; Refile
-  (setq org-refile-targets '((nil :maxlevel . 2)
-                             (org-agenda-files :maxlevel . 2))
-        org-refile-use-outline-path 'file
-        org-outline-path-complete-in-steps nil
-        org-refile-allow-creating-parent-nodes 'confirm)
-
-  ;; Archive
-  (setq org-archive-location (concat (expand-file-name "archive.org" org-directory) "::* From %s"))
-
-  ;; Babel
+  ;; Babel languages
   (setq org-babel-load-languages
         '((emacs-lisp . t)
           (python . t)

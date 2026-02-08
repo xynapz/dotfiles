@@ -19,6 +19,8 @@
       cat = "bat --style=plain"; tree = "tree -I '.git|node_modules|__pycache__|.venv|target|build'";
       penv = "source ./.venv/bin/activate"; ta = "tmux attach -t";
       em = "emacs -nw"; ds = "doom sync"; emk = "pkill -f emacs"; emd = "emacs --daemon";
+      e = "emacsclient -c -a ''";      # GUI emacs (instant via daemon)
+      et = "emacsclient -nw -a ''";    # Terminal emacs (instant via daemon)
       gs = "git status -sb"; gl = "git log --oneline -20"; gd = "git diff";
       ga = "git add"; gc = "git commit"; gp = "git push"; gf = "git fetch --all --prune";
       nrs = "sudo nixos-rebuild switch --flake ~/dotfiles#xynapz";

@@ -7,10 +7,35 @@
   home.file.".doom.d" = { source = ../../config/doom; recursive = true; };
 
   home.packages = with pkgs; [
+    # Core tools
     git ripgrep fd coreutils
-    nodePackages.typescript-language-server nodePackages.vscode-langservers-extracted nodePackages.bash-language-server
-    pyright gopls clang-tools terraform-ls yaml-language-server lua-language-server
-    nodePackages.prettier black ruff stylua shfmt nixpkgs-fmt
+
+    # LSP servers
+    nodePackages.typescript-language-server
+    nodePackages.vscode-langservers-extracted
+    nodePackages.bash-language-server
+    pyright gopls clang-tools
+
+    # Formatters
+    nodePackages.prettier black ruff shfmt
+    nixfmt-rfc-style  # doom doctor: nixfmt
+
+    # Linting/checking (doom doctor requirements)
+    shellcheck        # shell script linting
+    html-tidy         # HTML formatting
+    nodePackages.stylelint    # CSS linting
+    nodePackages.js-beautify  # JS/CSS/HTML formatting
+
+    # Python tools (doom doctor requirements)
+    python312Packages.pyflakes  # import management
+    python312Packages.isort     # import sorting
+    python312Packages.pytest    # testing
+    python312Packages.nose2     # nosetests alternative
+
+    # Markdown
+    pandoc            # doom doctor: markdown compiler
+
+    # Spell checking
     aspell aspellDicts.en aspellDicts.en-computers
   ];
 

@@ -68,7 +68,7 @@
        (javascript +tree-sitter)
        (json +tree-sitter)
        (latex)
-       (lua +tree-sitter)
+       ;; (lua +tree-sitter)
        markdown
        (nix +lsp)
        org
@@ -76,9 +76,9 @@
        (python +lsp +pyright +tree-sitter)
        ;;(rust +lsp +tree-sitter)
        (sh +tree-sitter)
-       (terraform +lsp)
+       ;; (terraform +lsp)
        (web +lsp +tree-sitter)
-       (yaml +lsp)
+       ;; (yaml +lsp)
 
        :email
 

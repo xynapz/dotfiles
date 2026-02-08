@@ -24,8 +24,8 @@
   # SESSION VARIABLES
   home.sessionVariables = {
     TERMINAL = "wezterm";
-    EDITOR = "emacs -nw";
-    VISUAL = "emacs -nw";
+    EDITOR = "emacsclient -nw -a ''";      # Terminal emacs via daemon (instant)
+    VISUAL = "emacsclient -c -a ''";       # GUI emacs via daemon (instant)
     PAGER = "less";
     LESS = "-R -i -M -S -x4";
     XDG_CURRENT_DESKTOP = "sway";
