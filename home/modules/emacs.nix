@@ -30,7 +30,7 @@
     python312Packages.pyflakes  # import management
     python312Packages.isort     # import sorting
     python312Packages.pytest    # testing
-    python312Packages.nose      # nosetests
+    python312Packages.nose2     # nosetests (nose2 is the successor)
     pipenv                      # pipenv support
 
     # Docker
