@@ -111,7 +111,6 @@
         ble-face -s syntax_glob              fg=yellow         # EBCB8B
         ble-face -s filename_directory       fg=cyan,underline # 88C0D0
         ble-face -s filename_executable      fg=green,bold     # A3BE8C
-        ble-face -s filename_symlink         fg=magenta        # B48EAD
         ble-face -s auto_complete            fg=238            # dim gray
         ble-face -s region                   bg=60             # selection
         ble-face -s command_builtin          fg=cyan           # 88C0D0
@@ -128,9 +127,6 @@
         # Highlight matching brackets/quotes
         bleopt highlight_syntax=1
         bleopt highlight_filename=1
-
-        # Vi mode indicator (works with starship)
-        bleopt keymap_vi_mode_show=1
       fi
 
       # ── Colored man pages (LESS_TERMCAP) ──
