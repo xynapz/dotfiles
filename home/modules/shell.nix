@@ -51,34 +51,6 @@
       emd = "emacs --daemon";
       emk = "pkill -f 'emacs --daemon'";
 
-      # Git
-      gs = "git status -sb";
-      gd = "git diff";
-      gds = "git diff --staged";
-      ga = "git add";
-      gaa = "git add -A";
-      gc = "git commit";
-      gcm = "git commit -m";
-      gca = "git commit --amend --no-edit";
-      gp = "git push";
-      gpf = "git push --force-with-lease";
-      gpl = "git pull --rebase";
-      gf = "git fetch --all --prune";
-      gco = "git checkout";
-      gcb = "git checkout -b";
-      gb = "git branch";
-      gbd = "git branch -d";
-      gl = "git log --oneline -20";
-      glg = "git log --graph --oneline --decorate -20";
-      gst = "git stash";
-      gstp = "git stash pop";
-      grb = "git rebase";
-      grbi = "git rebase -i";
-      grs = "git reset";
-      grsh = "git reset --hard";
-      gcp = "git cherry-pick";
-      gbl = "git blame -b -w";
-
       # NixOS
       nrs = "sudo nixos-rebuild switch --flake ~/dotfiles#xynapz";
       nrb = "sudo nixos-rebuild boot --flake ~/dotfiles#xynapz";
@@ -103,7 +75,7 @@
         git clone --depth 1 https://github.com/ohmybash/oh-my-bash.git "$OSH" 2>/dev/null
       fi
 
-      OSH_THEME="powerline-multiline"
+      OSH_THEME="pzq"
 
       plugins=(
         git
