@@ -1,0 +1,127 @@
+// EWW Cheatsheet Styling - Nord Theme
+// Colors: https://www.nordtheme.com/
+
+// Nord palette
+$nord0:  #2e3440;
+$nord1:  #3b4252;
+$nord2:  #434c5e;
+$nord3:  #4c566a;
+$nord4:  #d8dee9;
+$nord5:  #e5e9f0;
+$nord6:  #eceff4;
+$nord7:  #8fbcbb;
+$nord8:  #88c0d0;
+$nord9:  #81a1c1;
+$nord10: #5e81ac;
+$nord11: #bf616a;
+$nord12: #d08770;
+$nord13: #ebcb8b;
+$nord14: #a3be8c;
+$nord15: #b48ead;
+
+// ── Backdrop ────────────────────────────────────────────────────
+.backdrop {
+  background-color: rgba(0, 0, 0, 0.55);
+  padding: 40px 60px;
+}
+
+// ── Container ───────────────────────────────────────────────────
+.cheatsheet-container {
+  background-color: rgba(46, 52, 64, 0.97);
+  border-radius: 16px;
+  border: 1px solid $nord3;
+  padding: 0;
+  min-width: 900px;
+  min-height: 600px;
+}
+
+// ── Header ──────────────────────────────────────────────────────
+.cheatsheet-header {
+  background-color: rgba(59, 66, 82, 0.9);
+  border-radius: 16px 16px 0 0;
+  padding: 16px 24px;
+  border-bottom: 1px solid $nord3;
+}
+
+.header-icon {
+  font-size: 22px;
+  color: $nord8;
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: $nord6;
+  letter-spacing: 0.5px;
+}
+
+.close-btn {
+  font-size: 18px;
+  color: $nord3;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 4px 8px;
+  transition: all 200ms ease;
+
+  &:hover {
+    color: $nord11;
+    background-color: rgba(191, 97, 106, 0.15);
+  }
+}
+
+// ── Scroll Area ─────────────────────────────────────────────────
+.cheatsheet-scroll {
+  padding: 0;
+}
+
+// ── Content ─────────────────────────────────────────────────────
+.cheatsheet-content {
+  padding: 20px 28px 28px;
+}
+
+// ── Category ────────────────────────────────────────────────────
+.category {
+  padding: 0;
+}
+
+.category-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: $nord8;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 0 6px 4px;
+  border-bottom: 1px solid rgba(136, 192, 208, 0.15);
+  margin-bottom: 4px;
+}
+
+.category-items {
+  padding: 0 0 0 4px;
+}
+
+// ── Item Row ────────────────────────────────────────────────────
+.item-row {
+  padding: 5px 8px;
+  border-radius: 6px;
+  transition: background-color 150ms ease;
+
+  &:hover {
+    background-color: rgba(67, 76, 94, 0.5);
+  }
+}
+
+.item-key {
+  font-family: "Iosevka", "JetBrains Mono", monospace;
+  font-size: 13px;
+  color: $nord13;
+  background-color: rgba(235, 203, 139, 0.08);
+  border: 1px solid rgba(235, 203, 139, 0.2);
+  border-radius: 5px;
+  padding: 3px 10px;
+}
+
+.item-desc {
+  font-size: 13px;
+  color: $nord4;
+}

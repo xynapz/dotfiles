@@ -44,6 +44,7 @@
         { command = "waybar"; }
         { command = "emacs --daemon"; }
         { command = "wl-paste --watch cliphist store"; }
+        { command = "eww daemon -c $HOME/dotfiles/config/eww"; }
 
         { command = "swaymsg output '*' bg ~/.wallpaper-home fill"; }
         { command = "swayidle -w timeout 600 'swaylock -f -i ~/.wallpaper-lock' timeout 1200 'swaymsg \"output * power off\"' resume 'swaymsg \"output * power on\"' before-sleep 'swaylock -f -i ~/.wallpaper-lock'"; }
@@ -74,6 +75,7 @@
         "Shift+Print" = "exec grim - | swappy -f -";
         "${mod}+Print" = "exec grim -g \"$(slurp)\" ~/Pictures/Screenshots/$(date +%Y%m%d-%H%M%S).png";
         "${mod}+p" = "exec ${scripts}/color-picker.sh";
+        "${mod}+slash" = "exec ${scripts}/cheatsheet.sh";
 
         "${mod}+h" = "focus left"; "${mod}+j" = "focus down"; "${mod}+k" = "focus up"; "${mod}+l" = "focus right";
         "${mod}+Shift+h" = "move left"; "${mod}+Shift+j" = "move down"; "${mod}+Shift+k" = "move up"; "${mod}+Shift+l" = "move right";
@@ -111,6 +113,7 @@
       for_window [app_id="(foot|emacs|thunar)"] border none
       for_window [app_id="^org\.(wezfurlong\.wezterm)$"] border none
       for_window [class="(firefox|brave)"] border none
+      for_window [app_id="eww-cheatsheet"] floating enable, border none
       include /etc/sway/config.d/*
     '';
   };

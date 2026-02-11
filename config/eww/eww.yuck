@@ -1,0 +1,97 @@
+;; EWW Cheatsheet Widget
+;; Fullscreen overlay showing keybindings parsed from real config files
+
+;; ── Variables ──────────────────────────────────────────────────────
+(defvar cheatsheet_title "Cheatsheet")
+(defvar cheatsheet_data "[]")
+
+;; ── Close helper ───────────────────────────────────────────────────
+(defvar eww_config "$HOME/dotfiles/config/eww")
+
+;; ── Cheatsheet Window ──────────────────────────────────────────────
+(defwindow cheatsheet
+  :monitor 0
+  :geometry (geometry
+    :x "0%"
+    :y "0%"
+    :width "100%"
+    :height "100%"
+    :anchor "center center")
+  :stacking "overlay"
+  :exclusive false
+  :focusable true
+  :namespace "eww-cheatsheet"
+  (cheatsheet-layout))
+
+;; ── Main Layout ────────────────────────────────────────────────────
+(defwidget cheatsheet-layout []
+  (eventbox
+    :onclick "eww -c $HOME/dotfiles/config/eww close cheatsheet"
+    (box
+      :class "backdrop"
+      :orientation "v"
+      :space-evenly false
+      :halign "center"
+      :valign "center"
+      (eventbox
+        :onclick ""
+        (box
+          :class "cheatsheet-container"
+          :orientation "v"
+          :space-evenly false
+          :spacing 0
+          ;; Header
+          (box
+            :class "cheatsheet-header"
+            :orientation "h"
+            :space-evenly false
+            :spacing 12
+            (label :class "header-icon" :text "󰌌")
+            (label :class "header-title" :text cheatsheet_title)
+            (box :hexpand true)
+            (button
+              :class "close-btn"
+              :onclick "eww -c $HOME/dotfiles/config/eww close cheatsheet"
+              "󰅖"))
+          ;; Content
+          (scroll
+            :class "cheatsheet-scroll"
+            :vscroll true
+            :hscroll false
+            :vexpand true
+            (box
+              :class "cheatsheet-content"
+              :orientation "v"
+              :space-evenly false
+              :spacing 16
+              (for category in cheatsheet_data
+                (box
+                  :class "category"
+                  :orientation "v"
+                  :space-evenly false
+                  :spacing 6
+                  (label
+                    :class "category-title"
+                    :halign "start"
+                    :text {category.category})
+                  (box
+                    :class "category-items"
+                    :orientation "v"
+                    :space-evenly false
+                    :spacing 2
+                    (for item in {category.items}
+                      (box
+                        :class "item-row"
+                        :orientation "h"
+                        :space-evenly false
+                        :spacing 12
+                        (label
+                          :class "item-key"
+                          :halign "start"
+                          :width 280
+                          :text {item.key})
+                        (label
+                          :class "item-desc"
+                          :halign "start"
+                          :hexpand true
+                          :text {item.desc})))))))))))))
