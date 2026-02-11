@@ -1,5 +1,10 @@
 # Shell Configuration (Bash + Oh My Bash)
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   programs.bash = {
@@ -7,9 +12,32 @@
     enableCompletion = true;
     historySize = 50000;
     historyFileSize = 100000;
-    historyControl = [ "ignoreboth" "erasedups" ];
-    historyIgnore = [ "ls" "cd" "cd -" "pwd" "exit" "clear" "history" "bg" "fg" ];
-    shellOptions = [ "histappend" "cmdhist" "autocd" "cdspell" "dirspell" "globstar" "nocaseglob" "checkwinsize" "extglob" ];
+    historyControl = [
+      "ignoreboth"
+      "erasedups"
+    ];
+    historyIgnore = [
+      "ls"
+      "cd"
+      "cd -"
+      "pwd"
+      "exit"
+      "clear"
+      "history"
+      "bg"
+      "fg"
+    ];
+    shellOptions = [
+      "histappend"
+      "cmdhist"
+      "autocd"
+      "cdspell"
+      "dirspell"
+      "globstar"
+      "nocaseglob"
+      "checkwinsize"
+      "extglob"
+    ];
 
     shellAliases = {
       # Modern ls via eza (with icons and git integration)
@@ -29,10 +57,15 @@
       "?" = "tldr";
 
       # Navigation
-      ".." = "cd .."; "..." = "cd ../.."; "...." = "cd ../../.."; "....." = "cd ../../../..";
+      ".." = "cd ..";
+      "..." = "cd ../..";
+      "...." = "cd ../../..";
+      "....." = "cd ../../../..";
 
       # Safety
-      cp = "cp -i"; mv = "mv -i"; rm = "rm -i";
+      cp = "cp -i";
+      mv = "mv -i";
+      rm = "rm -i";
 
       # Grep with color
       grep = "grep --color=auto";
@@ -75,11 +108,9 @@
         git clone --depth 1 https://github.com/ohmybash/oh-my-bash.git "$OSH" 2>/dev/null
       fi
 
-      OSH_THEME="pzq"
+      OSH_THEME="powerbash10k"
 
       plugins=(
-        git
-        bashmarks
         progress
       )
 
@@ -145,7 +176,22 @@
     };
   };
 
-  programs.direnv = { enable = true; enableBashIntegration = true; nix-direnv.enable = true; };
-  programs.fzf = { enable = true; enableBashIntegration = true; defaultOptions = [ "--height 40%" "--layout=reverse" "--border" ]; };
-  programs.zoxide = { enable = true; enableBashIntegration = true; };
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    nix-direnv.enable = true;
+  };
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = true;
+    defaultOptions = [
+      "--height 40%"
+      "--layout=reverse"
+      "--border"
+    ];
+  };
+  programs.zoxide = {
+    enable = true;
+    enableBashIntegration = true;
+  };
 }
