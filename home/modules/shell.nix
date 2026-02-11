@@ -1,14 +1,15 @@
-# Shell Configuration (Bash + Starship)
+# Shell Configuration (Bash + Starship + ble.sh)
 { config, pkgs, lib, ... }:
 
 {
   programs.bash = {
     enable = true;
-    historySize = 10000;
-    historyFileSize = 20000;
+    enableCompletion = true;
+    historySize = 50000;
+    historyFileSize = 100000;
     historyControl = [ "ignoreboth" "erasedups" ];
-    historyIgnore = [ "ls" "cd" "cd -" "pwd" "exit" "clear" "history" ];
-    shellOptions = [ "histappend" "cmdhist" "autocd" "cdspell" "dirspell" "globstar" "nocaseglob" "checkwinsize" ];
+    historyIgnore = [ "ls" "cd" "cd -" "pwd" "exit" "clear" "history" "bg" "fg" ];
+    shellOptions = [ "histappend" "cmdhist" "autocd" "cdspell" "dirspell" "globstar" "nocaseglob" "checkwinsize" "extglob" ];
 
     shellAliases = {
       # Modern ls via eza (with icons and git integration)
@@ -50,10 +51,33 @@
       emd = "emacs --daemon";           # Start daemon manually
       emk = "pkill -f 'emacs --daemon'"; # Kill daemon
 
-      # Git
-      gs = "git status -sb"; gl = "git log --oneline -20"; gd = "git diff";
-      ga = "git add"; gc = "git commit"; gp = "git push"; gf = "git fetch --all --prune";
-      gco = "git checkout"; gb = "git branch";
+      # Git (shortcuts)
+      gs = "git status -sb";
+      gd = "git diff";
+      gds = "git diff --staged";
+      ga = "git add";
+      gaa = "git add -A";
+      gc = "git commit";
+      gcm = "git commit -m";
+      gca = "git commit --amend --no-edit";
+      gp = "git push";
+      gpf = "git push --force-with-lease";
+      gpl = "git pull --rebase";
+      gf = "git fetch --all --prune";
+      gco = "git checkout";
+      gcb = "git checkout -b";
+      gb = "git branch";
+      gbd = "git branch -d";
+      gl = "git log --oneline -20";
+      glg = "git log --graph --oneline --decorate -20";
+      gst = "git stash";
+      gstp = "git stash pop";
+      grb = "git rebase";
+      grbi = "git rebase -i";
+      grs = "git reset";
+      grsh = "git reset --hard";
+      gcp = "git cherry-pick";
+      gbl = "git blame -b -w";
 
       # NixOS
       nrs = "sudo nixos-rebuild switch --flake ~/dotfiles#xynapz";
@@ -71,7 +95,45 @@
     };
 
     initExtra = ''
-      # Colored man pages (LESS_TERMCAP) - makes man pages beautiful
+      # ── ble.sh (syntax highlighting, autosuggestions, auto-pairs) ──
+      if [[ -f "${pkgs.blesh}/share/blesh/ble.sh" ]] && [[ $- == *i* ]]; then
+        source "${pkgs.blesh}/share/blesh/ble.sh" --noattach
+
+        # Nord-themed syntax colors
+        ble-face -s syntax_default           fg=252            # D8DEE9
+        ble-face -s syntax_command           fg=cyan           # 88C0D0
+        ble-face -s syntax_quoted            fg=green          # A3BE8C
+        ble-face -s syntax_error             fg=red,bold       # BF616A
+        ble-face -s syntax_comment           fg=242            # 616e88
+        ble-face -s syntax_varname           fg=252            # D8DEE9
+        ble-face -s syntax_expr              fg=magenta        # B48EAD
+        ble-face -s syntax_tilde             fg=cyan           # 88C0D0
+        ble-face -s syntax_glob              fg=yellow         # EBCB8B
+        ble-face -s filename_directory       fg=cyan,underline # 88C0D0
+        ble-face -s filename_executable      fg=green,bold     # A3BE8C
+        ble-face -s filename_symlink         fg=magenta        # B48EAD
+        ble-face -s auto_complete            fg=238            # dim gray
+        ble-face -s region                   bg=60             # selection
+        ble-face -s command_builtin          fg=cyan           # 88C0D0
+        ble-face -s command_alias            fg=cyan           # 88C0D0
+        ble-face -s command_function         fg=cyan,bold      # 88C0D0
+
+        # Autosuggestions (fish-style, gray ghost text)
+        bleopt complete_auto_delay=100
+        bleopt complete_auto_history=1
+
+        # Menu completion styling
+        bleopt complete_menu_style=dense
+
+        # Highlight matching brackets/quotes
+        bleopt highlight_syntax=1
+        bleopt highlight_filename=1
+
+        # Vi mode indicator (works with starship)
+        bleopt keymap_vi_mode_show=1
+      fi
+
+      # ── Colored man pages (LESS_TERMCAP) ──
       export LESS_TERMCAP_mb=$'\e[1;32m'      # begin blink (green)
       export LESS_TERMCAP_md=$'\e[1;36m'      # begin bold (cyan)
       export LESS_TERMCAP_me=$'\e[0m'         # end mode
@@ -81,7 +143,7 @@
       export LESS_TERMCAP_us=$'\e[1;35m'      # begin underline (magenta)
       export GROFF_NO_SGR=1                   # for older groff versions
 
-      # Utility functions
+      # ── Utility functions ──
       mkcd() { mkdir -p "$1" && cd "$1"; }
 
       extract() {
@@ -93,7 +155,7 @@
         esac
       }
 
-      # Search functions
+      # Search functions (uses fd with fallback)
       ff() { fd --type f "$1" 2>/dev/null || find . -type f -iname "*$1*" 2>/dev/null; }
       fdir() { fd --type d "$1" 2>/dev/null || find . -type d -iname "*$1*" 2>/dev/null; }
 
@@ -105,10 +167,26 @@
       }
 
       # Preview file with syntax highlighting
-      preview() { bat --style=numbers --color=always "$1" | head -100; }
+      preview() { bat --style=numbers --color=always "''${1:--}" | head -''${2:-100}; }
 
-      # Quick JSON pretty print
-      json() { echo "$1" | jq .; }
+      # Quick JSON pretty print (pipe or argument)
+      json() {
+        if [ -t 0 ] && [ -n "''${1:-}" ]; then
+          echo "$1" | jq .
+        else
+          jq .
+        fi
+      }
+
+      # Git interactive log with fzf (Ctrl+G L)
+      glog() {
+        git log --oneline --graph --decorate --color=always | \
+          fzf --ansi --no-sort --reverse --preview 'git show --color=always {1}' \
+              --bind 'enter:execute(git show {1} | bat -l diff)+abort'
+      }
+
+      # ── Attach ble.sh at the end (must be last) ──
+      [[ ''${BLE_VERSION-} ]] && ble-attach
     '';
 
     profileExtra = ''
