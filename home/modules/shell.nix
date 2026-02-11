@@ -51,7 +51,7 @@ in
         git clone --depth 1 https://github.com/ohmybash/oh-my-bash.git "$OSH" 2>/dev/null
       fi
 
-      OSH_THEME="powerbash10k"
+      OSH_THEME="powerline-wizard"
 
       plugins=(
         progress

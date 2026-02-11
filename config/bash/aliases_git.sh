@@ -10,7 +10,7 @@ alias gds='git diff --staged'
 alias gbl='git blame -b -w'
 
 # Staging & Committing
-alias ga='git add'
+alias ga='git add .'
 alias gaa='git add -A'
 alias gc='git commit'
 alias gcm='git commit -m'
