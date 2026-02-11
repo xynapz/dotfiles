@@ -155,12 +155,6 @@
       }
 
       preview() { bat --style=numbers --color=always "''${1:--}" | head -''${2:-100}; }
-
-      glog() {
-        git log --oneline --graph --decorate --color=always | \
-          fzf --ansi --no-sort --reverse --preview 'git show --color=always {1}' \
-              --bind 'enter:execute(git show {1} | bat -l diff)+abort'
-      }
     '';
 
     profileExtra = ''
