@@ -1,4 +1,4 @@
-# Shell Configuration (Bash + Starship + ble.sh)
+# Shell Configuration (Bash + Oh My Bash)
 { config, pkgs, lib, ... }:
 
 {
@@ -24,7 +24,7 @@
       cat = "bat --style=plain";
       less = "bat --style=plain --paging=always";
 
-      # Help system: tldr first, fallback to man
+      # Help
       help = "tldr";
       "?" = "tldr";
 
@@ -45,58 +45,57 @@
       py = "python3";
 
       # Emacs (via daemon - instant startup)
-      e = "emacsclient -c -a ''";       # GUI emacs
-      et = "emacsclient -nw -a ''";     # Terminal emacs
-      ds = "doom sync";                 # Sync doom config
-      emd = "emacs --daemon";           # Start daemon manually
-      emk = "pkill -f 'emacs --daemon'"; # Kill daemon
+      e = "emacsclient -c -a ''";
+      et = "emacsclient -nw -a ''";
+      ds = "doom sync";
+      emd = "emacs --daemon";
+      emk = "pkill -f 'emacs --daemon'";
+
+      # Git
+      gs = "git status -sb";
+      gd = "git diff";
+      gds = "git diff --staged";
+      ga = "git add";
+      gaa = "git add -A";
+      gc = "git commit";
+      gcm = "git commit -m";
+      gca = "git commit --amend --no-edit";
+      gp = "git push";
+      gpf = "git push --force-with-lease";
+      gpl = "git pull --rebase";
+      gf = "git fetch --all --prune";
+      gco = "git checkout";
+      gcb = "git checkout -b";
+      gb = "git branch";
+      gbd = "git branch -d";
+      gl = "git log --oneline -20";
+      glg = "git log --graph --oneline --decorate -20";
+      gst = "git stash";
+      gstp = "git stash pop";
+      grb = "git rebase";
+      grbi = "git rebase -i";
+      grs = "git reset";
+      grsh = "git reset --hard";
+      gcp = "git cherry-pick";
+      gbl = "git blame -b -w";
 
       # NixOS
       nrs = "sudo nixos-rebuild switch --flake ~/dotfiles#xynapz";
       nrb = "sudo nixos-rebuild boot --flake ~/dotfiles#xynapz";
 
       # Misc tools
-      df = "duf";                        # Prettier df
-      du = "dust";                       # Prettier du
-      ps = "procs";                      # Prettier ps
-      top = "btm";                       # Bottom is better than top
-      fetch = "fastfetch";               # System info
-      md = "glow";                       # Markdown viewer
-      bench = "hyperfine";               # Benchmarking
-      loc = "tokei";                     # Code line counter
+      df = "duf";
+      du = "dust";
+      ps = "procs";
+      top = "btm";
+      fetch = "fastfetch";
+      md = "glow";
+      bench = "hyperfine";
+      loc = "tokei";
     };
 
     initExtra = ''
-      # ── ble.sh (syntax highlighting, autosuggestions) ──
-      if [[ -f "${pkgs.blesh}/share/blesh/ble.sh" ]] && [[ $- == *i* ]]; then
-        source "${pkgs.blesh}/share/blesh/ble.sh" --noattach
-
-        # Nord-themed syntax colors
-        ble-face -s syntax_default           fg=252
-        ble-face -s syntax_command           fg=cyan
-        ble-face -s syntax_quoted            fg=green
-        ble-face -s syntax_error             fg=red,bold
-        ble-face -s syntax_comment           fg=242
-        ble-face -s syntax_varname           fg=252
-        ble-face -s syntax_expr              fg=magenta
-        ble-face -s syntax_tilde             fg=cyan
-        ble-face -s syntax_glob              fg=yellow
-        ble-face -s filename_directory       fg=cyan,underline
-        ble-face -s filename_executable      fg=green,bold
-        ble-face -s auto_complete            fg=238
-        ble-face -s region                   bg=60
-        ble-face -s command_builtin          fg=cyan
-        ble-face -s command_alias            fg=cyan
-        ble-face -s command_function         fg=cyan,bold
-
-        bleopt complete_auto_delay=100
-        bleopt complete_auto_history=1
-        bleopt complete_menu_style=dense
-        bleopt highlight_syntax=1
-        bleopt highlight_filename=1
-      fi
-
-      # ── Oh My Bash (auto-install if missing) ──
+      # Oh My Bash (auto-install if missing)
       export OSH="$HOME/.oh-my-bash"
 
       if [[ ! -d "$OSH" ]]; then
@@ -104,32 +103,27 @@
         git clone --depth 1 https://github.com/ohmybash/oh-my-bash.git "$OSH" 2>/dev/null
       fi
 
-      # Theme
       OSH_THEME="powerline-multiline"
 
-      # Plugins
       plugins=(
         git
         bashmarks
         progress
       )
 
-      # Completions
       completions=(
         git
         ssh
         system
       )
 
-      # Aliases (we manage our own, disable OMB defaults)
       aliases=()
 
-      # Load Oh My Bash
       if [[ -f "$OSH/oh-my-bash.sh" ]]; then
         source "$OSH/oh-my-bash.sh"
       fi
 
-      # ── Colored man pages (LESS_TERMCAP) ──
+      # Colored man pages
       export LESS_TERMCAP_mb=$'\e[1;32m'
       export LESS_TERMCAP_md=$'\e[1;36m'
       export LESS_TERMCAP_me=$'\e[0m'
@@ -139,7 +133,7 @@
       export LESS_TERMCAP_us=$'\e[1;35m'
       export GROFF_NO_SGR=1
 
-      # ── Utility functions ──
+      # Functions
       mkcd() { mkdir -p "$1" && cd "$1"; }
 
       extract() {
@@ -151,44 +145,31 @@
         esac
       }
 
-      # Search functions (uses fd with fallback)
       ff() { fd --type f "$1" 2>/dev/null || find . -type f -iname "*$1*" 2>/dev/null; }
       fdir() { fd --type d "$1" 2>/dev/null || find . -type d -iname "*$1*" 2>/dev/null; }
 
-      # Directory navigation
       up() {
         local count="''${1:-1}"; local path=""
         for ((i=0;i<count;i++)); do path="../$path"; done
         cd "$path" || return
       }
 
-      # Preview file with syntax highlighting
       preview() { bat --style=numbers --color=always "''${1:--}" | head -''${2:-100}; }
 
-      # Quick JSON pretty print (pipe or argument)
-      json() {
-        if [ -t 0 ] && [ -n "''${1:-}" ]; then
-          echo "$1" | jq .
-        else
-          jq .
-        fi
-      }
-
-      # Git interactive log with fzf
       glog() {
         git log --oneline --graph --decorate --color=always | \
           fzf --ansi --no-sort --reverse --preview 'git show --color=always {1}' \
               --bind 'enter:execute(git show {1} | bat -l diff)+abort'
       }
-
-      # ── Attach ble.sh at the end (must be last) ──
-      [[ ''${BLE_VERSION-} ]] && ble-attach
     '';
 
     profileExtra = ''
       [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
     '';
   };
+
+  # Explicitly disable starship (was previously enabled)
+  programs.starship.enable = false;
 
   xdg.mimeApps = {
     enable = true;
